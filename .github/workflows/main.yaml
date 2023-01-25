@@ -17,7 +17,7 @@ jobs:
       uses: 'google-github-actions/auth@v1'
       with:
         workload_identity_provider: 'projects/1003391217227/locations/global/workloadIdentityPools/gitgoingpool/providers/gitgoingprovider'
-        service_account: 'my-service-account@gitgoingslackbot.iam.gserviceaccount.com'
+        service_account: 'gitgoingslackbot@gitgoingslackbot.iam.gserviceaccount.com'
 
     - id: 'deploy'
       uses: 'google-github-actions/deploy-appengine@v1'
