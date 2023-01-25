@@ -1,0 +1,29 @@
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  auth-and-deploy:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        workload_identity_provider: 'projects/1003391217227/locations/global/workloadIdentityPools/gitgoingpool/providers/gitgoingprovider'
+        service_account: 'my-service-account@gitgoingslackbot.iam.gserviceaccount.com'
+
+    - id: 'deploy'
+      uses: 'google-github-actions/deploy-appengine@v1'
+      with:
+        deliverables: app.yaml
+        project_id: gitgoingslackbot
+
+    - id: 'test'
+      run: 'curl "${{ steps.deploy.outputs.url }}"'
