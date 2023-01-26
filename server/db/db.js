@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 
 //create database link between sequelize and PG
+
 // const db = new Sequelize("postgres://34.27.41.97/gitgoingdb", {
 // 	logging: false,
 // });
