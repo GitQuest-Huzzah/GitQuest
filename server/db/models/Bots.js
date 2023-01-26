@@ -16,4 +16,10 @@ const Bots = db.define("bot", {
     }
 })
 
+Bots.create({
+    token:'oiajwodijawo',
+    teamID:'oijweoifj', 
+    teamName:"oiajwdion"
+})
+
 module.exports = Bots
