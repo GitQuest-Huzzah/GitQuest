@@ -1,4 +1,4 @@
-const writeFileToBucket = require("./logging");
+// const writeFileToBucket = require("./logging");
 
 const router = require("express").Router();
 
