@@ -1,7 +1,10 @@
+const writeFileToBucket = require("./logging");
+
 const router = require("express").Router();
 
 router.get("/", (req,res,next)=> {
-    res.send("hello world")
+    res.json({helloWorld: "hello world"})
+    writeFileToBucket(req)
 })
 
 module.exports = router;
