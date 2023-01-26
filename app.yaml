@@ -1,1 +1,3 @@
 runtime: nodejs16
+beta_settings:
+  cloud_sql_instances: gitgoingdb=tcp:5432
