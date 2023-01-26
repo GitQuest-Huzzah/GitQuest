@@ -1,22 +1,26 @@
 const Sequelize = require("sequelize");
 
 //create database link between sequelize and PG
-// const db = new Sequelize('postgres://***REMOVED***:***REMOVED***@***REMOVED***:5432/***REMOVED***', {ssl:true});
 
+// const db = new Sequelize("postgres://34.27.41.97/gitgoingdb", {
+// 	logging: false,
+// });
 const db = new Sequelize({
-  database:'***REMOVED***',
-  username: "***REMOVED***",
-  password: "***REMOVED***",
-    host: "***REMOVED***",
-  port: 5432,
-  dialect: "postgres",
-  dialectOptions: {
-    ssl: {
-      require: true, // This will help you. But you will see nwe error
-      rejectUnauthorized: false // This line will fix new error
-    }
-  },
-});
+	database: "postgres",
+	username: "postgres",
+	password: `***REMOVED***`,
+	host: "172.17.0.1",
+	port: 5432,
+	dialect: "postgres",
+	dialectOptions:{
+		ssl: {
+			require:true,
+			rejectUnauthorized:false
+		}
+	}
+
+  });
+db.authenticate().then(()=> console.log("connected to database")).catch((error=> console.error(error)))
 
 db.sync()
 module.exports = db;
