@@ -1,5 +1,4 @@
 const express = require('express');
-
 const app = express();
 
 
@@ -14,4 +13,5 @@ app.use((error, req, res, next) =>{
     res.status(error.status).send(error.message);
 })
 
-module.exports = app;
+module.exports = {app};
+
