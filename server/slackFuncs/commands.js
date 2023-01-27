@@ -11,20 +11,20 @@ const gitWorkFlow = async (reqBody, res) => {
 };
 
 const blockTest = async (reqBody, res) => {
-    await web.chat.postMessage({
-        blocks: [
-            {
-                type: "section",
-                text: {
-                    type: "plain_text",
-                    text: "This is a plain text section block.",
-                    emoji: true,
-                },
-            },
-        ],
-        channel: reqBody.user_id,
-        token: "***REMOVED***",
-    });
+	await web.chat.postMessage({
+		blocks: [
+			{
+				type: "section",
+				text: {
+					type: "plain_text",
+					text: "This is a plain text section block.",
+					emoji: true,
+				},
+			},
+		],
+		channel: reqBody.user_id,
+		token: "***REMOVED***",
+	});
 };
 const bangedMom = async (reqBody, res) => {
     console.log("THIS IS THE REQBODY FOR BANGED MOM",reqBody)
@@ -50,7 +50,13 @@ const bangedMom = async (reqBody, res) => {
 };
 
 const slackInstallAuth = async (req, res) => {
-    console.log(req.query, "this is the req query");
-    web.oauth.v2.access(req.query.code);
+
+	console.log(req.query, "this is the req query");
+	const accessFunction = await web.oauth.v2.access({
+		code: req.query.code,
+		client_id: "***REMOVED***",
+		client_secret: "***REMOVED***",
+	});
+    console.log(accessFunction, "this is the access v2 attempt")
 };
-module.exports = { gitWorkFlow, slackInstallAuth, blockTest, bangedMom };
+module.exports = { gitWorkFlow, slackInstallAuth, blockTest };

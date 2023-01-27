@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 router.use("/commands", require("./commands.js"));
 
-router.use("/install", require('./install'));
+router.use("/slack/install", require('./install'));
 
 
 
