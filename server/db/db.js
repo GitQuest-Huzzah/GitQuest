@@ -12,13 +12,6 @@ const db = new Sequelize({
 	host: "34.27.41.97",
 	port: 5432,
 	dialect: "postgres",
-	dialectOptions:{
-		ssl: {
-			require:true,
-			rejectUnauthorized:false
-		}
-	}
-
   });
   db.authenticate().then(() => {
 	console.log('Connection established successfully.');
