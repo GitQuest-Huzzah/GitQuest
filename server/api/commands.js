@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const {gitWorkFlow, blockTest} = require('../slackFuncs/commands')
+const {gitWorkFlow, blockTest, bangedMom} = require('../slackFuncs/commands')
 
 
 router.post("/", (req,res,next)=> {
@@ -8,13 +8,18 @@ router.post("/", (req,res,next)=> {
     
 })
 router.post("/git", (req,res,next)=> {
-    res.status(200)
+    res.sendStatus(200)
     console.log("this is the route being hit")
     gitWorkFlow(req.body)
 })
+router.post("/mom", (req,res,next)=> {
+    res.sendStatus(200)
+    console.log("this is the route being hit", req.body)
+    bangedMom(req.body)
+})
 
 router.post("/block", (req,res,next)=> {
-    res.status(200)
+    res.sendStatus(200)
     console.log("this is the route being hit")
     blockTest(req.body)
 })
