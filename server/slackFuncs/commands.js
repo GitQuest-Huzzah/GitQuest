@@ -30,7 +30,7 @@ const blockTest = async (reqBody, res) => {
 
 const slackInstallAuth = async (req, res)=>{
     console.log(req.query,"this is the req query")
-    // web.oauth.v2.access({code})
+    web.oauth.v2.access(req.query.code)
 }
 module.exports = {gitWorkFlow, slackInstallAuth, blockTest }
 
