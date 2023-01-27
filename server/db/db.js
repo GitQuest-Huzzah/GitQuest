@@ -4,11 +4,12 @@ const db = new Sequelize({
 	database: "postgres",
 	username: "postgres",
 	password: `_"._&BY[-It';3.q`,
-	host: "34.27.41.97",
+	host: "/cloudsql/gitgoingslackbot:us-central1:gitgoingdb",
 	port: 5432,
 	dialect: "postgres",
+	logging:true,
 	dialectOptions: {
-		socketPath: '/cloudsql/gitgoingdb'
+		socketPath: '/cloudsql/gitgoingslackbot:us-central1:gitgoingdb'
 	},
   });
   db.authenticate().then(() => {
