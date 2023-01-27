@@ -1,7 +1,6 @@
 const express = require('express');
+const Bots = require('./db/models/Bots');
 const app = express();
-
-
 
 app.use(express.json());
 
