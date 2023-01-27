@@ -13,4 +13,8 @@ const gitWorkFlow = async(reqBody, res)=>{
     })
 }
 
-module.exports = gitWorkFlow 
+const slackInstallAuth = async (req, res)=>{
+    console.log(req.query,"this is the req query")
+    // web.oauth.v2.access({code})
+}
+module.exports = {gitWorkFlow, slackInstallAuth }
