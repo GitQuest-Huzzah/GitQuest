@@ -60,15 +60,13 @@ const slackInstallAuth = async (req, res) => {
 	});
     console.log(installRequest, "this is the access v2 attempt")
 
-	const adminUser = await Users.create({
+	 Users.create({
 		slackID: installRequest.authed_user.id,
 		isAdmin: true,
-	})
-	const newWorkspace = await Workspaces.create({
+	}).then((adminUser) => Workspaces.create({
 		botToken:installRequest.access_token,
 		teamID: installRequest.team.id,
 		teamName: installRequest.team.name,
-	})
-	adminUser.setWorkspaces(newWorkspace)
+	}).then((newWorkspace)=> adminUser.setWorkspaces(newWorkspace)))
 };
 module.exports = { gitWorkFlow, slackInstallAuth, blockTest };
