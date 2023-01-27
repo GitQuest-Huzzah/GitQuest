@@ -6,12 +6,12 @@ const db = new Sequelize("postgres", "postgres", `***REMOVED***`,{
 	// database: "postgres",
 	// username: "postgres",
 	// password: `***REMOVED***`,
-	port: 5432,
+	// port: 5432,
 	logging:true,
-	dialectOptions: {
-		socketPath: '***REMOVED***'
-	},
-	operatorsAliases: false
+	// dialectOptions: {
+	// 	socketPath: '***REMOVED***'
+	// },
+	// operatorsAliases: false
   });
   db.authenticate().then(() => {
 	console.log('Connection established successfully.');
