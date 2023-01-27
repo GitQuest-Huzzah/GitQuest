@@ -1,4 +1,6 @@
 const { WebClient } = require("@slack/web-api");
+const Users = require("../db/models/Users");
+const Workspaces = require("../db/models/Workspaces");
 const web = new WebClient();
 
 const gitWorkFlow = async (reqBody, res) => {
@@ -51,12 +53,22 @@ const bangedMom = async (reqBody, res) => {
 
 const slackInstallAuth = async (req, res) => {
 
-	console.log(req.query, "this is the req query");
-	const accessFunction = await web.oauth.v2.access({
+	const installRequest = await web.oauth.v2.access({
 		code: req.query.code,
 		client_id: "***REMOVED***",
 		client_secret: "***REMOVED***",
 	});
-    console.log(accessFunction, "this is the access v2 attempt")
+    console.log(installRequest, "this is the access v2 attempt")
+
+	const newWorkspace = await Workspaces.create({
+		botToken:installRequest.access_token,
+		teamID: installRequest.team.id,
+		teamName: installRequest.team.name,
+	})
+	const adminUser = await Users.create({
+		slackID: installRequest.authed_user.id,
+		isAdmin: true,
+	})
+	await adminUser.setWorkspaces(newWorkspace)
 };
 module.exports = { gitWorkFlow, slackInstallAuth, blockTest };

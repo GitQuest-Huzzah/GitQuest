@@ -10,35 +10,13 @@ const router = require("express").Router();
 
 //path is /api/slack/install
 router.get("/", async (req, res, next) => {
-	// await installer.handleInstallPath(req, res, {
-	// 	scopes: [
-	// 		"channels:join",
-	// 		"channel:read",
-	// 		"chat:write",
-	// 		"chat:write.public",
-	// 		"commands",
-	// 		"groups:read",
-	// 		"im:read",
-	// 		"im:write",
-	// 		"incoming-webhook",
-	// 		"links:read",
-	// 		"links:write",
-	// 		"team:read",
-	// 		"users:read",
-	// 		"users:read.email",
-	// 		"users:write",
-	// 	],
-    //     userScopes:['identity.email'],
-    //     redirectUri:"https://gitgoingslackbot.uc.r.appspot.com/api/slack/install/redirect"
-	// });
-	res.sendStatus(200);
-	// console.log(req.query, "route was hit query logged");
-	// slackInstallAuth(req);
+	res.status(200).send('<h1>Git Going Bot Installed!!</h1>')
+
 });
 //path is /api/slack/install/redirect
 router.get("/redirect", (req,res) =>{
-    // installer.handleCallback(req,res)
     slackInstallAuth(req);
+	res.redirect([200], "/")
 });
 
 module.exports = router;
