@@ -60,14 +60,14 @@ const slackInstallAuth = async (req, res) => {
 	});
     console.log(installRequest, "this is the access v2 attempt")
 
+	const adminUser = await Users.create({
+		slackID: installRequest.authed_user.id,
+		isAdmin: true,
+	})
 	const newWorkspace = await Workspaces.create({
 		botToken:installRequest.access_token,
 		teamID: installRequest.team.id,
 		teamName: installRequest.team.name,
-	})
-	const adminUser = await Users.create({
-		slackID: installRequest.authed_user.id,
-		isAdmin: true,
 	})
 	await adminUser.setWorkspaces(newWorkspace)
 };
