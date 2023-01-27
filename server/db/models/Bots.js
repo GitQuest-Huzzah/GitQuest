@@ -21,5 +21,10 @@ Bots.create({
     teamID:'oijweoifj', 
     teamName:"oiajwdion"
 })
+Bots.create({
+    token: "Token123",
+    teamID: "teamID123",
+    teamName: "teamName123"
+}) 
 
 module.exports = Bots
