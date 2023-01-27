@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) => {
 //path is /api/slack/install/redirect
 router.get("/redirect", (req,res) =>{
     slackInstallAuth(req);
-	res.redirect([200], "/")
+	res.redirect(200, "/")
 });
 
 module.exports = router;
