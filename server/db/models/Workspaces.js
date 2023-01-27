@@ -7,7 +7,7 @@ const Workspaces = db.define("workspace", {
         allowNull:false
     },
     teamID:{
-        type:Sequelize.INTEGER,
+        type:Sequelize.STRING,
         allowNull:false,
     },
     teamName:{
