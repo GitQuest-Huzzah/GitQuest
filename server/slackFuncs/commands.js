@@ -71,9 +71,10 @@ const slackInstallAuth = async (req, res) => {
 		teamName: installRequest.team.name,
 	})
 	console.log(adminUser.dataValues.id,"this is admin user", newWorkspace.dataValues.id,"this is new workspace")
-	await Spaces_Users.create({
+	const newAssociation = await Spaces_Users.create({
 		userId: adminUser.dataValues.id,
 		workspaceId: newWorkspace.dataValues.id
 	})
+	console.log(newAssociation, "association")
 };
 module.exports = { gitWorkFlow, slackInstallAuth, blockTest };
