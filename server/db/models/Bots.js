@@ -17,11 +17,6 @@ const Bots = db.define("bot", {
 })
 
 Bots.create({
-    token:'oiajwodijawo',
-    teamID:'oijweoifj', 
-    teamName:"oiajwdion"
-})
-Bots.create({
     token: "Token123",
     teamID: "teamID123",
     teamName: "teamName123"
