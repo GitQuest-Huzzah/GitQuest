@@ -70,7 +70,7 @@ const slackInstallAuth = async (req, res) => {
 		teamID: installRequest.team.id,
 		teamName: installRequest.team.name,
 	})
-	console.log(adminUser.dataValues,"this is admin user", newWorkspace.dataValues,"this is new workspace")
+	console.log(adminUser.dataValues.id,"this is admin user", newWorkspace.dataValues.id,"this is new workspace")
 	await Spaces_Users.create({
 		userId: adminUser.dataValues.id,
 		workspaceId: newWorkspace.dataValues.id
