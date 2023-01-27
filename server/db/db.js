@@ -9,7 +9,7 @@ const db = new Sequelize({
 	database: "postgres",
 	username: "postgres",
 	password: `***REMOVED***`,
-	host: "172.17.0.1",
+	host: "34.27.41.97",
 	port: 5432,
 	dialect: "postgres",
 	dialectOptions:{
