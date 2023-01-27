@@ -1,5 +1,4 @@
 const { slackInstallAuth } = require("../slackFuncs/commands");
-const { InstallProvider } = require("@slack/oauth");
 
 const router = require("express").Router();
 
