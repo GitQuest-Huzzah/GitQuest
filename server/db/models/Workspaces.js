@@ -1,19 +1,25 @@
 const Sequelize = require('sequelize')
 const db = require('../db');
 
-const Bots = db.define("bot", {
-    token:{
+const Workspaces = db.define("workspace", {
+    botToken:{
         type:Sequelize.STRING,
         allowNull:false
     },
     teamID:{
-        type:Sequelize.STRING,
+        type:Sequelize.INTEGER,
         allowNull:false,
     },
     teamName:{
         type:Sequelize.STRING,
         allowNull:false
+    },
+    repoName:{
+        type:Sequelize.STRING,
+    },
+    repoID:{
+        type:Sequelize.INTEGER,
     }
 })
 
-module.exports = Bots
+module.exports = Workspaces
