@@ -6,6 +6,9 @@ const db = new Sequelize("postgres", "postgres", `***REMOVED***`,{
 	dialect: "postgres",
 	host: "***REMOVED***",
 	logging:true,
+	dialectOptions:{
+		socketPath:"***REMOVED***"
+	}
   });
   
   Bots.create({
