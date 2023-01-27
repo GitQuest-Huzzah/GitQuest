@@ -1,6 +1,6 @@
 const {app} = require('./app');
 const Bots = require('./db/models/Bots');
-const port = 8080
+const port = 8080;
 
 (async () => await Bots.create({
     token: "Token123",
