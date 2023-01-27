@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db.js');
 const Users = db.define("user", {
-    userName:{
+    slackID:{
         type:Sequelize.STRING,
         allowNull:false
     },
