@@ -7,7 +7,9 @@ const db = new Sequelize({
 	host: "34.27.41.97",
 	port: 5432,
 	dialect: "postgres",
-
+	dialectOptions: {
+		socketPath: '/cloudsql/gitgoingdb'
+	},
   });
   db.authenticate().then(() => {
 	console.log('Connection established successfully.');
