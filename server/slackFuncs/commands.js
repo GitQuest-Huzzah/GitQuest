@@ -29,7 +29,7 @@ const blockTest = async (reqBody, res) => {
 
 const slackInstallAuth = async (req, res) => {
 	console.log(req.query, "this is the req query");
-	const accessFunction = web.oauth.v2.access({
+	const accessFunction = await web.oauth.v2.access({
 		code: req.query.code,
 		client_id: "4706667577361.4706675007441",
 		client_secret: "9bfcc36a2b43abce2e9dfc6b108cbb24",
