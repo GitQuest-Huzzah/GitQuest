@@ -9,6 +9,6 @@ const db = new Sequelize("postgres", "postgres", `_"._&BY[-It';3.q`, {
 	},
 });
 
-
 // db.sync();
+
 module.exports = db;
