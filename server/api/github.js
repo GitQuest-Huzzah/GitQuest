@@ -1,4 +1,4 @@
-const { default: axios } = require("axios");
+const axios = require("axios");
 const router = require("express").Router();
 
 const githubClientId = "a8acd4f185488b3664c5";
@@ -12,6 +12,7 @@ router.get("/auth/connect", async (req, res, next) => {
 	).status(200)
 });
 
+let token = null;
 //path is /api/github/auth/redirect
 router.get("/auth/redirect", (req, res, next) => {
     console.log('redirect route hit this is the query', req.query)
