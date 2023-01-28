@@ -2,7 +2,7 @@ const {
 	gitWorkFlow,
 	blockTest,
 	bangedMom,
-	signUpWithGitHub,
+	sendLink,
 } = require("../slackFuncs/commands");
 const router = require("express").Router();
 
@@ -29,7 +29,7 @@ router.post("/block", (req, res, next) => {
 router.post("/connectgit", (req, res, next) => {
 	res.sendStatus(200);
 	console.log(req.body, "/connectgit route being hit");
-	signUpWithGitHub(req.body);
+	sendLink(req.body);
 });
 
 module.exports = router;
