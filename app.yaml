@@ -2,6 +2,3 @@ runtime: nodejs16
 
 beta_settings:
     cloud_sql_instances: gitgoingslackbot:us-central1:gitgoingdb
-
-includes:
-    - env_vars.yaml
