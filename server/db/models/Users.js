@@ -5,17 +5,14 @@ const Users = db.define("user", {
         type:Sequelize.STRING,
         allowNull:false
     },
+    gitHubID:{
+        type:Sequelize.STRING,
+    },
     isAdmin:{
         type:Sequelize.BOOLEAN,
-        default: false,
+        defaultValue: false,
         allowNull:false
     },
-    slackEmail:{
-        type:Sequelize.STRING,
-    },
-    GHEmail:{
-        type:Sequelize.STRING,
-    }
 })
 
 module.exports = Users
