@@ -20,12 +20,13 @@ router.get("/auth/redirect", (req, res, next) => {
 		client_id: githubClientId,
 		client_secret: githubClientSecret,
 		code: req.query.code,
+        redirect_uri: 'chrome://dino/'
 	};
 	const opts = { headers: { accept: "application/json" } };
 	const gitToken = async () => {
 		try {
 			const res = await axios.post(
-				`https://github.com/login/access_token`,
+				`https://github.com/login/oauth/access_token`,
 				body,
 				opts
 			);
