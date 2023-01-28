@@ -1,5 +1,8 @@
 const router = require("express").Router();
 
+router.use("/interactivity", require("./interactivity.js"));
+
+router.use("/events", require("./events.js"));
 
 router.use("/commands", require("./commands.js"));
 
