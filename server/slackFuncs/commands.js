@@ -21,17 +21,68 @@ const gitWorkFlow = async (reqBody, res) => {
 
 const blockTest = async (reqBody, res) => {
 	await web.chat.postMessage({
-		blocks: [
-			{
-				type: "section",
-				text: {
-					type: "plain_text",
-					text: "This is a plain text section block.",
-					emoji: true,
-				},
+        "blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "*Who's code is the least shit?* Poll by *Your Mom*"
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": ":man: *Bobby B*\nHottest dude in Denver."
 			},
-		],
-		channel: reqBody.user_id,
+			"accessory": {
+				"type": "button",
+				"text": {
+					"type": "plain_text",
+					"emoji": true,
+					"text": "Vote"
+				},
+				"value": "click_me_123",
+				"action_id": "bob"
+			}
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": ":cat: *Corbin Campbell*\nSuper pissed."
+			},
+			"accessory": {
+				"type": "button",
+				"text": {
+					"type": "plain_text",
+					"emoji": true,
+					"text": "Vote"
+				},
+				"value": "click_me_123",
+				"action_id": "corbin"
+			}
+		},
+		{
+			"type": "actions",
+			"elements": [
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Click Me",
+						"emoji": true
+					},
+					"value": "click_me_123",
+					"action_id": "actionId-0"
+				}
+			]
+		}
+	],
+		channel: reqBody.channel_id,
 		token: "xoxb-4706667577361-4696519498212-BS2W96yuJQEyIf29kY6baP4i",
 	});
 };
