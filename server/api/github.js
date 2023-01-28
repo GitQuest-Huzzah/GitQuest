@@ -7,10 +7,9 @@ const githubClientSecret = "***REMOVED***";
 //path is /api/github/auth/connect
 router.get("/auth/connect", async (req, res, next) => {
     console.log('connect route hit')
-	res.sendStatus(200);
 	res.redirect(
 		`https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=read:repo_hook,read:org,read:user,read:email,read:discussion`
-	);
+	).status(200)
 });
 
 //path is /api/github/auth/redirect
@@ -18,7 +17,7 @@ router.get("/auth/redirect", (req, res, next) => {
     console.log('redirect route hit this is the query', req.query)
 	const body = {
 		client_id: githubClientId,
-		client_secret: client_secret,
+		client_secret: githubClientSecret,
 		code: req.query.code,
 	};
 	const opts = { headers: { accept: "application/json" } };
