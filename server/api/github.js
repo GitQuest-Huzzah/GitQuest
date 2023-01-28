@@ -7,11 +7,9 @@ const githubClientSecret = "5ee1729ef0278e389a663954859b662e8d364afd";
 //path is /api/github/auth/connect
 router.get("/auth/connect", async (req, res, next) => {
 	console.log("connect route hit");
-	res
-		.redirect(
-			`https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=read:repo_hook,read:org,read:user,read:email,read:discussion`
-		)
-		.status(200);
+	res.redirect(
+		`https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=read:repo_hook,read:org,read:user,read:email,read:discussion`
+	);
 });
 
 let token = null;
@@ -32,7 +30,7 @@ router.get("/auth/redirect", (req, res, next) => {
 				opts
 			);
 			console.log(res.data);
-            return res.data
+			return res.data;
 		} catch (error) {
 			console.error(error);
 		}
