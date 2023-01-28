@@ -1,9 +1,8 @@
 const { WebClient } = require("@slack/web-api");
-const { Spaces_Users, Users, Workspaces } = require("../db/index.js");
+const {  Users, Workspaces } = require("../db/index.js");
 const web = new WebClient();
 
 const gitWorkFlow = async (reqBody, res) => {
-	console.log("This is the req body", reqBody);
 	await web.chat.postMessage({
 		text: "Step 1. Gently, yet firmly, remove your head from your ass. Can you see? Excellent.",
 		channel: reqBody.user_id,
@@ -28,7 +27,7 @@ const blockTest = async (reqBody, res) => {
 	});
 };
 const bangedMom = async (reqBody, res) => {
-	console.log("THIS IS THE REQBODY FOR BANGED MOM", reqBody);
+	console.log("/mom REQ.BODY", reqBody);
 	await web.chat.postMessage({
 		blocks: [
 			{
@@ -56,7 +55,6 @@ const slackInstallAuth = async (req, res) => {
 		client_id: "4706667577361.4706675007441",
 		client_secret: "9bfcc36a2b43abce2e9dfc6b108cbb24",
 	});
-	console.log(installRequest, "this is the access v2 attempt");
 
 	const adminUser = await Users.create({
 		slackID: installRequest.authed_user.id,
@@ -68,6 +66,5 @@ const slackInstallAuth = async (req, res) => {
 		teamName: installRequest.team.name,
 	});
 	await adminUser.setWorkspaces(newWorkspace) 
-	console.log("entries created");
 };
 module.exports = { gitWorkFlow, slackInstallAuth, blockTest };
