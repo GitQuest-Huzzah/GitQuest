@@ -36,6 +36,7 @@ router.get("/auth/redirect", (req, res, next) => {
 		}
 	};
     gitToken()
+    
 });
 
 module.exports = router;
