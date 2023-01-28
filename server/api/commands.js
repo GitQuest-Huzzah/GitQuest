@@ -1,7 +1,6 @@
+const { gitWorkFlow, blockTest, bangedMom, gitConnectFunction } = require("../slackFuncs/commands");
 const router = require("express").Router();
 
-const axios = require("axios");
-const { gitWorkFlow, blockTest, bangedMom, gitConnectFlow } = require("../slackFuncs/commands");
 
 router.post("/", (req, res, next) => {
 	res.sendStatus(200);
@@ -25,8 +24,8 @@ router.post("/block", (req, res, next) => {
 
 router.post("/connectgit", (req, res, next) => {
 	res.sendStatus(200);
-    console.log(req.body, "/connectgit route being hit")
-	gitConnectFlow(req.body)
+    console.log(req.body, "/connectgit route being hit");
+	gitConnectFunction(req.body);
 });
 
 module.exports = router;
