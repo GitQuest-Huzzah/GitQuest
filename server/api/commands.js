@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const axios = require("axios");
-const { gitWorkFlow, blockTest, bangedMom } = require("../slackFuncs/commands");
+const { gitWorkFlow, blockTest, bangedMom, gitConnectFlow } = require("../slackFuncs/commands");
 
 router.post("/", (req, res, next) => {
 	res.sendStatus(200);
@@ -26,12 +26,7 @@ router.post("/block", (req, res, next) => {
 router.post("/connectgit", (req, res, next) => {
 	res.sendStatus(200);
     console.log(req.body, "/connectgit route being hit")
-	axios
-		.get("https://gitgoingslackbot.uc.r.appspot.com/api/github/auth/connect")
-		.then((res) => {
-			console.log(res.data);
-		})
-		.catch((error) => console.error(error));
+	gitConnectFlow(req.body)
 });
 
 module.exports = router;
