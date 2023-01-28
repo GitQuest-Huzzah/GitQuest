@@ -9,18 +9,18 @@ router.post("/", (req,res,next)=> {
 })
 router.post("/git", (req,res,next)=> {
     res.sendStatus(200)
-    console.log("this is the route being hit")
+    console.log("/git route being hit", req.body)
     gitWorkFlow(req.body)
 })
 router.post("/mom", (req,res,next)=> {
     res.sendStatus(200)
-    console.log("this is the route being hit", req.body)
+    console.log("/mom route being hit", req.body)
     bangedMom(req.body)
 })
 
 router.post("/block", (req,res,next)=> {
     res.sendStatus(200)
-    console.log("this is the route being hit")
+    console.log("/block route being hit", req.body)
     blockTest(req.body)
 })
 
