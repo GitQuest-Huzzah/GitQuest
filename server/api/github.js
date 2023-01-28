@@ -12,7 +12,6 @@ router.get("/auth/connect", async (req, res, next) => {
 	);
 });
 
-let token = null;
 //path is /api/github/auth/redirect
 router.get("/auth/redirect", (req, res, next) => {
 	console.log("redirect route hit this is the query", req.query);
