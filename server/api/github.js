@@ -15,6 +15,7 @@ router.get("/auth/connect", async (req, res, next) => {
 //path is /api/github/auth/redirect
 router.get("/auth/redirect", (req, res, next) => {
 	console.log("redirect route hit this is the query", req.query);
+	console.log("redirect route req body", req)
 	const body = {
 		client_id: githubClientId,
 		client_secret: githubClientSecret,
