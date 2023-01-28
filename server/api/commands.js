@@ -1,6 +1,10 @@
-const { gitWorkFlow, blockTest, bangedMom, signUpWithGitHub } = require("../slackFuncs/commands");
+const {
+	gitWorkFlow,
+	blockTest,
+	bangedMom,
+	signUpWithGitHub,
+} = require("../slackFuncs/commands");
 const router = require("express").Router();
-
 
 router.post("/", (req, res, next) => {
 	res.sendStatus(200);
@@ -24,7 +28,7 @@ router.post("/block", (req, res, next) => {
 
 router.post("/connectgit", (req, res, next) => {
 	res.sendStatus(200);
-    console.log(req.body, "/connectgit route being hit");
+	console.log(req.body, "/connectgit route being hit");
 	signUpWithGitHub(req.body);
 });
 
