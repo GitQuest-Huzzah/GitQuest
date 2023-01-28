@@ -21,10 +21,8 @@ const findTokenByTeamId = async (teamId)=>{
 
 module.exports = {
     db, 
-    models: {
-        Users,
-        Workspaces, 
-        Spaces_Users
-    }, 
+    Users,
+    Workspaces, 
+    Spaces_Users,
     findTokenByTeamId
 };
