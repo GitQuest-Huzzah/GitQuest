@@ -1,6 +1,15 @@
 const { WebClient } = require("@slack/web-api");
-const {  Users, Workspaces } = require("../db/index.js");
+const { Users, Workspaces } = require("../db/index.js");
 const web = new WebClient();
+
+const sendLink = async (reqBody, res) => {
+	console.log("SIGN UP GIT ROUTE");
+	await web.chat.postMessage({
+		text: "<https://github.com/login/oauth/authorize?client_id=***REMOVED***&scope=read:repo_hook,read:org,read:user,read:email,read:discussion/>  This message to link your gitHub account",
+		channel: reqBody.user_id,
+		token: "***REMOVED***",
+	});
+};
 
 const gitWorkFlow = async (reqBody, res) => {
 	await web.chat.postMessage({
@@ -65,6 +74,7 @@ const slackInstallAuth = async (req, res) => {
 		teamID: installRequest.team.id,
 		teamName: installRequest.team.name,
 	});
-	await adminUser.setWorkspaces(newWorkspace) 
+	await adminUser.setWorkspaces(newWorkspace);
 };
-module.exports = { gitWorkFlow, slackInstallAuth, blockTest };
+
+module.exports = { sendLink, gitWorkFlow, slackInstallAuth, blockTest };
