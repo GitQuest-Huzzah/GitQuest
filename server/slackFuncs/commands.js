@@ -123,8 +123,8 @@ const slackInstallAuth = async (req, res) => {
 const sendGitHubAuthLink = async (reqBody, res) => {
 	console.log("SIGN UP GIT ROUTE");
 	const githubClientId = "a8acd4f185488b3664c5"
-
-	const bufferUTFObj = Buffer.from(reqBody.user_id, "utf8");
+	const userInfo = JSON.stringify({userId:reqBody.user_id, teamId: reqBody.team_id})
+	const bufferUTFObj = Buffer.from(userInfo, "utf8");
 	const base64String = bufferUTFObj.toString("base64");
 
 	await web.chat.postMessage({
