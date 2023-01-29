@@ -133,6 +133,6 @@ const sendGitHubAuthLink = async (reqBody, res) => {
 		channel: reqBody.user_id,
 		token: "***REMOVED***",
 	});
-};
+}; 
 
 module.exports = { sendGitHubAuthLink, gitWorkFlow, slackInstallAuth, blockTest };
