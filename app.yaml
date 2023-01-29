@@ -2,6 +2,3 @@ runtime: nodejs16
 
 beta_settings:
     cloud_sql_instances: gitgoingslackbot:us-central1:gitgoingdb
-
-env_variables:
-  STRIPE_API_KEY: STRIPE_API_VAR

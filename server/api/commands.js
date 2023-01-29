@@ -1,7 +1,7 @@
 const {
-	gitWorkFlow,
-	blockTest,
 	bangedMom,
+	blockTest,
+	gitWorkFlow,
 	sendGitHubAuthLink,
 } = require("../slackFuncs/commands");
 const router = require("express").Router();
