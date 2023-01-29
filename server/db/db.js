@@ -11,6 +11,6 @@ const db = new Sequelize("postgres", "postgres", `***REMOVED***`, {
     },
 });
 
-db.sync({force:true});
+db.sync();
 
 module.exports = db;
