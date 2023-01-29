@@ -30,7 +30,7 @@ jobs:
 
     - id: 'deploy'
       env:
-        DB_NAME: ${{ var.DB_USER}}
+        DB_NAME: ${{ vars.DB_USER}}
         DB_USER: ${{ secrets.DB_USER }}
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
