@@ -14,15 +14,20 @@ router.get("/auth/connect", async (req, res, next) => {
 
 //path is /api/github/auth/redirect
 router.get("/auth/redirect", (req, res, next) => {
-	console.log("redirect route hit this is the query", req.query);
-	console.log("redirect route req body", req)
+	res.json({ git: "authorized" });
+	console.log(req.query, "redirected query")
+
+	const buffer64Obj = Buffer.from(req.query.state, "base64");
+	const decodedString = buffer64Obj.toString("utf8");
+	console.log("decoded userID", decodedString)
+	
 	const body = {
 		client_id: githubClientId,
 		client_secret: githubClientSecret,
 		code: req.query.code,
 	};
 	const opts = { headers: { accept: "application/json" } };
-	const gitToken = async () => {
+	(async () => {
 		try {
 			const res = await axios.post(
 				`https://github.com/login/oauth/access_token`,
@@ -34,9 +39,7 @@ router.get("/auth/redirect", (req, res, next) => {
 		} catch (error) {
 			console.error(error);
 		}
-	};
-    gitToken()
-    
+	})();
 });
 
 module.exports = router;
