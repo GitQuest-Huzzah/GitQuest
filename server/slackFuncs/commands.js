@@ -101,6 +101,7 @@ const bangedMom = async (reqBody, res) => {
 };
 
 const slackInstallAuth = async (req, res) => {
+	console.log(req.query, "slack install auth query")
 	const installRequest = await web.oauth.v2.access({
 		code: req.query.code,
 		client_id: "***REMOVED***",
