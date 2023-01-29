@@ -14,7 +14,7 @@ const gitHubUserInfoAPI = async (reqBody) => {
     // console.log("hello, %s", login);
     const gitHubUserAPIResponse = await octokit.request('GET /user', {})
     console.log(gitHubUserAPIResponse, "response ")
-    const gitHubUserRepos = await octokit.request('GET /user/repos', {})
+    const gitHubUserRepos = await octokit.request('GET /user/repos{?affiliation=organization_member,per_page=100}}', {})
     console.log("user repos", gitHubUserRepos)
 }
 
