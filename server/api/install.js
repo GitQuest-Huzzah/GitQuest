@@ -9,9 +9,8 @@ router.get("/", async (req, res, next) => {
 });
 //path is /api/slack/install/redirect
 router.get("/redirect", (req,res) =>{
-	console.log(req, "redirect slack route getting hit")
     slackInstallAuth(req);
-	res.status(200).redirect("chrome://dino/")
+	res.status(200).json({installed:"yes"})
 });
 
 module.exports = router;
