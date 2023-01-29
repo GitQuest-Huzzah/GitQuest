@@ -7,27 +7,22 @@ app.listen(process.env.PORT || port, ()=> console.log(`Listening ${process.env.P
 
 async function main() {
 
-  const name = 'projects/1003391217227/secrets/ENV_VARIABLES';
+  const name = 'projects/1003391217227/secrets/ENV_VARIABLES/versions/1';
 
-  // Imports the Secret Manager library
   const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
 
-  // Instantiates a client
   const client = new SecretManagerServiceClient();
 
-  async function getSecret() {
-    const [secret] = await client.getSecret({
+  async function accessSecretVersion() {
+    const [version] = await client.accessSecretVersion({
       name: name,
     });
 
-    const policy = secret.replication.replication;
+    const payload = version.payload.data.toString();
 
-    console.info(`Found secret ${secret.name} (${policy})`);
+    console.info(`Payload: ${payload}`);
   }
-
-  getSecret();
+  accessSecretVersion();
 }
 
-const args = process.argv.slice(2);
-console.log(args, "args log")
 main().catch(console.error);
