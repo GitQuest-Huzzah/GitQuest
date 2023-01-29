@@ -29,7 +29,7 @@ router.post("/block", (req, res, next) => {
 router.post("/connectgit", (req, res, next) => {
 	res.sendStatus(200);
 	console.log(req.body, "/connectgit route being hit");
-	sendLink(req.body);
+	sendGitHubAuthLink(req.body);
 });
 
 module.exports = router;
