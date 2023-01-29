@@ -7,7 +7,7 @@ app.listen(process.env.PORT || port, ()=> console.log(`Listening ${process.env.P
 
 
 function main() {
-  const name = 'projects/1003391217227/secrets/ENV_VARIABLES/'
+  const name = 'projects/1003391217227/secrets/ENV_VARIABLES'
 
   const secretmanagerClient = new SecretManagerServiceClient();
 
