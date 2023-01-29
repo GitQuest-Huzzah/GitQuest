@@ -13,13 +13,13 @@ app.listen(process.env.PORT || port, ()=> console.log(`Listening ${process.env.P
 // if(process.env.GH_CLIENT_SECRET) console.log("gh secret exists")
 // if(process.env.GH_CLIENT_ID) console.log("gh ID exists")
 
-const name = 'projects/1003391217227/secrets/ENV_VARIABLES/versions/latest'
+const name = 'projects/1003391217227/secrets/ENV_VARIABLES/versions/1'
 // Instantiates a client
 const client = new SecretManagerServiceClient();
 
 
 async function accessSecretVersion() {
-    console.log("accessing secret")
+    console.log("accessing maybe this time?")
   const [version] = await client.accessSecretVersion({
     name: name,
   });
