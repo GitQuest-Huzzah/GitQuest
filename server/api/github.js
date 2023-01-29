@@ -42,9 +42,6 @@ router.get("/auth/redirect", (req, res, next) => {
 				},
 				include: {
 					model: Workspaces,
-					where: {
-						teamID: parsedUserInfo.teamId,
-					},
 				},
 			});
 			if (userAlreadyExists) {
