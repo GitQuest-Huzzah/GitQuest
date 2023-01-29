@@ -12,6 +12,14 @@ jobs:
 
     steps:
     - name: Checkout
+      uses: actions/checkout@v2
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        workload_identity_provider: 'projects/1003391217227/locations/global/workloadIdentityPools/gitgoingpool/providers/gitgoingprovider'
+        service_account: 'my-service-account@gitgoingslackbot.iam.gserviceaccount.com'
+
+    - id: 'deploy'
       env:
         DB_NAME: 'THIS IS A DBNAME'
         DB_USER: ${{ secrets.DB_USER }}
@@ -21,14 +29,6 @@ jobs:
         SLACK_CLIENT_SECRET: ${{ secrets.SLACK_CLIENT_SECRET }}
         GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
         GH_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
-      uses: actions/checkout@v2
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        workload_identity_provider: 'projects/1003391217227/locations/global/workloadIdentityPools/gitgoingpool/providers/gitgoingprovider'
-        service_account: 'my-service-account@gitgoingslackbot.iam.gserviceaccount.com'
-
-    - id: 'deploy'
       uses: 'google-github-actions/deploy-appengine@v1'
       with:
         deliverables: app.yaml
@@ -36,6 +36,15 @@ jobs:
 
 
     - id: 'test'
+      env:
+        DB_NAME: 'THIS IS A DBNAME'
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
+        SLACK_CLIENT_ID: ${{ secrets.SLACK_CLIENT_ID }}
+        SLACK_CLIENT_SECRET: ${{ secrets.SLACK_CLIENT_SECRET }}
+        GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
+        GH_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
       run: 'curl "${{ steps.deploy.outputs.url }}"'
 
 
