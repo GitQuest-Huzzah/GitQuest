@@ -45,10 +45,7 @@ router.get("/auth/redirect", (req, res, next) => {
 				},
 			});
 			if (userAlreadyExists) {
-				return await Users.update({
-					where:{
-						slackID: parsedUserInfo.userId
-					},
+				return await userAlreadyExists.update({
 					gitHubToken: res.data.access_token,
 				});
 			}
