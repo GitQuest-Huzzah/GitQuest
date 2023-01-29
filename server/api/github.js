@@ -7,12 +7,12 @@ const githubClientId = "***REMOVED***";
 const githubClientSecret = "***REMOVED***";
 
 //path is /api/github/auth/connect
-router.get("/auth/connect", async (req, res, next) => {
-	console.log("connect route hit");
-	res.redirect(
-		`https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=repo,repo:status,read:repo_hook,read:org,read:user,read:email,read:discussion`
-	);
-});
+// router.get("/auth/connect", async (req, res, next) => {
+// 	console.log("connect route hit");
+// 	res.redirect(
+// 		`https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=repo,repo:status,read:repo_hook,read:org,read:user,read:email,read:discussion`
+// 	);
+// });
 
 //path is /api/github/auth/redirect
 router.get("/auth/redirect", (req, res, next) => {
