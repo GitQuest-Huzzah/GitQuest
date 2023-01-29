@@ -5,7 +5,7 @@ const port = 8080;
 app.listen(process.env.PORT || port, ()=> console.log(`Listening ${process.env.PORT || port}`));
 
 
-async function main(name = 'projects/1003391217227/secrets/ENV_VARIABLES') {
+async function main() {
 
   const name = 'projects/1003391217227/secrets/ENV_VARIABLES';
 
@@ -29,4 +29,5 @@ async function main(name = 'projects/1003391217227/secrets/ENV_VARIABLES') {
 }
 
 const args = process.argv.slice(2);
-main(...args).catch(console.error);
+console.log(args, "args log")
+main().catch(console.error);
