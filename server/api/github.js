@@ -19,7 +19,8 @@ router.get("/auth/redirect", (req, res, next) => {
 
 	const buffer64Obj = Buffer.from(req.query.state, "base64");
 	const decodedString = buffer64Obj.toString("utf8");
-	console.log("decoded userID", decodedString)
+	const parsedUserInfo = JSON.parse(decodedString)
+	console.log("decoded userID", parsedUserInfo)
 	
 	const body = {
 		client_id: githubClientId,
