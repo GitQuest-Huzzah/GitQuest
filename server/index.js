@@ -17,10 +17,10 @@ async function main() {
     const [version] = await client.accessSecretVersion({
       name: name,
     });
-
+    console.log(version, "logged version")
     const payload = version.payload.data.toString();
 
-    console.info(`Payload: ${payload}`);
+    console.log(`Payload: ${payload}`);
   }
   accessSecretVersion();
 }
