@@ -2,15 +2,6 @@ const { WebClient } = require("@slack/web-api");
 const { Users, Workspaces } = require("../db/index.js");
 const web = new WebClient();
 
-const sendLink = async (reqBody, res) => {
-	console.log("SIGN UP GIT ROUTE");
-	await web.chat.postMessage({
-		text: "<https://github.com/login/oauth/authorize?client_id=***REMOVED***&scope=read:repo_hook,read:org,read:user,read:email,read:discussion/>  This message to link your gitHub account",
-		channel: reqBody.user_id,
-		token: "***REMOVED***",
-	});
-};
-
 const gitWorkFlow = async (reqBody, res) => {
 	await web.chat.postMessage({
 		text: "Step 1. Gently, yet firmly, remove your head from your ass. Can you see? Excellent.",
@@ -128,4 +119,19 @@ const slackInstallAuth = async (req, res) => {
 	await adminUser.setWorkspaces(newWorkspace);
 };
 
-module.exports = { sendLink, gitWorkFlow, slackInstallAuth, blockTest };
+
+const sendGitHubAuthLink = async (reqBody, res) => {
+	console.log("SIGN UP GIT ROUTE");
+	const githubClientId = "***REMOVED***"
+
+	const bufferUTFObj = Buffer.from(reqBody.user_id, "utf8");
+	const base64String = bufferUTFObj.toString("base64");
+
+	await web.chat.postMessage({
+		text: `<https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=read:repo_hook,read:org,read:user,read:email,read:discussion&state=${base64String}/>  This message to link your gitHub account`,
+		channel: reqBody.user_id,
+		token: "***REMOVED***",
+	});
+};
+
+module.exports = { sendGitHubAuthLink, gitWorkFlow, slackInstallAuth, blockTest };
