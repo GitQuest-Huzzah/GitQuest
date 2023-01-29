@@ -23,11 +23,8 @@ async function accessSecretVersion() {
   const [version] = await client.accessSecretVersion({
     name: name,
   });
-
-  const policy = secret.replication.replication;
   const payload = version.payload.data.toString();
 
-  console.info(`Found secret ${secret.name} (${policy})`);
   console.info(`Payload: ${payload}`);
 }
 
