@@ -6,23 +6,13 @@ const router = require("express").Router();
 const githubClientId = "a8acd4f185488b3664c5";
 const githubClientSecret = "5ee1729ef0278e389a663954859b662e8d364afd";
 
-//path is /api/github/auth/connect
-// router.get("/auth/connect", async (req, res, next) => {
-// 	console.log("connect route hit");
-// 	res.redirect(
-// 		`https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=repo,repo:status,read:repo_hook,read:org,read:user,read:email,read:discussion`
-// 	);
-// });
-
 //path is /api/github/auth/redirect
 router.get("/auth/redirect", (req, res, next) => {
 	res.json({ git: "authorized" });
-	console.log(req.query, "redirected query");
 
 	const buffer64Obj = Buffer.from(req.query.state, "base64");
 	const decodedString = buffer64Obj.toString("utf8");
 	const parsedUserInfo = JSON.parse(decodedString);
-	console.log("decoded userID", parsedUserInfo);
 
 	const body = {
 		client_id: githubClientId,

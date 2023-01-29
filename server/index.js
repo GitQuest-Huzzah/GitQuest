@@ -7,8 +7,7 @@ app.listen(process.env.PORT || port, ()=> console.log(`Listening ${process.env.P
 
 
 function main() {
-  const name = 'projects/1003391217227/secrets/ENV_VARIABLES'
-
+  const name = 'projects/1003391217227/secrets/ENV_VARIABLES/versions/1'
   // Imports the Secretmanager library
 
   // Instantiates a client
@@ -21,15 +20,9 @@ function main() {
     };
 
     // Run request
-    const response = await secretmanagerClient.getSecret(request);
+    const response = await secretmanagerClient.accessSecretVersion(request);
     console.log(response);
   }
-
   callGetSecret();
 }
-
-process.on('unhandledRejection', err => {
-  console.error(err.message);
-  process.exitCode = 1;
-});
 main();

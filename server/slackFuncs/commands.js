@@ -101,7 +101,6 @@ const bangedMom = async (reqBody, res) => {
 };
 
 const slackInstallAuth = async (req, res) => {
-	console.log(req.query, "slack install auth query")
 	const installRequest = await web.oauth.v2.access({
 		code: req.query.code,
 		client_id: "4706667577361.4706675007441",
@@ -122,7 +121,6 @@ const slackInstallAuth = async (req, res) => {
 
 
 const sendGitHubAuthLink = async (reqBody, res) => {
-	console.log("SIGN UP GIT ROUTE");
 	const githubClientId = "a8acd4f185488b3664c5"
 	const userInfo = JSON.stringify({userId:reqBody.user_id, teamId: reqBody.team_id})
 	const bufferUTFObj = Buffer.from(userInfo, "utf8");
