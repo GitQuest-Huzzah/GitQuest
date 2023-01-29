@@ -129,7 +129,7 @@ const sendGitHubAuthLink = async (reqBody, res) => {
 	const base64String = bufferUTFObj.toString("base64");
 
 	await web.chat.postMessage({
-		text: `<https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=read:repo_hook,read:org,read:user,read:email,read:discussion&state=${base64String}/>  This message to link your gitHub account`,
+		text: `<https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=repo,read:status,read:repo_hook,read:org,read:user,read:email,read:discussion&state=${base64String}/>  This message to link your gitHub account`,
 		channel: reqBody.user_id,
 		token: "xoxb-4706667577361-4696519498212-BS2W96yuJQEyIf29kY6baP4i",
 	});
