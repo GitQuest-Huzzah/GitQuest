@@ -8,7 +8,6 @@ app.listen(process.env.PORT || port, ()=> console.log(`Listening ${process.env.P
 async function main() {
 
   const name = 'projects/1003391217227/secrets/ENV_VARIABLES/versions/1';
-
   const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
 
   const client = new SecretManagerServiceClient();
@@ -17,7 +16,6 @@ async function main() {
     const [version] = await client.accessSecretVersion({
       name: name,
     });
-    console.log(version, "logged version")
     const payload = version.payload.data.toString();
 
     console.log(`Payload: ${payload}`);
