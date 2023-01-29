@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { Users, Workspaces } = require("../db");
+const gitHubUserInfoAPI = require("../gitFuncs/commands");
 const router = require("express").Router();
 
 const githubClientId = "***REMOVED***";
@@ -57,6 +58,12 @@ router.get("/auth/redirect", (req, res, next) => {
 			console.error(error);
 		}
 	})();
+});
+
+//path is /api/github/userinfo
+router.post("/userinfo", (req, res, next) => {
+	res.sendStatus(200);
+	gitHubUserInfoAPI(req.body)
 });
 
 module.exports = router;
