@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { Users, Workspaces } = require("../db");
 const router = require("express").Router();
 
 const githubClientId = "a8acd4f185488b3664c5";
@@ -15,13 +16,13 @@ router.get("/auth/connect", async (req, res, next) => {
 //path is /api/github/auth/redirect
 router.get("/auth/redirect", (req, res, next) => {
 	res.json({ git: "authorized" });
-	console.log(req.query, "redirected query")
+	console.log(req.query, "redirected query");
 
 	const buffer64Obj = Buffer.from(req.query.state, "base64");
 	const decodedString = buffer64Obj.toString("utf8");
-	const parsedUserInfo = JSON.parse(decodedString)
-	console.log("decoded userID", parsedUserInfo)
-	
+	const parsedUserInfo = JSON.parse(decodedString);
+	console.log("decoded userID", parsedUserInfo);
+
 	const body = {
 		client_id: githubClientId,
 		client_secret: githubClientSecret,
@@ -35,8 +36,26 @@ router.get("/auth/redirect", (req, res, next) => {
 				body,
 				opts
 			);
-			console.log(res.data);
-			return res.data;
+			const userAlreadyExists = await Users.findOne({
+				where: {
+					slackID: parsedUserInfo.userId,
+				},
+				include: {
+					model: Workspaces,
+					where: {
+						teamID: parsedUserInfo.teamId,
+					},
+				},
+			});
+			if (userAlreadyExists) {
+				return await Users.update({
+					gitHubToken: res.data.access_token,
+				});
+			}
+			return await Users.create({
+				slackID: parsedUserInfo.userId,
+				gitHubToken: res.data.access_token,
+			});
 		} catch (error) {
 			console.error(error);
 		}
