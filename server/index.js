@@ -19,6 +19,7 @@ const client = new SecretManagerServiceClient();
 
 
 async function accessSecretVersion() {
+    console.log("accessing secret")
   const [version] = await client.accessSecretVersion({
     name: name,
   });
