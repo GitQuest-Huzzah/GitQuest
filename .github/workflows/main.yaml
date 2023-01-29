@@ -12,15 +12,6 @@ jobs:
 
     steps:
     - name: Checkout
-      env:
-        DB_NAME: ${{ vars.DB_USER}}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
-        SLACK_CLIENT_ID: ${{ secrets.SLACK_CLIENT_ID }}
-        SLACK_CLIENT_SECRET: ${{ secrets.SLACK_CLIENT_SECRET }}
-        GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
-        GH_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
       uses: actions/checkout@v2
     - id: 'auth'
       uses: 'google-github-actions/auth@v1'
@@ -29,15 +20,6 @@ jobs:
         service_account: 'my-service-account@gitgoingslackbot.iam.gserviceaccount.com'
 
     - id: 'deploy'
-      env:
-        DB_NAME: ${{ vars.DB_USER}}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
-        SLACK_CLIENT_ID: ${{ secrets.SLACK_CLIENT_ID }}
-        SLACK_CLIENT_SECRET: ${{ secrets.SLACK_CLIENT_SECRET }}
-        GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
-        GH_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
       uses: 'google-github-actions/deploy-appengine@v1'
       with:
         deliverables: app.yaml
