@@ -12,12 +12,12 @@ const gitHubUserInfoAPI = async (reqBody) => {
     })
     // const {data: {login}} = await octokit.rest.users.getAuthenticated();
     // console.log("hello, %s", login);
-    const gitHubUserAPIResponse = await octokit.request('GET /user', {})
-    const gitHubUserRepos = await octokit.request('GET /user/repos{?affiliation,per_page}}', {
-        affiliation:"organization_member",
-        per_page:100
-    })
-    console.log("big ol new repos", gitHubUserRepos, "big ol new repos")
+    // const gitHubUserAPIResponse = await octokit.request('GET /user', {})
+    const gitHubCommits = await octokit.request('GET /repos/{owner}/{repo}/commits', {
+        owner: 'GitQuest-Huzzah',
+        repo: 'GitQuest'
+      })
+    console.log("big ol new repos", gitHubCommits, "big ol new repos")
 }
 
 
