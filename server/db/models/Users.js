@@ -8,6 +8,9 @@ const Users = db.define("user", {
     gitHubID:{
         type:Sequelize.STRING,
     },
+    gitHubToken:{
+        type:Sequelize.STRING,
+    },
     isAdmin:{
         type:Sequelize.BOOLEAN,
         defaultValue: false,
