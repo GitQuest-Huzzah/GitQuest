@@ -50,10 +50,16 @@ router.get("/auth/redirect", (req, res, next) => {
 					gitHubToken: res.data.access_token,
 				});
 			}
-			return await Users.create({
+			const newUsersWorkspace = await Workspaces.findOne({
+				where: {
+					teamID: parsedUserInfo.teamId,
+				},
+			});
+			const newUser = await Users.create({
 				slackID: parsedUserInfo.userId,
 				gitHubToken: res.data.access_token,
 			});
+			return await newUser.setWorkspaces(newUsersWorkspace);
 		} catch (error) {
 			console.error(error);
 		}
@@ -63,7 +69,7 @@ router.get("/auth/redirect", (req, res, next) => {
 //path is /api/github/userinfo
 router.post("/userinfo", (req, res, next) => {
 	res.sendStatus(200);
-	gitHubUserInfoAPI(req.body)
+	gitHubUserInfoAPI(req.body);
 });
 
 module.exports = router;
