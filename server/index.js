@@ -16,7 +16,7 @@ function main() {
       name,
     };
 
-    const response = await secretmanagerClient.accessSecretVersion(request);
+    const response = await secretmanagerClient.getSecret(request);
     console.log("this is the response from secret manager", response, 'seceret manager response');
   }
   callGetSecret();
