@@ -10,11 +10,10 @@ const gitHubUserInfoAPI = async (reqBody) => {
     const octokit = new Octokit({
         auth: user.dataValues.gitHubToken
     })
-    console.log(user.dataValues.gitHubToken, "gh token")
-    console.log(octokit.request,"octokit rest")
-    console.log(octokit.rest.users,"rest users octokit")
-    const {data: {login}} = await octokit.rest.users.getAuthenticated();
-    console.log("hello, %s", login);
+    // const {data: {login}} = await octokit.rest.users.getAuthenticated();
+    // console.log("hello, %s", login);
+    const gitHubUserAPIResponse = await octokit.request('GET /user', {})
+    console.log(gitHubUserAPIResponse, "response ")
 }
 
 module.exports = gitHubUserInfoAPI
