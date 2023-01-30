@@ -10,7 +10,7 @@ const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
     const [version] = await client.accessSecretVersion({
         name: name,
     });
-    const payload = version.payload.data.toString();
+    const payload = version.payload.data;
     process.env.DB_NAME = payload.DB_NAME
     process.env.DB_PASSWORD = payload.DB_PASSWORD
     process.env.DB_USER = payload.DB_USER
