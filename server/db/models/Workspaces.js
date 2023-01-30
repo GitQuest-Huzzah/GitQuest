@@ -17,6 +17,9 @@ const Workspaces = db.define("workspace", {
     repoName:{
         type:Sequelize.STRING,
     },
+    orgName:{
+        type:Sequelize.STRING,
+    },
     repoID:{
         type:Sequelize.INTEGER,
     }
