@@ -8,20 +8,28 @@ const name = 'projects/1003391217227/secrets/ENV_VARIABLES/versions/1'
 const client = new SecretManagerServiceClient();
 
 
- const accessSecretVersion = async () => {
-    console.log("accessing maybe this time?")
-  const [version] = await client.accessSecretVersion({
-    name: name,
-  });
-  const payload = version.payload.data.toString();
-  process.env['DB_NAME'] = payload.DB_NAME
-  process.env['DB_PASSWORD'] = payload.DB_PASSWORD
-  process.env['DB_USER'] = payload.DB_USER
-  process.env['DB_CONNECTION'] = payload.DB_CONNECTION
-  console.log(payload, "payload inside function")
-  return payload
-}
-console.log(accessSecretVersion(),"function")
+//  const accessSecretVersion = async () => {
+//   const [version] = await client.accessSecretVersion({
+//     name: name,
+//   });
+//   const payload = version.payload.data.toString();
+//   process.env['DB_NAME'] = payload.DB_NAME
+//   process.env['DB_PASSWORD'] = payload.DB_PASSWORD
+//   process.env['DB_USER'] = payload.DB_USER
+//   process.env['DB_CONNECTION'] = payload.DB_CONNECTION
+//   console.log(payload, "payload inside function")
+//   return payload
+// }
+function getSecret() {
+    return client
+      .accessSecretVersion({
+        name: `projects/150472312947/secrets/pizza/versions/latest`,
+      })
+      .then((response) => response[0].payload.data.toString("utf-8"))
+  }
+// accessSecretVersion()
+const payload = getSecret()
+console.log(payload,'payload')
 console.log(process.env.DB_NAME, "db name env")
 console.log(process.env.DB_PASSWORD, "db pass env")
 console.log(process.env.DB_USER, "db user env")
