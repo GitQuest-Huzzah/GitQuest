@@ -13,7 +13,7 @@ const client = new SecretManagerServiceClient();
   const [version] = await client.accessSecretVersion({
     name: name,
   });
-  payload = version.payload.data.toString();
+  const payload = await version.payload.data.toString();
   process.env.DB_NAME = payload.DB_NAME
   process.env.DB_PASSWORD = payload.DB_PASSWORD
   process.env.DB_USER = payload.DB_USER
