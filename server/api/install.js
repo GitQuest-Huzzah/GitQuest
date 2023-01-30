@@ -9,6 +9,7 @@ router.get("/", async (req, res, next) => {
 });
 //path is /api/slack/install/redirect
 router.get("/redirect", (req,res) =>{
+	console.log(process.env.DB_NAME, 'test of ENV')
     slackInstallAuth(req);
 	res.status(200).json({installed:"yes"})
 });
