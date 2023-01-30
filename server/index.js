@@ -28,7 +28,7 @@ const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
 //   }
 // accessSecretVersion()
 // const payload = getSecret()
-console.log(payload,'payload')
+// console.log(payload,'payload')
 console.log(process.env.DB_NAME, "db name env")
 console.log(process.env.DB_PASSWORD, "db pass env")
 console.log(process.env.DB_USER, "db user env")
