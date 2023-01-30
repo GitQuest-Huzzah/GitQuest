@@ -10,16 +10,16 @@ const client = new SecretManagerServiceClient();
 
  const accessSecretVersion = async () => {
     console.log("accessing maybe this time?")
-  return await client.accessSecretVersion({
+  const [version] = await client.accessSecretVersion({
     name: name,
   });
-//   const  = version.payload.data.toString();
-//   process.env.DB_NAME = payload.DB_NAME
-//   process.env.DB_PASSWORD = payload.DB_PASSWORD
-//   process.env.DB_USER = payload.DB_USER
-//   process.env.DB_CONNECTION = payload.DB_CONNECTION
-//   console.log(payload, "payload inside function")
-//   return payload
+  const payload = version.payload.data.toString();
+  process.env['DB_NAME'] = payload.DB_NAME
+  process.env['DB_PASSWORD'] = payload.DB_PASSWORD
+  process.env['DB_USER'] = payload.DB_USER
+  process.env['DB_CONNECTION'] = payload.DB_CONNECTION
+  console.log(payload, "payload inside function")
+  return payload
 }
 console.log(accessSecretVersion(),"function")
 console.log(process.env.DB_NAME, "db name env")
