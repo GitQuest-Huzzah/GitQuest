@@ -12,9 +12,6 @@ const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
     });
     const payload = version.payload.data.toString('utf-8');
     const parsedPayload = JSON.parse(payload)
-    process.env.DB_NAME = parsedPayload.DB_NAME
-    console.log(process.env.DB_NAME, "ENV DB NAME in function")
-    
+    process.env.DB_NAME = parsedPayload.DB_NAME    
     app.listen(process.env.PORT || port, ()=> console.log(`Listening ${process.env.PORT || port}`));
 })();
-console.log(process.env.DB_NAME, "ENV DB NAME out of function")
