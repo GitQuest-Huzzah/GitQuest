@@ -10,14 +10,16 @@ const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
     const [version] = await client.accessSecretVersion({
         name: name,
     });
-    const payload = version.payload.data.toString();
-    const parsedPayload = JSON.parse(payload)
-    process.env.DB_NAME = parsedPayload.DB_NAME
-    process.env.DB_PASSWORD = parsedPayload.DB_PASSWORD
-    process.env.DB_USER = parsedPayload.DB_USER
-    process.env.DB_CONNECTION = parsedPayload.DB_CONNECTION
-    console.log(process.env.DB_NAME, "did this work?")
-    console.log(parsedPayload, "payload")
+    const payload = version.payload.data.toString('utf-8');
+    console.log(payload, "payload payload")
+    console.log(JSON.stringify(payload), 'stringify')
+    // const parsedPayload = JSON.parse(payload)
+    // process.env.DB_NAME = parsedPayload.DB_NAME
+    // process.env.DB_PASSWORD = parsedPayload.DB_PASSWORD
+    // process.env.DB_USER = parsedPayload.DB_USER
+    // process.env.DB_CONNECTION = parsedPayload.DB_CONNECTION
+    // console.log(process.env.DB_NAME, "did this work?")
+    // console.log(parsedPayload, "payload")
     app.listen(process.env.PORT || port, ()=> console.log(`Listening ${process.env.PORT || port}`));
 })();
 
