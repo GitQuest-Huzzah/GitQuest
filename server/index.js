@@ -12,7 +12,7 @@ const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
     });
     const payload = version.payload.data.toString('utf-8');
     console.log(payload, "payload payload")
-    console.log(JSON.stringify(payload), 'stringify')
+    console.log(JSON.parse(payload), 'parse')
     // const parsedPayload = JSON.parse(payload)
     // process.env.DB_NAME = parsedPayload.DB_NAME
     // process.env.DB_PASSWORD = parsedPayload.DB_PASSWORD
