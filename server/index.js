@@ -23,7 +23,7 @@ const client = new SecretManagerServiceClient();
 function getSecret() {
     return client
       .accessSecretVersion({
-        name: `projects/150472312947/secrets/pizza/versions/latest`,
+        name: name,
       })
       .then((response) => response[0].payload.data.toString("utf-8"))
   }
