@@ -16,6 +16,7 @@ const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
     process.env.DB_USER = payload.DB_USER
     process.env.DB_CONNECTION = payload.DB_CONNECTION
     console.log(process.env.DB_NAME, "did this work?")
+    console.log(payload, "payload")
     app.listen(process.env.PORT || port, ()=> console.log(`Listening ${process.env.PORT || port}`));
 })();
 
