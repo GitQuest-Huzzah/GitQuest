@@ -5,14 +5,15 @@ const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
 // Instantiates a client
 
 (async () => {
-    const name = 'projects/1003391217227/secrets/ENV_VARIABLES/versions/4'
+    const name = 'projects/1003391217227/secrets/ENV_VARIABLES/versions/5'
     const client = new SecretManagerServiceClient();
     const [version] = await client.accessSecretVersion({
         name: name,
     });
     const payload = version.payload.data.toString('utf-8');
     console.log(payload, "payload payload")
-    // console.log(JSON.parse(payload), 'parse')
+    console.log(payload.DB_NAME)
+    console.log(JSON.parse(payload), 'parse')
     // const parsedPayload = JSON.parse(payload)
     process.env.DB_NAME = payload.DB_NAME
     process.env.DB_PASSWORD = payload.DB_PASSWORD
