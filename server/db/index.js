@@ -1,11 +1,15 @@
 const db = require('./db')
 const Workspaces = require('./models/Workspaces');
 const Users = require('./models/Users')
-const Spaces_Users = require('./models/Spaces_Users')
+const Achievements = require('./models/Achievements')
+const Users_Achievements = require('./models/Users_Achievements')
 
 //model associations
-Users.belongsToMany(Workspaces, {through: Spaces_Users})
-Workspaces.belongsToMany(Users, {through: Spaces_Users})
+Users.belongsToMany(Achievements, {through: Users_Achievements})
+Achievements.belongsToMany(Users, {through: Users_Achievements})
+
+Users.belongsTo(Workspaces)
+Workspaces.hasMany(Users)
 
 //finding bot token that belongs to a workspace to send response to proper instance of bot
 const findTokenByTeamId = async (teamId)=>{
@@ -25,6 +29,7 @@ module.exports = {
     db, 
     Users,
     Workspaces, 
-    Spaces_Users,
+    Achievements,
+    Users_Achievements,
     findTokenByTeamId
 };
