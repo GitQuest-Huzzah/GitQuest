@@ -16,6 +16,22 @@ const Users = db.define("user", {
         defaultValue: false,
         allowNull:false
     },
+    level:{
+        type:Sequelize.INTEGER,
+        defaultValue: 1,
+    },
+    exp:{
+        type:Sequelize.INTEGER,
+        defaultValue: 0,
+    },
+    gold:{
+        type:Sequelize.INTEGER,
+        defaultValue: 0,
+    },
+    rewardGold:{
+        type:Sequelize.INTEGER,
+        defaultValue: 0,
+    },
 })
 
 module.exports = Users
