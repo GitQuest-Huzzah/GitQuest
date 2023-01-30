@@ -12,7 +12,7 @@ const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
     });
     const payload = version.payload.data.toString('utf-8');
     const parsedPayload = JSON.parse(payload)
-
+    console.log(parsedPayload.DB_NAME)
     console.log(parsedPayload, "parsed")
     
     app.listen(process.env.PORT || port, ()=> console.log(`Listening ${process.env.PORT || port}`));
