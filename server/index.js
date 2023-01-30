@@ -19,9 +19,9 @@ const client = new SecretManagerServiceClient();
   process.env.DB_USER = payload.DB_USER
   process.env.DB_CONNECTION = payload.DB_CONNECTION
   console.log(payload, "payload inside function")
-
+  return payload
 }
-accessSecretVersion()
+console.log(accessSecretVersion(),"function")
 console.log(process.env.DB_NAME, "db name env")
 console.log(process.env.DB_PASSWORD, "db pass env")
 console.log(process.env.DB_USER, "db user env")
