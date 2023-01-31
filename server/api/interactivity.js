@@ -18,10 +18,11 @@ router.post("/", (req, res, next) => {
 	if (parsedSubmission.type === "view_submission") {
 		res.send({ response_action: "clear" });
 		console.log(parsedSubmission.view.state.values.OwnerName.Owner_Input.value);
-		createOrUpdateOrg({
+		const org = createOrUpdateOrg({
 			team_id: parsedSubmission.view.team_id,
 			orgName: parsedSubmission.view.state.values.OwnerName.Owner_Input.value,
 		});
+        
 	}
 });
 
