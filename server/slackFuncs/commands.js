@@ -101,14 +101,18 @@ const slackInstallAuth = async (req, res) => {
 		teamID: installRequest.team.id,
 		teamName: installRequest.team.name,
 	});
-
+	//list all users in the workspace
 	const result = await web.users.list({
 		token: "***REMOVED***",
 	});
+	//filter out bots, the admin who was just created, and slackbot which is not labeled as a bot
 	const filteredMembers = result.members.filter(
-		(member) => member["is_bot"] === false && member["name"] !== "slackbot"
-	&& member["id"] !== installRequest.authed_user.id);
-	console.log(filteredMembers)
+		(member) =>
+			member["is_bot"] === false &&
+			member["name"] !== "slackbot" &&
+			member["id"] !== installRequest.authed_user.id
+	);
+	//we then create an entry for each user and set their workspace to the new workspace
 	filteredMembers.forEach(async (user) => {
 		const newUser = await Users.create({
 			slackID: user["id"],
@@ -139,6 +143,54 @@ const sendGitHubAuthLink = async (reqBody, res) => {
 		token: "***REMOVED***",
 	});
 };
+
+// Listen to the app_home_opened Events API event to hear when a user opens your app from the sidebar
+web.event("app_home_opened", async ({ payload, client }) => {
+	const userId = payload.user;
+
+	try {
+		// Call the views.publish method using the WebClient passed to listeners
+		const result = await web.views.publish({
+			user_id: userId,
+			view: {
+				// Home tabs must be enabled in your app configuration page under "App Home"
+				type: "home",
+				blocks: [
+					{
+						type: "section",
+						text: {
+							type: "mrkdwn",
+							text: "*Welcome home, <@" + userId + "> :house:*",
+						},
+					},
+					{
+						type: "section",
+						text: {
+							type: "mrkdwn",
+							text: "Learn how home tabs can be more useful and interactive <https://api.slack.com/surfaces/tabs/using|*in the documentation*>.",
+						},
+					},
+					{
+						type: "divider",
+					},
+					{
+						type: "context",
+						elements: [
+							{
+								type: "mrkdwn",
+								text: "Psssst this home tab was designed using <https://api.slack.com/tools/block-kit-builder|*Block Kit Builder*>",
+							},
+						],
+					},
+				],
+			},
+		});
+
+		console.log(result);
+	} catch (error) {
+		console.error(error);
+	}
+});
 
 module.exports = {
 	sendGitHubAuthLink,
