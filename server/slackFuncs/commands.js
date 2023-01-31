@@ -104,15 +104,15 @@ const slackInstallAuth = async (req, res) => {
 		});
 
 		const result = await web.users.list();
-		saveUsers(result.members);
-		const saveUsers = (members) => {
-			members.forEach(async (user) => {
-				const newUser = await Users.create({
-					slackID: user["id"],
-				});
-				await newUser.setWorkspaces(newWorkspace);
+		console.log(result.members, "members");
+		result.members.forEach(async (user) => {
+			const newUser = await Users.create({
+				slackID: user["id"],
 			});
-		};
+			console.log(newUser,"new user for each")
+			await newUser.setWorkspaces(newWorkspace);
+		});
+		console.log(adminUser.__proto__)
 		await adminUser.setWorkspaces(newWorkspace);
 	} catch (error) {
 		console.error(error);
