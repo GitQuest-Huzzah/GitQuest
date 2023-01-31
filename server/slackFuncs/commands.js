@@ -1,5 +1,5 @@
 const { WebClient } = require("@slack/web-api");
-const { Users, Workspaces } = require("../db/index.js");
+const { Users, Workspaces,Repos } = require("../db/index.js");
 const { findOrgOnGH } = require("../gitFuncs/commands.js");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
@@ -198,6 +198,23 @@ const homeTab = async (reqBody) => {
 							action_id: "adminOrgModalButton",
 						},
 					},
+					{
+						type: "section",
+						text: {
+							type: "mrkdwn",
+							text: "This is a section block with a button.",
+						},
+						accessory: {
+							type: "button",
+							text: {
+								type: "plain_text",
+								text: "Repos to connect",
+								emoji: true,
+							},
+							value: "Repos to connect",
+							action_id: "adminRepoModalButton",
+						},
+					},
 				],
 			},
 		});
@@ -271,26 +288,82 @@ const adminOrgModalResponse = async (reqBody) => {
 	});
 };
 
-const createOrUpdateOrg = async ({team_id, orgName}) => {
+const createOrUpdateOrg = async ({ team_id, orgName }) => {
+	console.log(team_id, orgName, "create or update func");
 	const orgToUpdate = await Workspaces.findOne({
 		where: {
 			teamID: team_id,
 		},
 	});
-	const doesOrgExist = await findOrgOnGH(orgName)
-	if(doesOrgExist){
-		await orgToUpdate.update({ orgName:orgName });
-        return doesOrgExist
-		
+	const doesOrgExist = await findOrgOnGH(orgName);
+	if (doesOrgExist) {
+		return await orgToUpdate.update({ orgName: orgName });
 	}
-
 };
+
+const adminRepoModal = async (reqBody) => {
+	await web.views.open({
+		trigger_id: reqBody.trigger_id,
+		token: "***REMOVED***",
+		view: {
+			type: "modal",
+			title: {
+				type: "plain_text",
+				text: "Adding Repo to Watch",
+				emoji: true,
+			},
+			submit: {
+				type: "plain_text",
+				text: "Submit",
+				emoji: true,
+			},
+			close: {
+				type: "plain_text",
+				text: "Cancel",
+				emoji: true,
+			},
+			blocks: [
+				{
+					type: "section",
+					block_id: "section678",
+					text: {
+						type: "mrkdwn",
+						text: "Pick items from the list",
+					},
+					accessory: {
+						action_id: "text1234",
+						type: "multi_external_select",
+						placeholder: {
+							type: "plain_text",
+							text: "Select items",
+						},
+						min_query_length: 1,
+					},
+				},
+			],
+		},
+	});
+};
+
+const findAllWorkSpaceRepos = async (team_id) =>{
+	 return await Workspaces.findOne({
+		where: {
+			teamID: team_id
+		},
+		include: {
+			model: Repos,
+		},
+	})
+	
+}
 
 module.exports = {
 	adminOrgModal,
 	adminOrgModalResponse,
+	adminRepoModal,
 	blockTest,
 	createOrUpdateOrg,
+	findAllWorkSpaceRepos,
 	gitWorkFlow,
 	homeTab,
 	sendGitHubAuthLink,
