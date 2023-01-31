@@ -106,8 +106,9 @@ const slackInstallAuth = async (req, res) => {
 		token: "xoxb-4706667577361-4696519498212-BS2W96yuJQEyIf29kY6baP4i",
 	});
 	const filteredMembers = result.members.filter(
-		(member) => member["is_bot"] === false || member["name"] !== "slackbot"
+		(member) => member["is_bot"] === false && member["name"] !== "slackbot"
 	);
+	console.log(filteredMembers)
 	filteredMembers.forEach(async (user) => {
 		const newUser = await Users.create({
 			slackID: user["id"],
