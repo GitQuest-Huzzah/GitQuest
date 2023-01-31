@@ -21,6 +21,25 @@ const gitHubUserInfoAPI = async (reqBody) => {
         repo: 'GitQuest'
       })
 }
+  const gitHubSetRepoHook = async (reqBody) =>{
 
+     const octokit = new Octokit({ auth: "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"})
 
-module.exports = gitHubUserInfoAPI
+      await octokit.request('POST /repos/{owner}/{repo}/hooks', {
+          owner: reqBody.owner,
+          repo: reqBody.repo,
+          name: 'web',
+          active: true,
+          events: [
+              'push',
+              'pull_request'
+            ],
+            config: {
+                url: 'https://gitquest.fun/api/webhook',
+                content_type: 'json',
+                insecure_ssl: '0'
+            }
+        })
+    }
+
+module.exports = {gitHubUserInfoAPI, gitHubSetRepoHook}
