@@ -105,16 +105,13 @@ const slackInstallAuth = async (req, res) => {
 	const result = await web.users.list({
 		token: "xoxb-4706667577361-4696519498212-BS2W96yuJQEyIf29kY6baP4i",
 	});
-	console.log(result.members, "members");
 	result.members.forEach(async (user) => {
 		const newUser = await Users.create({
 			slackID: user["id"],
 		});
-		console.log(newUser, "new user for each");
-		await newUser.setWorkspaces(newWorkspace);
+		await newUser.setWorkspace(newWorkspace);
 	});
-	console.log(adminUser.__proto__);
-	await adminUser.setWorkspaces(newWorkspace);
+	await adminUser.setWorkspace(newWorkspace);
 };
 
 //responds to command /connectgit
