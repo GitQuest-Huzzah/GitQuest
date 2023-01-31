@@ -145,7 +145,7 @@ const sendGitHubAuthLink = async (reqBody, res) => {
 };
 
 // Listen to the app_home_opened Events API event to hear when a user opens your app from the sidebar
-web.event("app_home_opened", async ({ payload, client }) => {
+web.event("app_home_opened", async ({ payload, web }) => {
 	const userId = payload.user;
 
 	try {
