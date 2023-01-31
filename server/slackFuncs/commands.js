@@ -90,7 +90,6 @@ const slackInstallAuth = async (req, res) => {
 		client_id: "***REMOVED***",
 		client_secret: "***REMOVED***",
 	});
-	console.log(installRequest.authed_user, "authed user")
 	//adminUser block sets the installer of the app on a workspace as the admin for that workspace
 	const adminUser = await Users.create({
 		slackID: installRequest.authed_user.id,
@@ -106,7 +105,10 @@ const slackInstallAuth = async (req, res) => {
 	const result = await web.users.list({
 		token: "***REMOVED***",
 	});
-	result.members.forEach(async (user) => {
+	const filteredMembers = result.members.filter(
+		(member) => member["is_bot"] === false || member["name"] !== "slackbot"
+	);
+	filteredMembers.forEach(async (user) => {
 		const newUser = await Users.create({
 			slackID: user["id"],
 		});
