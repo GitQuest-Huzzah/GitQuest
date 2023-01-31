@@ -102,7 +102,9 @@ const slackInstallAuth = async (req, res) => {
 		teamName: installRequest.team.name,
 	});
 
-	const result = await web.users.list();
+	const result = await web.users.list({
+		token: "***REMOVED***",
+	});
 	console.log(result.members, "members");
 	result.members.forEach(async (user) => {
 		const newUser = await Users.create({
