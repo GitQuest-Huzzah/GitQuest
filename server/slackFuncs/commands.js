@@ -1,5 +1,5 @@
 const { WebClient } = require("@slack/web-api");
-const { Users, Workspaces,Repos } = require("../db/index.js");
+const { Users, Workspaces, Repos } = require("../db/index.js");
 const { findOrgOnGH } = require("../gitFuncs/commands.js");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
@@ -337,7 +337,7 @@ const adminRepoModal = async (reqBody) => {
 							type: "plain_text",
 							text: "Select items",
 						},
-						min_query_length: 1,
+						min_query_length: 3,
 					},
 				},
 			],
@@ -345,17 +345,16 @@ const adminRepoModal = async (reqBody) => {
 	});
 };
 
-const findAllWorkSpaceRepos = async (team_id) =>{
-	 return await Workspaces.findOne({
+const findAllWorkSpaceRepos = async (team_id) => {
+	return await Workspaces.findOne({
 		where: {
-			teamID: team_id
+			teamID: team_id,
 		},
 		include: {
 			model: Repos,
 		},
-	})
-	
-}
+	});
+};
 
 module.exports = {
 	adminOrgModal,

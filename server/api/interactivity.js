@@ -10,7 +10,6 @@ const router = require("express").Router();
 //path is api/interactivity
 //all captured data from interactive slack messages hit this endpoint
 router.post("/", (req, res, next) => {
-	console.log(req, "interactivity");
 	const parsedSubmission = JSON.parse(req.body.payload);
 	if (parsedSubmission.type === "block_actions") {
 		if (
