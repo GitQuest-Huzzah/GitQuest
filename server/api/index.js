@@ -13,5 +13,7 @@ router.use('/github/', require('./github'));
 
 router.use('/webhook', require('./webhooksEndpoints'));
 
+router.use('/selectMenus', require('./selectMenus'))
+
 module.exports = router;
 
