@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db.js');
-const Users = db.define("user", {
+const Repos = db.define("repo", {
     repoId:{
         type:Sequelize.STRING,
         allowNull:false
@@ -11,4 +11,4 @@ const Users = db.define("user", {
     },
 })
 
-module.exports = Users
+module.exports = Repos
