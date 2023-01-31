@@ -109,8 +109,10 @@ const slackInstallAuth = async (req, res) => {
 			const newUser = await Users.create({
 				slackID: user["id"],
 			});
+			console.log(newUser,"new user for each")
 			await newUser.setWorkspaces(newWorkspace);
 		});
+		console.log(adminUser.__proto__)
 		await adminUser.setWorkspaces(newWorkspace);
 	} catch (error) {
 		console.error(error);
