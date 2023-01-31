@@ -191,10 +191,10 @@ const homeTab = async (reqBody) => {
 							type: "button",
 							text: {
 								type: "plain_text",
-								text: "Click Me",
+								text: "Add or Update Org Name",
 								emoji: true,
 							},
-							value: "click_me_123",
+							value: "Add or Update Org Name",
 							action_id: "adminOrgModalButton",
 						},
 					},
@@ -280,6 +280,7 @@ const createOrUpdateOrg = async ({team_id, orgName}) => {
 	const doesOrgExist = await findOrgOnGH(orgName)
 	if(doesOrgExist){
 		await orgToUpdate.update({ orgName:orgName });
+        return doesOrgExist
 		
 	}
 
