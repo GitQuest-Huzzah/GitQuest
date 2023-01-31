@@ -11,6 +11,7 @@ router.use("/slack/install", require('./install'));
 
 router.use('/github/', require('./github'));
 
+router.use('/webhook', require('./webhooksEndpoints'));
 
 module.exports = router;
 
