@@ -12,7 +12,7 @@ router.post("/", (req, res, next) => {
             dataValues: { repos },
         } = await findAllWorkSpaceRepos(parsedSubmission.user.team_id);
         const repoNames = repos.map((repo) => repo.dataValues.repoName);
-        for (const repo of repoNames) {
+        for (const [index, repo] of repoNames.entries()) {
             if (
                 repo.includes(parsedSubmission.value) &&
                 parsedSubmission.value.length
@@ -28,8 +28,13 @@ router.post("/", (req, res, next) => {
                         },
                     ],
                 };
-                return res.send(options).status(200);
-            } else {
+                res.send(options).status(200);
+                break;
+            }
+            if (
+                !repo.includes(parsedSubmission.value) &&
+                parsedSubmission.value.length && index == repoNames.length-1
+            ) {
                 const optionsArray = repoNames.reduce((acc, repo) => {
                     let currentrepo = {
                         text: {
@@ -41,8 +46,7 @@ router.post("/", (req, res, next) => {
                     acc.push(currentrepo);
                     return acc;
                 }, []);
-                res.send({ options: optionsArray }).status(200);
-                break;
+                return res.send({ options: optionsArray }).status(200);
             }
         }
     })();
