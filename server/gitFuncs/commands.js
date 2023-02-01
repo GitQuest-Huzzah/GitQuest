@@ -61,6 +61,7 @@ const getAllOrgRepos = async (reqBody) => {
 			model: Workspaces,
 		},
 	});
+    console.log(orgName, 'THIS IS THE orgName')
 	return await octokit.request("GET /orgs/{owner}/repos", {
 		owner: orgName, //these need to be set to receive from the found user
 	});
