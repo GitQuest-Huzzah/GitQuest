@@ -338,7 +338,7 @@ const adminRepoModal = async (reqBody) => {
 							type: "plain_text",
 							text: "Select items",
 						},
-						min_query_length: 1,
+						min_query_length: 0,
 					},
 				},
 			],
