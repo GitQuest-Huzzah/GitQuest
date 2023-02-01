@@ -9,7 +9,7 @@ const Repos = db.define("repo", {
         type:Sequelize.STRING,
         allowNull:false
     },
-    isWebhook:{
+    webhookSet:{
         type: Sequelize.BOOLEAN,
         allowNull:false,
         defaultValue: false
