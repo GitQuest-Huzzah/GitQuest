@@ -12,6 +12,7 @@ const router = require("express").Router();
 router.post("/", (req, res, next) => {
 	const parsedSubmission = JSON.parse(req.body.payload);
 	if (parsedSubmission.type === "block_actions") {
+    // console.log(parsedSubmission)
 		if (
 			parsedSubmission.actions[0].action_id &&
 			parsedSubmission.actions[0].action_id === "adminOrgModalButton"
@@ -27,6 +28,7 @@ router.post("/", (req, res, next) => {
 	if (parsedSubmission.type === "view_submission") {
 		res.send({ response_action: "clear" });
 		(async () => {
+            console.log(parsedSubmission.view.team_id, 'THIS IS TEAM ID PASSED INTO CREATE OR UPDATE ORG')
 			await createOrUpdateOrg({
 				team_id: parsedSubmission.view.team_id,
 				orgName: parsedSubmission.view.state.values.OwnerName.Owner_Input.value,
