@@ -14,15 +14,9 @@ const Workspaces = db.define("workspace", {
         type:Sequelize.STRING,
         allowNull:false
     },
-    repoName:{
-        type:Sequelize.STRING,
-    },
     orgName:{
         type:Sequelize.STRING,
     },
-    repoID:{
-        type:Sequelize.INTEGER,
-    }
 })
 
 module.exports = Workspaces
