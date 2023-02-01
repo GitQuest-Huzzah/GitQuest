@@ -296,6 +296,7 @@ const createOrUpdateOrg = async ({ team_id, orgName }) => {
 		},
 	});
 	const doesOrgExist = await findOrgOnGH(orgName);
+    console.log(orgToUpdate)
 	if (doesOrgExist) {
 		return await orgToUpdate.update({ orgName: orgName });
 	}
@@ -337,7 +338,7 @@ const adminRepoModal = async (reqBody) => {
 							type: "plain_text",
 							text: "Select items",
 						},
-						min_query_length: 3,
+						min_query_length: 0,
 					},
 				},
 			],
