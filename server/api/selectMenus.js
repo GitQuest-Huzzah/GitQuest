@@ -10,7 +10,8 @@ router.post("/", (req, res, next) => {
 		const {
 			dataValues: { repos },
 		} = await findAllWorkSpaceRepos(parsedSubmission.user.team_id);
-		const names = repos.map((repo) => repo.dataValues.repoName);
+		const repoNames = repos.map((repo) => repo.dataValues.repoName);
+        console.log(repoNames)
 	})();
 	const options = {
           "options": [
