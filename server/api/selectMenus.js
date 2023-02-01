@@ -31,9 +31,7 @@ router.post("/", (req, res, next) => {
                 res.send(options).status(200);
                 break;
             }
-            if (
-                 index == repoNames.length-1
-            ) {
+            if (index == repoNames.length - 1) {
                 const optionsArray = repoNames.reduce((acc, repo) => {
                     let currentrepo = {
                         text: {

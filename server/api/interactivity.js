@@ -1,9 +1,10 @@
-const { getAllOrgRepos, addAllOrgReposToDB } = require("../gitFuncs/commands");
+const { getAllOrgRepos, addAllOrgReposToDB, gitHubSetRepoHook } = require("../gitFuncs/commands");
 const {
 	adminOrgModal,
 	adminRepoModal,
 	createOrUpdateOrg,
 } = require("../slackFuncs/commands");
+const { Users } = require("../db/")
 
 const router = require("express").Router();
 
@@ -25,7 +26,16 @@ router.post("/", (req, res, next) => {
 			adminRepoModal(parsedSubmission);
 		res.sendStatus(200);
 	}
-	if (parsedSubmission.type === "view_submission") {
+    
+    if(parsedSubmission.view.external_id === 'adminAddReposSubmit' && parsedSubmission.type === 'view_submission'){
+        console.log(parsedSubmission)
+        gitHubSetRepoHook(parsedSubmission, )
+        
+
+    }
+
+	if (parsedSubmission.view.external_id === "adminAddOrgSubmit" && parsedSubmission.type === 'view_submission') {
+        console.log(parsedSubmission, "THIS IS THE VIEW SUBMISSION TYPE")
 		res.send({ response_action: "clear" });
 		(async () => {
             console.log(parsedSubmission.view.team_id, 'THIS IS TEAM ID PASSED INTO CREATE OR UPDATE ORG')
