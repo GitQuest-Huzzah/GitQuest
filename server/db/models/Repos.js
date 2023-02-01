@@ -9,6 +9,11 @@ const Repos = db.define("repo", {
         type:Sequelize.STRING,
         allowNull:false
     },
+    isWebhook:{
+        type: Sequelize.BOOLEAN,
+        allowNull:false,
+        defaultValue: false
+    }
 })
 
 module.exports = Repos

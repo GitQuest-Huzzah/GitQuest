@@ -231,10 +231,11 @@ const adminOrgModal = async (reqBody) => {
 		trigger_id: reqBody.trigger_id,
 		token: "***REMOVED***",
 		view: {
+            external_id:'adminAddOrgSubmit',
 			type: "modal",
 			title: {
 				type: "plain_text",
-				text: "Adding Repo to Watch",
+				text: "Add Org",
 				emoji: true,
 			},
 			submit: {
@@ -308,6 +309,7 @@ const adminRepoModal = async (reqBody) => {
 		token: "***REMOVED***",
 		view: {
 			type: "modal",
+            external_id: 'adminAddReposSubmit',
 			title: {
 				type: "plain_text",
 				text: "Adding Repo to Watch",
@@ -326,13 +328,13 @@ const adminRepoModal = async (reqBody) => {
 			blocks: [
 				{
 					type: "section",
-					block_id: "section678",
+					block_id: "adminRepoModal",
 					text: {
 						type: "mrkdwn",
 						text: "Pick items from the list",
 					},
 					accessory: {
-						action_id: "text1234",
+						action_id: "adminRepoModalAction",
 						type: "multi_external_select",
 						placeholder: {
 							type: "plain_text",
