@@ -11,7 +11,7 @@ const adminDeleteRepoModal = async (reqBody) => {
             external_id: 'adminDeleteReposSubmit',
 			title: {
 				type: "plain_text",
-				text: "Adding Repo to Watch",
+				text: "Remove Watched Repo",
 				emoji: true,
 			},
 			submit: {
