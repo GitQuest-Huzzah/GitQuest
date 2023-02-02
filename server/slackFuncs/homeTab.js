@@ -4,7 +4,8 @@ const createAdminGHLink = require("./createAdminGHLink");
 const web = new WebClient();
 // Listen to the app_home_opened Events API event to hear when a user opens your app from the sidebar
 const homeTab = async (reqBody) => {
-	const gHLink = createAdminGHLink(reqBody)
+	console.log(reqBody, 'home tab')
+	const gHLink = createAdminGHLink({teamId: reqBody.team_id, userId: reqBody.event.user})
 	try{
 		// Call the views.publish method using the WebClient passed to listeners
 		await web.views.publish({

@@ -16,6 +16,7 @@ router.get("/auth/redirect", (req, res, next) => {
 	const decodedString = buffer64Obj.toString("utf8");
 	//we finally parse that string into a readable JSON
 	const parsedUserInfo = JSON.parse(decodedString);
+	console.log(parsedUserInfo)
 	//body is the request body where we exchange our temporary code for a GH access token
 	const body = {
 		client_id: githubClientId,
