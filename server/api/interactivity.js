@@ -8,6 +8,7 @@ const {
 	adminOrgModal,
 	adminRepoModal,
 	createOrUpdateOrg,
+	adminGitConnectUserModal,
 } = require("../slackFuncs");
 
 const router = require("express").Router();
@@ -28,6 +29,11 @@ router.post("/", (req, res, next) => {
 			parsedSubmission.actions[0].action_id === "adminRepoModalButton"
 		)
 			adminRepoModal(parsedSubmission);
+		if (
+			parsedSubmission.actions[0].action_id &&
+			parsedSubmission.actions[0].action_id === "adminGitConnectUserModalButton"
+		)
+			adminGitConnectUserModal(parsedSubmission)
 		res.sendStatus(200);
 	}
 
@@ -35,7 +41,6 @@ router.post("/", (req, res, next) => {
 		parsedSubmission.view.external_id === "adminAddReposSubmit" &&
 		parsedSubmission.type === "view_submission"
 	) {
-		console.log(parsedSubmission);
 		gitHubSetRepoHook(parsedSubmission);
 	}
 
@@ -43,13 +48,8 @@ router.post("/", (req, res, next) => {
 		parsedSubmission.view.external_id === "adminAddOrgSubmit" &&
 		parsedSubmission.type === "view_submission"
 	) {
-		console.log(parsedSubmission, "THIS IS THE VIEW SUBMISSION TYPE");
 		res.send({ response_action: "clear" });
 		(async () => {
-			console.log(
-				parsedSubmission.view.team_id,
-				"THIS IS TEAM ID PASSED INTO CREATE OR UPDATE ORG"
-			);
 			await createOrUpdateOrg({
 				team_id: parsedSubmission.view.team_id,
 				orgName: parsedSubmission.view.state.values.OwnerName.Owner_Input.value,
