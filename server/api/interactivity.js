@@ -3,6 +3,7 @@ const {
 	getAllOrgRepos,
 	gitHubSetRepoHook,
 	updateUserGitHub,
+	gitHubDeleteRepo,
 } = require("../gitFuncs");
 
 const {
@@ -11,6 +12,7 @@ const {
 	createOrUpdateOrg,
 	adminGitConnectUserModal,
 } = require("../slackFuncs");
+const adminDeleteRepoModal = require("../slackFuncs/adminDeleteRepoModal");
 
 const router = require("express").Router();
 
@@ -34,7 +36,12 @@ router.post("/", (req, res, next) => {
 			parsedSubmission.actions[0].action_id &&
 			parsedSubmission.actions[0].action_id === "adminGitConnectUserModalButton"
 		)
-			adminGitConnectUserModal(parsedSubmission)
+			adminGitConnectUserModal(parsedSubmission);
+		if (
+			parsedSubmission.actions[0].action_id &&
+			parsedSubmission.actions[0].action_id === "adminRepoDeleteModalButton"
+		)
+			adminDeleteRepoModal(parsedSubmission);
 		res.sendStatus(200);
 	}
 
@@ -52,14 +59,18 @@ router.post("/", (req, res, next) => {
 		parsedSubmission.type === "view_submission"
 	) {
 		res.send({ response_action: "clear" });
-			createOrUpdateOrg(parsedSubmission);
+		createOrUpdateOrg(parsedSubmission);
 	}
 	if (
 		parsedSubmission.view.external_id === "adminGitConnectUserSubmit" &&
 		parsedSubmission.type === "view_submission"
 	) {
 		res.send({ response_action: "clear" });
-			updateUserGitHub(parsedSubmission);
+		updateUserGitHub(parsedSubmission);
+	}
+	if (parsedSubmission.view.external_id === "adminDeleteReposSubmit" && parsedSubmission.type === "view_submission"){
+		res.send({ response_action:'clear'});
+		gitHubDeleteRepo(parsedSubmission);
 	}
 });
 
