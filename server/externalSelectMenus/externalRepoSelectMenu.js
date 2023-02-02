@@ -1,4 +1,3 @@
-const { findAllWorkSpaceRepos } = require("../slackFuncs");
 const { getAllOrgRepos } = require("../gitFuncs")
 const externalRepoSelectMenu = async (parsedSubmission) => {
     const {data} = await getAllOrgRepos(parsedSubmission);

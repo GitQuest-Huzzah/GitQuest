@@ -1,4 +1,4 @@
-const {externalRepoSelectMenu, externalGitHubUserConnectSelectMenu}  = require("../externalSelectMenus");
+const {externalRepoSelectMenu, externalGitHubUserConnectSelectMenu, externalRepoDeleteSelectMenu}  = require("../externalSelectMenus");
 
 const router = require("express").Router();
 
@@ -11,6 +11,9 @@ router.post("/", async (req, res, next) => {
 	}
 	if (parsedSubmission.view.external_id === "adminGitConnectUserSubmit") {
 		res.send(await externalGitHubUserConnectSelectMenu(parsedSubmission)).status(200);
+	}
+	if (parsedSubmission.view.external_id === "adminDeleteReposSubmit"){
+		res.send(await externalRepoDeleteSelectMenu(parsedSubmission)).status(200)
 	}
 });
 
