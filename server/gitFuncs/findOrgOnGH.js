@@ -1,8 +1,11 @@
 const { Octokit } = require("@octokit/core");
+const retrieveGitHubAPIToken = require("./retrieveGitHubAPIToken");
 
-const findOrgOnGH = async (orgName) => {
+const findOrgOnGH = async (reqBody) => {
+    const orgName = reqBody.view.state.values.OwnerName.Owner_Input.value;
+    const token = await retrieveGitHubAPIToken(reqBody)
     const octokit = new Octokit({
-        auth: "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",
+        auth: token,
     });
     try {
         const organization = await octokit.request("GET /orgs/{owner}", {
