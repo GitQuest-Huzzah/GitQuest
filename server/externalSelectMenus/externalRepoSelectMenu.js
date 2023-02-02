@@ -1,13 +1,10 @@
 const { findAllWorkSpaceRepos } = require("../slackFuncs");
-
+const { getAllOrgRepos } = require("../gitFuncs")
 const externalRepoSelectMenu = async (parsedSubmission) => {
-    const {
-        dataValues: { repos },
-    } = await findAllWorkSpaceRepos(parsedSubmission.user.team_id);
-    const repoNames = repos.map((repo) => repo.dataValues.repoName);
-    for (const [index, repo] of repoNames.entries()) {
+    const {data} = await getAllOrgRepos(parsedSubmission);
+    for (const [index, repo] of data.entries()) {
         if (
-            repo.includes(parsedSubmission.value) &&
+            repo.name.includes(parsedSubmission.value) &&
             parsedSubmission.value.length
         ) {
             const options = {
@@ -15,23 +12,22 @@ const externalRepoSelectMenu = async (parsedSubmission) => {
                     {
                         text: {
                             type: "plain_text",
-                            text: `${repo}`,
+                            text: `${repo.name}`,
                         },
-                        value: `${repo}`,
+                        value: `${repo.id}`,
                     },
                 ],
             };
-            res.send(options).status(200);
-            break;
+            return options
         }
-        if (index == repoNames.length - 1) {
-            const optionsArray = repoNames.reduce((acc, repo) => {
+        if (index == data.length - 1) {
+            const optionsArray = data.reduce((acc, repo) => {
                 let currentrepo = {
                     text: {
                         type: "plain_text",
-                        text: `${repo}`,
+                        text: `${repo.name}`,
                     },
-                    value: `${repo}`,
+                    value: `${repo.id}`,
                 };
                 acc.push(currentrepo);
                 return acc;
