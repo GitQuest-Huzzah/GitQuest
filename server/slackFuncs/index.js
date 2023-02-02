@@ -1,3 +1,4 @@
+const adminGitConnectUserModal = require("./adminGitConnectUserModal");
 const adminOrgModal = require("./adminOrgModal");
 const adminRepoModal = require("./adminRepoModal");
 const blockTest = require("./blockTest");
@@ -10,6 +11,7 @@ const sendGitHubAuthLink = require("./sendGitHubLink");
 const slackInstallAuth = require("./slackInstallAuth");
 
 module.exports = {
+	adminGitConnectUserModal,
 	adminOrgModal,
 	adminRepoModal,
 	blockTest,
