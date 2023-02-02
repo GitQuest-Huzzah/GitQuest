@@ -3,9 +3,8 @@ const { Users, Workspaces } = require("../db");
 const { gitHubSetRepoHook } = require("../gitFuncs");
 const router = require("express").Router();
 
-const githubClientId = "a8acd4f185488b3664c5";
-const githubClientSecret = "5ee1729ef0278e389a663954859b662e8d364afd";
-
+const githubClientId = process.env.GITHUB_CLIENT_ID_DEV || process.env.GITHUB_CLIENT_ID;
+const githubClientSecret = process.env.GITHUB_CLIENT_SECRET_DEV || process.env.GITHUB_CLIENT_SECRET
 //path is /api/github/auth/redirect
 router.get("/auth/redirect", (req, res, next) => {
 	res.json({ git: "authorized" });
@@ -16,7 +15,6 @@ router.get("/auth/redirect", (req, res, next) => {
 	const decodedString = buffer64Obj.toString("utf8");
 	//we finally parse that string into a readable JSON
 	const parsedUserInfo = JSON.parse(decodedString);
-	console.log(parsedUserInfo)
 	//body is the request body where we exchange our temporary code for a GH access token
 	const body = {
 		client_id: githubClientId,

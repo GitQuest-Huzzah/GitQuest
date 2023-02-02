@@ -5,11 +5,13 @@ const web = new WebClient();
 //slackInstallAuth responds to the redirect from a user agreeing to install the app on a workspace, which hits the path /api/slack/install/redirect
 // the first block takes the code given by agreeing to install, and supplies the associated slack app information and then exchanges it for a official bot token
 const slackInstallAuth = async (req, res) => {
+	console.log('fired')
 	const installRequest = await web.oauth.v2.access({
 		code: req.query.code,
-		client_id: "4706667577361.4706675007441",
-		client_secret: "9bfcc36a2b43abce2e9dfc6b108cbb24",
+		client_id: process.env.SLACK_CLIENT_ID_DEV || process.env.SLACK_CLIENT_ID,
+		client_secret: process.env.SLACK_CLIENT_SECRET_DEV || process.env.SLACK_CLIENT_SECRET,
 	});
+	console.log(installRequest,"install")
 	//adminUser block sets the installer of the app on a workspace as the admin for that workspace
 	const adminUser = await Users.create({
 		slackID: installRequest.authed_user.id,
