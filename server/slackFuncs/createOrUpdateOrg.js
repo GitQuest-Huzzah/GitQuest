@@ -2,7 +2,6 @@ const { Workspaces } = require("../db");
 const { findOrgOnGH } = require("../gitFuncs");
 
 const createOrUpdateOrg = async (reqBody) => {
-	console.log(reqBody.view, "create function")
 	const orgName = reqBody.view.state.values.OwnerName.Owner_Input.value;
 	const orgToUpdate = await Workspaces.findOne({
 		where: {

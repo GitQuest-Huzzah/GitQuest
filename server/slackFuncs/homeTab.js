@@ -66,6 +66,23 @@ const homeTab = async (reqBody) => {
 							type: "button",
 							text: {
 								type: "plain_text",
+								text: "Repos to Delete",
+								emoji: true,
+							},
+							value: "Repos to Delete",
+							action_id: "adminRepoDeleteModalButton",
+						},
+					},
+					{
+						type: "section",
+						text: {
+							type: "mrkdwn",
+							text: "This is a section block with a button.",
+						},
+						accessory: {
+							type: "button",
+							text: {
+								type: "plain_text",
 								text: "Link Users To GitHub",
 								emoji: true,
 							},
