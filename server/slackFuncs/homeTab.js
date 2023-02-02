@@ -56,6 +56,23 @@ const homeTab = async (reqBody) => {
 							action_id: "adminRepoModalButton",
 						},
 					},
+					{
+						type: "section",
+						text: {
+							type: "mrkdwn",
+							text: "This is a section block with a button.",
+						},
+						accessory: {
+							type: "button",
+							text: {
+								type: "plain_text",
+								text: "Link Users To GitHub",
+								emoji: true,
+							},
+							value: "Connect User To GitHub Account",
+							action_id: "adminGitConnectUserModalButton",
+						},
+					},
 				],
 			},
 		});

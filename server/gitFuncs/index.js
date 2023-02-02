@@ -2,12 +2,13 @@ const addAllOrgReposToDB = require("./addAllOrgReposToDB");
 const findOrgOnGH = require("./findOrgOnGH");
 const getAllOrgRepos = require("./getAllOrgRepos");
 const gitHubSetRepoHook = require("./gitHubSetRepoHook");
-const gitHubUserInfoAPI = require("./gitHubUserInfoAPI");
-
+const gitHubOrgAllUsers = require("./gitHubOrgAllUsers");
+const retrieveGitHubAPIToken = require('./retrieveGitHubAPIToken')
 module.exports = {
 	addAllOrgReposToDB,
 	findOrgOnGH,
 	getAllOrgRepos,
-	gitHubUserInfoAPI,
+	gitHubOrgAllUsers,
 	gitHubSetRepoHook,
+	retrieveGitHubAPIToken
 };
