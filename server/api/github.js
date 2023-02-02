@@ -64,12 +64,6 @@ router.get("/auth/redirect", (req, res, next) => {
 	})();
 });
 
-//path is /api/github/userinfo
-// router.post("/userinfo", (req, res, next) => {
-// 	res.sendStatus(200);
-// 	gitHubUserInfoAPI(req.body);
-// });
-
 //path is api/github/setrepo
 router.post("/setrepo", (req, res, next) => {
 	res.sendStatus(200);
