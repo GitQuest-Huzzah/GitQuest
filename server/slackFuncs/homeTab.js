@@ -1,11 +1,13 @@
 const { WebClient } = require("@slack/web-api");
+const createAdminGHLink = require("./createAdminGHLink");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 // Listen to the app_home_opened Events API event to hear when a user opens your app from the sidebar
 const homeTab = async (reqBody) => {
-	try {
+	const gHLink = createAdminGHLink(reqBody)
+	try{
 		// Call the views.publish method using the WebClient passed to listeners
-		 await web.views.publish({
+		await web.views.publish({
 			user_id: reqBody.event.user,
 			token: "***REMOVED***",
 			view: {
@@ -26,7 +28,7 @@ const homeTab = async (reqBody) => {
 						type: "section",
 						text: {
 							type: "mrkdwn",
-							text: "This is a section block with a button.",
+							text: "FIRST WE NEED YOUR ORGANIZATION NAME",
 						},
 						accessory: {
 							type: "button",
@@ -43,7 +45,24 @@ const homeTab = async (reqBody) => {
 						type: "section",
 						text: {
 							type: "mrkdwn",
-							text: "This is a section block with a button.",
+							text: "THEN WE NEED YOU TO CONNECT YOUR ORG TO GITHUB",
+						},
+						accessory: {
+							type: "button",
+							text: {
+								type: "plain_text",
+								text: "Link Org To GitHub",
+								emoji: true,
+							},
+							value: "Link Org To GitHub",
+							url: gHLink
+						},
+					},
+					{
+						type: "section",
+						text: {
+							type: "mrkdwn",
+							text: "THEN TELL US WHAT REPOS TO WATCH FOR YOU",
 						},
 						accessory: {
 							type: "button",
@@ -60,7 +79,7 @@ const homeTab = async (reqBody) => {
 						type: "section",
 						text: {
 							type: "mrkdwn",
-							text: "This is a section block with a button.",
+							text: "THEN LINK YOUR USERS TO THEIR GITHUB USERNAME",
 						},
 						accessory: {
 							type: "button",
@@ -77,7 +96,7 @@ const homeTab = async (reqBody) => {
 						type: "section",
 						text: {
 							type: "mrkdwn",
-							text: "This is a section block with a button.",
+							text: "IF YOU NEED US TO STOP WATCHING A REPO FOR YOU",
 						},
 						accessory: {
 							type: "button",
