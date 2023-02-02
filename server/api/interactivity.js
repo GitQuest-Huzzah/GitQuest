@@ -2,6 +2,7 @@ const {
 	addAllOrgReposToDB,
 	getAllOrgRepos,
 	gitHubSetRepoHook,
+	updateUserGitHub,
 } = require("../gitFuncs");
 
 const {
@@ -41,6 +42,8 @@ router.post("/", (req, res, next) => {
 		parsedSubmission.view.external_id === "adminAddReposSubmit" &&
 		parsedSubmission.type === "view_submission"
 	) {
+		res.send({ response_action: "clear" });
+		addAllOrgReposToDB(parsedSubmission);
 		gitHubSetRepoHook(parsedSubmission);
 	}
 
@@ -49,14 +52,14 @@ router.post("/", (req, res, next) => {
 		parsedSubmission.type === "view_submission"
 	) {
 		res.send({ response_action: "clear" });
-		(async () => {
-			await createOrUpdateOrg({
-				team_id: parsedSubmission.view.team_id,
-				orgName: parsedSubmission.view.state.values.OwnerName.Owner_Input.value,
-			});
-			const repos = await getAllOrgRepos(parsedSubmission);
-			await addAllOrgReposToDB(repos, parsedSubmission);
-		})();
+			createOrUpdateOrg(parsedSubmission);
+	}
+	if (
+		parsedSubmission.view.external_id === "adminGitConnectUserSubmit" &&
+		parsedSubmission.type === "view_submission"
+	) {
+		res.send({ response_action: "clear" });
+			updateUserGitHub(parsedSubmission);
 	}
 });
 

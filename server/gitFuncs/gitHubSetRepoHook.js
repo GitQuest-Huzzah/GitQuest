@@ -23,7 +23,7 @@ const gitHubSetRepoHook = async (reqBody, repos) => {
             active: true,
             events: ["push", "pull_request"],
             config: {
-                url: "https://ece1-2603-9000-9300-a36b-4937-cdfd-8e40-2bfe.ngrok.io/api/webhook",
+                url: "https://gitquest.fun/api/webhook",
                 content_type: "json",
                 insecure_ssl: "0",
             },
