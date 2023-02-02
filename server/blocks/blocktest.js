@@ -1,4 +1,3 @@
-
 const { WebClient } = require("@slack/web-api");
 const web = new WebClient();
 
@@ -71,4 +70,4 @@ const blockTest = async (reqBody, res) => {
     });
 };
 
-module.exports = blockTest
+module.exports = blockTest;
