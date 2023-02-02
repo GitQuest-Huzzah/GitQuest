@@ -1,7 +1,6 @@
-const { slackInstallAuth } = require("../slackFuncs/commands");
+const { slackInstallAuth } = require("../slackFuncs");
 
 const router = require("express").Router();
-
 
 //path is /api/slack/install/redirect
 router.get("/redirect", (req,res) =>{
