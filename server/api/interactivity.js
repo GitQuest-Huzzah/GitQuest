@@ -59,7 +59,6 @@ router.post("/", (req, res, next) => {
 		parsedSubmission.type === "view_submission"
 	) {
 		res.send({ response_action: "clear" });
-		console.log('submission in response', parsedSubmission)
 		createOrUpdateOrg(parsedSubmission);
 	}
 	if (
