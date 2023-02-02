@@ -13,7 +13,7 @@ const updateUserGitHub = async (reqBody) => {
 		},
 	});
 	console.log(user);
-	user.update({ gitHubID: gitHubUser.value });
+	user.update({ gitHubID: gitHubUser.value, gitHubLogin: gitHubUser.text.text });
 };
 
 module.exports = updateUserGitHub;
