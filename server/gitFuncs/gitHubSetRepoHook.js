@@ -1,5 +1,6 @@
 const { Octokit } = require("@octokit/core");
 const { Users, Workspaces } = require("../db");
+const retrieveGitHubAPIToken = require("./retrieveGitHubAPIToken");
 
 const gitHubSetRepoHook = async (reqBody) => {
 	const user = await Users.findOne({
@@ -8,9 +9,9 @@ const gitHubSetRepoHook = async (reqBody) => {
 		},
 		include: Workspaces,
 	});
-
+	const token = await retrieveGitHubAPIToken(reqBody)
 	const octokit = new Octokit({
-		auth: "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",
+		auth: token,
 		// needs to be user.gitToken
 	});
 
