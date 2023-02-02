@@ -12,6 +12,6 @@ const db = new Sequelize('postgres://localhost:5432/gitgoingdb', {logging:false}
 //     },
 // });
 
-db.sync();
+db.sync({force:true});
 
 module.exports = db;
