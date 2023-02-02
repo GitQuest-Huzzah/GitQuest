@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { Users, Workspaces } = require("../db");
-const {gitHubUserInfoAPI, gitHubSetRepoHook} = require("../gitFuncs/commands");
+const { gitHubSetRepoHook } = require("../gitFuncs");
 const router = require("express").Router();
 
 const githubClientId = "a8acd4f185488b3664c5";
@@ -73,8 +73,8 @@ router.get("/auth/redirect", (req, res, next) => {
 //path is api/github/setrepo
 router.post("/setrepo", (req, res, next) => {
 	res.sendStatus(200);
-	const [owner,repo] = req.body.text.split(" ")
-	gitHubSetRepoHook({...req.body, owner:owner, repo:repo});
+	const [owner, repo] = req.body.text.split(" ");
+	gitHubSetRepoHook({ ...req.body, owner: owner, repo: repo });
 });
 
 module.exports = router;
