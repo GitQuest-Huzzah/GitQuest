@@ -19,9 +19,21 @@ const Users = db.define("user", {
         defaultValue: false,
         allowNull:false
     },
+    commits:{
+        type:Sequelize.INTEGER,
+        defaultValue: 0,
+    },
+    pullRequests:{
+        type:Sequelize.INTEGER,
+        defaultValue: 0,
+    },
     level:{
         type:Sequelize.INTEGER,
         defaultValue: 1,
+    },
+    title:{
+        type:Sequelize.STRING,
+        defaultValue: 'Neophyte',
     },
     exp:{
         type:Sequelize.INTEGER,
@@ -35,6 +47,9 @@ const Users = db.define("user", {
         type:Sequelize.INTEGER,
         defaultValue: 0,
     },
+    achievements:{
+        type:Sequelize.JSONB
+    }
 })
 
 module.exports = Users
