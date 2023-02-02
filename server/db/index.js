@@ -6,8 +6,6 @@ const Users_Achievements = require('./models/Users_Achievements')
 const Workspaces = require('./models/Workspaces');
 
 //model associations
-Users.belongsToMany(Achievements, {through: Users_Achievements})
-Achievements.belongsToMany(Users, {through: Users_Achievements})
 
 Users.belongsTo(Workspaces)
 Workspaces.hasMany(Users)

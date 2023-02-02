@@ -11,18 +11,24 @@ const Achievements = db.define("achievement", {
         type:Sequelize.TEXT,
         allowNull:false,
     },
-    expValue:{
-        type:Sequelize.INTEGER,
-        allowNull:false
-    },
-    goldValue:{
-        type:Sequelize.INTEGER,
-    },
-    rewardGold:{
-        type:Sequelize.INTEGER,
-    },
+    commitLevel:{
+        // null
+   },
+    pullRequestLevel:{
+        150
+    }
+    userID
 })
 
 //Write achievements
 
 module.exports = Achievements
+
+
+//
+//
+//
+//
+//
+//
+//
