@@ -5,7 +5,7 @@ const web = new WebClient();
 const homeTab = async (reqBody) => {
 	try {
 		// Call the views.publish method using the WebClient passed to listeners
-		const result = await web.views.publish({
+		 await web.views.publish({
 			user_id: reqBody.event.user,
 			token: "xoxb-4706667577361-4696519498212-BS2W96yuJQEyIf29kY6baP4i",
 			view: {
@@ -16,27 +16,11 @@ const homeTab = async (reqBody) => {
 						type: "section",
 						text: {
 							type: "mrkdwn",
-							text: "Hey there big boy",
-						},
-					},
-					{
-						type: "section",
-						text: {
-							type: "mrkdwn",
-							text: "Learn how home tabs can be more useful and interactive <https://api.slack.com/surfaces/tabs/using|*in the documentation*>.",
+							text: "Hey there Git Quest **Your Rank and Name Here**",
 						},
 					},
 					{
 						type: "divider",
-					},
-					{
-						type: "context",
-						elements: [
-							{
-								type: "mrkdwn",
-								text: "Psssst this home tab was designed using <https://api.slack.com/tools/block-kit-builder|*Block Kit Builder*>",
-							},
-						],
 					},
 					{
 						type: "section",
@@ -75,8 +59,6 @@ const homeTab = async (reqBody) => {
 				],
 			},
 		});
-
-		// console.log(result);
 	} catch (error) {
 		console.error(error);
 	}
