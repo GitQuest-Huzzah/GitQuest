@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db.js');
 
-const GoldLog = db.define("goldlog", {
+const Goldlog = db.define("goldlog", {
     description:{
         type:Sequelize.STRING,
         allowNull:false
@@ -18,5 +18,5 @@ const GoldLog = db.define("goldlog", {
 // User has one gold log // gold log has many users
 // 
 
-module.exports = GoldLog
+module.exports = Goldlog;
 
