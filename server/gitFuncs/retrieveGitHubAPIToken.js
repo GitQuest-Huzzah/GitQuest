@@ -1,13 +1,14 @@
 const { Users } = require("../db");
 
 const retrieveGitHubAPIToken = (reqBody) =>{
-    const {dataValues:{gitHubToken}} = Users.findOne({
+    const user = Users.findOne({
         where:{
             slackID:reqBody.user.id
         }, 
         attributes: ["gitHubToken"]
     })
-    return gitHubToken
+    console.log(user, "retrieved user")
+    return user.dataValues.gitHubToken
 }
 
 module.exports = retrieveGitHubAPIToken;
