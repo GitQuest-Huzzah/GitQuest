@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const retrieveSecrets = require("../../retrieveSecret");
 
 //this is the connection to a localinstance of the DB
-console.log(process.env);
+
 let db
 	//this is the connection to the deployed DB
 	if (process.env.NODE_ENV !== "production") {
