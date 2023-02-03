@@ -11,13 +11,12 @@ if (process.env.NODE_ENV !== "production") {
 	});
 }
 if (process.env.NODE_ENV === "production") {
-	console.log(process.env, "in DB ROUTE");
-	db = new Sequelize("postgres", "postgres", `_"._&BY[-It';3.q`, {
+	db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
 		dialect: "postgres",
-		host: "/cloudsql/gitgoingslackbot:us-central1:gitgoingdb",
+		host: process.env.DB_CONNECTION,
 		logging: false,
 		dialectOptions: {
-			socketPath: "/cloudsql/gitgoingslackbot:us-central1:gitgoingdb",
+			socketPath: process.env.DB_CONNECTION,
 		},
 	});
 }
