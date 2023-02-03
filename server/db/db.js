@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 
 //this is the connection to a localinstance of the DB
+console.log(process.env)
 let db = "";
 if(process.env.DEV === "YESSIR"){
 db = new Sequelize('postgres://localhost:5432/gitgoingdb', {logging:false})
