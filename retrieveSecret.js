@@ -4,7 +4,7 @@ function retrieveSecrets(){
 	const client = new SecretManagerServiceClient();
 	client
 		.accessSecretVersion({
-			name: "projects/1003391217227/secrets/ENV_VARIABLES/versions/13",
+			name: "projects/1003391217227/secrets/ENV_VARIABLES/versions/14",
 		})
 		.then(([version]) => {
 			console.log("deploy route");
