@@ -4,7 +4,10 @@ const findTokenByTeamId = require("./findTokenByTeam");
 const web = new WebClient();
 
 const adminOrgModal = async (reqBody) => {
+	console.log(process.env)
+	console.log(reqBody,"org modal body")
 	const token = await findTokenByTeamId(reqBody.user.team_id)
+	console.log(token, "token org modal")
 	await web.views.open({
 		trigger_id: reqBody.trigger_id,
 		token: token,

@@ -8,6 +8,7 @@ const findTokenByTeamId = async (teamId) => {
 				teamID: teamId,
 			},
 		});
+		console.log(token, "token in find token")
 		return token.dataValues.gitHubToken;
 	} catch (error) {
 		console.error(error);
