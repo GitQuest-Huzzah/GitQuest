@@ -5,7 +5,7 @@ function retrieveSecrets() {
 
   return client
     .accessSecretVersion({
-      name: "projects/1003391217227/secrets/ENV_VARIABLES/versions/15",
+      name: "projects/1003391217227/secrets/ENV_VARIABLES/versions/16",
     })
     .then(([version]) => {
       //turning the buffer value of the payload into a readable string
