@@ -3,8 +3,10 @@ const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 
 //this is the connection to a localinstance of the DB
 let db = "";
-const client = new SecretManagerServiceClient();
-client.accessSecretVersion({
+if(process.env.DEV !== "YES"){
+	
+	const client = new SecretManagerServiceClient();
+	client.accessSecretVersion({
 		name: "projects/1003391217227/secrets/ENV_VARIABLES/versions/13",
 	})
 	.then(([version]) => {
@@ -39,12 +41,13 @@ client.accessSecretVersion({
 					socketPath: process.env.DB_CONNECTION,
 				},
 			}
-		))
-	);
-// if (process.env.NODE_ENV !== "production") {
-// 	exports = db = new Sequelize("postgres://localhost:5432/gitgoingdb", {
-// 		logging: false,
-// 	});
-// }
+			))
+			);
+		}
+			if (process.env.DEV === "YES") {
+	exports = db = new Sequelize("postgres://localhost:5432/gitgoingdb", {
+		logging: false,
+	});
+}
 
 module.exports = db;
