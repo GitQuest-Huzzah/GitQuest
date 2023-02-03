@@ -7,7 +7,7 @@ let db = "";
 	console.log(process.env);
 
 	if (process.env.NODE_ENV !== "production") {
-		db = new Sequelize("postgres://localhost:5432/gitgoingdb", {
+		exports = db = new Sequelize("postgres://localhost:5432/gitgoingdb", {
 			logging: false,
 		});
 	}
@@ -37,7 +37,7 @@ let db = "";
 		process.env.GITHUB_CLIENT_SECRET = parsedPayload.GITHUB_CLIENT_SECRET;
 		process.env.SLACK_CLIENT_ID = parsedPayload.SLACK_CLIENT_ID;
 		process.env.SLACK_CLIENT_SECRET = parsedPayload.SLACK_CLIENT_SECRET;
-		db = new Sequelize(
+		exports = db = new Sequelize(
 			process.env.DB_NAME,
 			process.env.DB_USER,
 			process.env.DB_PASSWORD,
@@ -54,4 +54,3 @@ let db = "";
 
 	db.sync();
 })();
-module.exports = db;
