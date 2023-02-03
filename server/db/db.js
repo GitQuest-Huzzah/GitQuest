@@ -3,24 +3,12 @@ const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 
 //this is the connection to a localinstance of the DB
 let db = "";
-(async () => {
-	console.log(process.env);
-
-	if (process.env.NODE_ENV !== "production") {
-		exports = db = new Sequelize("postgres://localhost:5432/gitgoingdb", {
-			logging: false,
-		});
-	}
-	//this is the connection to the deployed DB
-	if (process.env.NODE_ENV === "production") {
+const client = new SecretManagerServiceClient();
+client.accessSecretVersion({
+		name: "projects/1003391217227/secrets/ENV_VARIABLES/versions/13",
+	})
+	.then(([version]) => {
 		console.log("deploy route");
-		const name = "projects/1003391217227/secrets/ENV_VARIABLES/versions/13";
-		//instantiated a client for secretManager and calling accessSecretVersion method supplying the secret resource name
-		const client = new SecretManagerServiceClient();
-		const [version] = await client.accessSecretVersion({
-			name: name,
-		});
-		console.log(version, "deploy version");
 		//turning the buffer value of the payload into a readable string
 		const payload = version.payload.data.toString("utf-8");
 		//parsing the payload string to get a JSON object
@@ -37,7 +25,9 @@ let db = "";
 		process.env.GITHUB_CLIENT_SECRET = parsedPayload.GITHUB_CLIENT_SECRET;
 		process.env.SLACK_CLIENT_ID = parsedPayload.SLACK_CLIENT_ID;
 		process.env.SLACK_CLIENT_SECRET = parsedPayload.SLACK_CLIENT_SECRET;
-		exports = db = new Sequelize(
+	})
+	.then(
+		(db = new Sequelize(
 			process.env.DB_NAME,
 			process.env.DB_USER,
 			process.env.DB_PASSWORD,
@@ -49,8 +39,12 @@ let db = "";
 					socketPath: process.env.DB_CONNECTION,
 				},
 			}
-		);
-	}
+		))
+	);
+// if (process.env.NODE_ENV !== "production") {
+// 	exports = db = new Sequelize("postgres://localhost:5432/gitgoingdb", {
+// 		logging: false,
+// 	});
+// }
 
-	db.sync();
-})();
+module.exports = db;
