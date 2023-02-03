@@ -8,11 +8,12 @@ const findTokenByTeamId = async (teamId) => {
 				teamID: teamId,
 			},
 		});
-		console.log(token, "token in find token")
-		return token.dataValues.gitHubToken;
+		console.log(token.dataValues, "token in find token")
+		return token.dataValues.botToken;
 	} catch (error) {
 		console.error(error);
 	}
 };
+
 
 module.exports = findTokenByTeamId;
