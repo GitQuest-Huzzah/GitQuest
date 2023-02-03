@@ -1,7 +1,7 @@
 const pullRequestAchievements = () => {
   return {
     1: "Congratulations, young neophyte. You've made your first pull request!",
-    5: "5 pull requests in the bag! Enjoy a level-up and riches to share.",
+    5: "5 pull requests in the bag!",
     10: "You are rapidly gaining attention on your quest. 10 pull requests made!",
     15: "Continue to blaze the trail! You've reached 15 pull requests.",
     20: "With 20 pull requests, you have gained quite the experience...and even more gold.",
