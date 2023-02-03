@@ -20,7 +20,6 @@ const updateUserOnPR = async (reqBody) => {
       }
     }
   })
-  // console.log('user info', user)
   const numOfCommits = reqBody.pull_request.commits + user.dataValues.commits;
   const userExp = numOfCommits * 10;
   const numOfPulls = user.dataValues.pullRequests + 1;
