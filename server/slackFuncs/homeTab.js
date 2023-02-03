@@ -5,11 +5,13 @@ const web = new WebClient();
 // Listen to the app_home_opened Events API event to hear when a user opens your app from the sidebar
 const homeTab = async (reqBody) => {
 	const gHLink = createAdminGHLink({teamId: reqBody.team_id, userId: reqBody.event.user})
+	const token = await findTokenByTeamId(reqBody.team_id)
+
 	try{
 		// Call the views.publish method using the WebClient passed to listeners
 		await web.views.publish({
 			user_id: reqBody.event.user,
-			token: "***REMOVED***",
+			token: token,
 			view: {
 				// Home tabs must be enabled in your app configuration page under "App Home"
 				type: "home",
