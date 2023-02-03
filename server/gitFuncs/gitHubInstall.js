@@ -2,8 +2,6 @@ const axios = require("axios");
 const { Users, Workspaces } = require("../db");
 
 const gitHubInstall = (req) => {
-	const githubClientId = "***REMOVED***";
-	const githubClientSecret = "***REMOVED***";
 	//we are decoding the state variable containing user information
 	const buffer64Obj = Buffer.from(req.query.state, "base64");
 	//we turn that base64 buffer into a utf8 string
@@ -12,8 +10,8 @@ const gitHubInstall = (req) => {
 	const parsedUserInfo = JSON.parse(decodedString);
 	//body is the request body where we exchange our temporary code for a GH access token
 	const body = {
-		client_id: githubClientId,
-		client_secret: githubClientSecret,
+		client_id: process.env.GITHUB_CLIENT_ID,
+		client_secret: process.env.GITHUB_CLIENT_SECRET,
 		code: req.query.code,
 	};
 	//opts is the headers which contain the format of the response we would like from GH

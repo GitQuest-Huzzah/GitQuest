@@ -1,5 +1,5 @@
 const { Octokit } = require("@octokit/core");
-const { Workspaces, Repos } = require("../db");
+const { Workspaces } = require("../db");
 const retrieveGitHubAPIToken = require("./retrieveGitHubAPIToken");
 
 //find a user's slackID to supply the GH API with access Token

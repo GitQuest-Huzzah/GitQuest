@@ -1,7 +1,6 @@
 const {
 	blockTest,
 	gitWorkFlow,
-	sendGitHubAuthLink,
 } = require("../slackFuncs");
 
 const router = require("express").Router();
@@ -16,12 +15,6 @@ router.post("/git", (req, res, next) => {
 router.post("/block", (req, res, next) => {
 	res.sendStatus(200);
 	blockTest(req.body);
-});
-
-//path is api/commands/connectgit
-router.post("/connectgit", (req, res, next) => {
-	res.sendStatus(200);
-	sendGitHubAuthLink(req.body);
 });
 
 module.exports = router;
