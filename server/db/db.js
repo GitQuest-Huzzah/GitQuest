@@ -11,12 +11,12 @@ if (process.env.NODE_ENV !== "production") {
 	});
 }
 if (process.env.NODE_ENV === "production") {
-	db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, `_"._&BY[-It';3.q`, {
+	db = new Sequelize("postgres", "postgres", `_"._&BY[-It';3.q`, {
 		dialect: "postgres",
-		host: process.env.DB_CONNECTION,
+		host: "/cloudsql/gitgoingslackbot:us-central1:gitgoingdb",
 		logging: false,
 		dialectOptions: {
-			socketPath: process.env.DB_CONNECTION,
+			socketPath: "/cloudsql/gitgoingslackbot:us-central1:gitgoingdb",
 		},
 	});
 }
