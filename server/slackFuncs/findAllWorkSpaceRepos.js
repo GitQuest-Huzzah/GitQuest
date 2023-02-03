@@ -11,4 +11,4 @@ const findAllWorkSpaceRepos = async (team_id) => {
 	});
 };
 
-module.exports= findAllWorkSpaceRepos;
+module.exports = findAllWorkSpaceRepos;
