@@ -16,14 +16,14 @@ function retrieveSecrets(){
 			console.log(parsedPayload, "deploy payload");
 			//assigning the associated key value pairs from the payload to env variables
 			//these are now accessible anywhere in the project
-			process.env.DB_CONNECTION = parsedPayload.DB_CONNECTION;
-			process.env.DB_NAME = parsedPayload.DB_NAME;
-			process.env.DB_PASSWORD = parsedPayload.DB_PASSWORD;
-			process.env.DB_USER = parsedPayload.DB_USER;
-			process.env.GITHUB_CLIENT_ID = parsedPayload.GITHUB_CLIENT_ID;
-			process.env.GITHUB_CLIENT_SECRET = parsedPayload.GITHUB_CLIENT_SECRET;
-			process.env.SLACK_CLIENT_ID = parsedPayload.SLACK_CLIENT_ID;
-			process.env.SLACK_CLIENT_SECRET = parsedPayload.SLACK_CLIENT_SECRET;
+			process.env['DB_CONNECTION'] = parsedPayload.DB_CONNECTION;
+			process.env['DB_NAME'] = parsedPayload.DB_NAME;
+			process.env['DB_PASSWORD'] = parsedPayload.DB_PASSWORD;
+			process.env['DB_USER'] = parsedPayload.DB_USER;
+			process.env['GITHUB_CLIENT_ID'] = parsedPayload.GITHUB_CLIENT_ID;
+			process.env['GITHUB_CLIENT_SECRET'] = parsedPayload.GITHUB_CLIENT_SECRET;
+			process.env['SLACK_CLIENT_ID'] = parsedPayload.SLACK_CLIENT_ID;
+			process.env['SLACK_CLIENT_SECRET'] = parsedPayload.SLACK_CLIENT_SECRET;
 		}).catch(console.error)
 };
 module.exports = retrieveSecrets;
