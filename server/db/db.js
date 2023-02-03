@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 
+
 const db = (() => {
   switch (process.env.ENVIRONMENT) {
     case "production":
