@@ -10,34 +10,34 @@ const commitReqAchieveFunc = require('./commitReqAchieveFunc');
 
 
 const updateUserOnPR = async (reqBody) => {
-  const userGithubId = reqBody.sender.id.toString();
-  const userOrgName = reqBody.organization.login;
-  
-  const user = await Users.findOne({
-    where: {
-      gitHubID: userGithubId
-    },
-    include: {
-      model: Workspaces,
-      where: {
-        orgName: userOrgName
-      }
-    }
-  })
+	const userGithubId = reqBody.sender.id.toString();
+	const userOrgName = reqBody.organization.login;
 
-  const numOfCommits = reqBody.pull_request.commits + user.dataValues.commits;
-  const userExp = numOfCommits * 10;
-  const numOfPulls = user.dataValues.pullRequests + 1;
+	const user = await Users.findOne({
+		where: {
+			gitHubID: userGithubId,
+		},
+		include: {
+			model: Workspaces,
+			where: {
+				orgName: userOrgName,
+			},
+		},
+	});
 
-  const currLevel = user.dataValues.level;
-  let userGold = user.dataValues.gold;
-  let rewardGold = user.dataValues.rewardGold;
-  const userAchievements = user.dataValues.achievements;
+	const numOfCommits = reqBody.pull_request.commits + user.dataValues.commits;
+	const userExp = numOfCommits * 10;
+	const numOfPulls = user.dataValues.pullRequests + 1;
 
-  const achievementsPR = pullRequestAchievements();
-  const achievementsCommit = commitAchievements();
-  const levels = expLevel();
-  const title = titles();
+	const currLevel = user.dataValues.level;
+	let userGold = user.dataValues.gold;
+	let rewardGold = user.dataValues.rewardGold;
+	const userAchievements = user.dataValues.achievements;
+
+	const achievementsPR = pullRequestAchievements();
+	const achievementsCommit = commitAchievements();
+	const levels = expLevel();
+	const title = titles();
 
   // update gold and reward gold based on leveling up
   const userLevel = userLevelFunc(levels, Object.keys(levels), userExp);
@@ -65,25 +65,25 @@ const updateUserOnPR = async (reqBody) => {
     }
   }
 
-  for(const achieve of parsedUserAchievements){
-    if(JSON.stringify(achieve) !== JSON.stringify(userPRAchieve)){
-      parsedUserAchievements = [...parsedUserAchievements, userPRAchieve]
-      break;
-    }
-  }
+	for (const achieve of parsedUserAchievements) {
+		if (JSON.stringify(achieve) !== JSON.stringify(userPRAchieve)) {
+			parsedUserAchievements = [...parsedUserAchievements, userPRAchieve];
+			break;
+		}
+	}
 
-  let userAchievementJSON = JSON.stringify(parsedUserAchievements);
+	let userAchievementJSON = JSON.stringify(parsedUserAchievements);
 
-  await user.update({
-    commits: numOfCommits,
-    pullRequests: numOfPulls,
-    level: userLevel,
-    title: userTitle,
-    exp: userExp,
-    achievements: userAchievementJSON,
-    gold: userGold,
-    rewardGold: rewardGold
-  })
-}
+	await user.update({
+		commits: numOfCommits,
+		pullRequests: numOfPulls,
+		level: userLevel,
+		title: userTitle,
+		exp: userExp,
+		achievements: userAchievementJSON,
+		gold: userGold,
+		rewardGold: rewardGold,
+	});
+};
 
 module.exports = updateUserOnPR;

@@ -1,11 +1,16 @@
 const { WebClient } = require("@slack/web-api");
+const findTokenByTeamId = require("./findTokenByTeam");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 
 const adminOrgModal = async (reqBody) => {
+	console.log(process.env)
+	console.log(reqBody,"org modal body")
+	const token = await findTokenByTeamId(reqBody.user.team_id)
+	console.log(token, "token org modal")
 	await web.views.open({
 		trigger_id: reqBody.trigger_id,
-		token: "xoxb-4706667577361-4696519498212-BS2W96yuJQEyIf29kY6baP4i",
+		token: token,
 		view: {
 			external_id: "adminAddOrgSubmit",
 			type: "modal",
