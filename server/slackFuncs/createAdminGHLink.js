@@ -3,7 +3,7 @@ const createAdminGHLink = ({ teamId, userId }) => {
 		userId: userId,
 		teamId: teamId,
 	});
-	const githubClientId = "a8acd4f185488b3664c5";
+	const githubClientId = process.env.GITHUB_CLIENT_ID;
 	//we are turning the string into a buffer
 	const bufferUTFObj = Buffer.from(userInfo, "utf8");
 	//this transforms the buffer into a base64 string before sending it so the user in the link on the optional state parameter

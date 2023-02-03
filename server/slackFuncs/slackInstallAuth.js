@@ -7,8 +7,8 @@ const web = new WebClient();
 const slackInstallAuth = async (req, res) => {
 	const installRequest = await web.oauth.v2.access({
 		code: req.query.code,
-		client_id: "4706667577361.4706675007441",
-		client_secret: "9bfcc36a2b43abce2e9dfc6b108cbb24",
+		client_id: process.env.SLACK_CLIENT_ID,
+		client_secret: process.env.SLACK_CLIENT_SECRET,
 	});
 	//adminUser block sets the installer of the app on a workspace as the admin for that workspace
 	const adminUser = await Users.create({
@@ -23,7 +23,7 @@ const slackInstallAuth = async (req, res) => {
 	});
 	//list all users in the workspace
 	const result = await web.users.list({
-		token: "xoxb-4706667577361-4696519498212-BS2W96yuJQEyIf29kY6baP4i",
+		token: installRequest.access_token,
 	});
 	//filter out bots, the admin who was just created, and slackbot which is not labeled as a bot
 	const filteredMembers = result.members.filter(
