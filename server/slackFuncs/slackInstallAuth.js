@@ -10,7 +10,6 @@ const slackInstallAuth = async (req, res) => {
 		client_id: process.env.SLACK_CLIENT_ID,
 		client_secret: process.env.SLACK_CLIENT_SECRET,
 	});
-	console.log(installRequest,"install")
 	//adminUser block sets the installer of the app on a workspace as the admin for that workspace
 	const adminUser = await Users.create({
 		slackID: installRequest.authed_user.id,

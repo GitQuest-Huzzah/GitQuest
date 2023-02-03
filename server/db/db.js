@@ -13,6 +13,7 @@ let db
 	}
 	if (process.env.NODE_ENV === "production") {
 		retrieveSecrets()
+		console.log(process.env, "in DB ROUTE")
 		db= new Sequelize(
 			process.env.DB_NAME,
 				process.env.DB_USER,
