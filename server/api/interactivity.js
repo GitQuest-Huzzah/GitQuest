@@ -1,6 +1,5 @@
 const {
 	addAllOrgReposToDB,
-	getAllOrgRepos,
 	gitHubSetRepoHook,
 	updateUserGitHub,
 	gitHubDeleteRepo,
