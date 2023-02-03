@@ -7,8 +7,6 @@ const router = require("express").Router();
 //path is /api/github/auth/redirect
 router.get("/auth/redirect", (req, res, next) => {
 	res.json({ git: "authorized" });
-	console.log(process.env.GITHUB_CLIENT_ID,"GH CLIENT")
-	console.log(process.env.GITHUB_CLIENT_SECRET, "GH SECRET")
 	//we are decoding the state variable containing user information
 	const buffer64Obj = Buffer.from(req.query.state, "base64");
 	//we turn that base64 buffer into a utf8 string

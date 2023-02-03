@@ -4,7 +4,6 @@ const findTokenByTeamId = require("./findTokenByTeam");
 const web = new WebClient();
 
 const adminDeleteRepoModal = async (reqBody) => {
-	console.log(reqBody,"admin modal")
 	const token = await findTokenByTeamId(reqBody.user.team_id)
 	await web.views.open({
 		trigger_id: reqBody.trigger_id,
