@@ -8,12 +8,12 @@ if (process.env.NODE_ENV !== "production") {
 	db = new Sequelize("postgres://localhost:5432/gitgoingdb", {
 		logging: false,
 	});
-	db.sync();
+	
 }
 //this is the connection to the deployed DB
 if (process.env.NODE_ENV === "production") {
-	retrieveSecrets
-		(db = new Sequelize(
+	retrieveSecrets()
+		db = new Sequelize(
 			process.env.DB_NAME,
 			process.env.DB_USER,
 			process.env.DB_PASSWORD,
@@ -25,10 +25,10 @@ if (process.env.NODE_ENV === "production") {
 					socketPath: process.env.DB_CONNECTION,
 				},
 			}
-		))
+		)
 	
-		db.sync();
-}
+	}
+	// db.sync();
 
 
 module.exports = db;
