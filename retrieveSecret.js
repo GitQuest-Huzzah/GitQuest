@@ -1,5 +1,6 @@
 const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
-const retrieveSecrets = () => {
+function retrieveSecrets(){
+    console.log("secret route hit")
 	const client = new SecretManagerServiceClient();
 	client
 		.accessSecretVersion({
