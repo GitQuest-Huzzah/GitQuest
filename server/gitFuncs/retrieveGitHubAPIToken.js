@@ -1,7 +1,7 @@
 const { Users } = require("../db");
 
-const retrieveGitHubAPIToken = (reqBody) =>{
-    const user = Users.findOne({
+const retrieveGitHubAPIToken = async (reqBody) =>{
+    const user = await Users.findOne({
         where:{
             slackID:reqBody.user.id
         }, 
