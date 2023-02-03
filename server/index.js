@@ -4,7 +4,7 @@ const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 
 //name is the resource value for our secrets in secret manager
 (async () => {
-	if (process.env.DEV === "YESSIR") {
+	if (process.env.NODE_ENV !== "production") {
 		return app.listen(process.env.PORT || port, () =>
 			console.log(`Listening ${process.env.PORT || port}`)
 		);
