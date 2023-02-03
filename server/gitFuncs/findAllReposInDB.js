@@ -1,4 +1,4 @@
-const { Repos, Users, Workspaces } = require("../db");
+const { Repos, Users, Workspaces } = require("../db/");
 
 const findAllReposInDB = async (reqBody) => {
 
