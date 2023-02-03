@@ -4,11 +4,6 @@ const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 
 //name is the resource value for our secrets in secret manager
 (async () => {
-	if (process.env.NODE_ENV !== "production") {
-		return app.listen(process.env.PORT || port, () =>
-			console.log(`Listening ${process.env.PORT || port}`)
-		);
-	}
 	console.log('deploy route')
 	const name = "projects/1003391217227/secrets/ENV_VARIABLES/versions/13";
 	//instantiated a client for secretManager and calling accessSecretVersion method supplying the secret resource name
