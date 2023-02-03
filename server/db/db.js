@@ -6,16 +6,16 @@ const retrieveSecrets = require("../../retrieveSecret");
 let db
 	//this is the connection to the deployed DB
 	if (process.env.NODE_ENV !== "production") {
-		db= new Sequelize("postgres://localhost:5432/gitgoingdb", {
+		db = new Sequelize("postgres://localhost:5432/gitgoingdb", {
 			logging: false,
 		});
 		
 	}
 	if (process.env.NODE_ENV === "production") {
-		retrieveSecrets()
-		console.log(process.env, "in DB ROUTE")
-		db= new Sequelize(
-			process.env.DB_NAME,
+
+			console.log(process.env, "in DB ROUTE")
+			db = new Sequelize(
+				process.env.DB_NAME,
 				process.env.DB_USER,
 				process.env.DB_PASSWORD,
 				{
@@ -26,7 +26,8 @@ let db
 						socketPath: process.env.DB_CONNECTION,
 					},
 				}
-			)
+				)
+				
 		
 		}
 
