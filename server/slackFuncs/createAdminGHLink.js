@@ -3,7 +3,6 @@ const createAdminGHLink = ({ teamId, userId }) => {
 		userId: userId,
 		teamId: teamId,
 	});
-	// console.log(reqBody.event)
 	const githubClientId = "a8acd4f185488b3664c5";
 	//we are turning the string into a buffer
 	const bufferUTFObj = Buffer.from(userInfo, "utf8");
