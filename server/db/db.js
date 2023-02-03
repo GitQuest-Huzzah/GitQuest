@@ -5,9 +5,9 @@ const retrieveSecrets = require("../../retrieveSecret");
 //this is the connection to a localinstance of the DB
 console.log(process.env);
 const db = () =>{
-	
+
 	//this is the connection to the deployed DB
-	if (!process.env || process.env.NODE_ENV !== "production") {
+	if (process.env.NODE_ENV !== "production") {
 		return new Sequelize("postgres://localhost:5432/gitgoingdb", {
 			logging: false,
 		});
@@ -31,5 +31,4 @@ const db = () =>{
 		
 		}
 }
-
 module.exports=db()
