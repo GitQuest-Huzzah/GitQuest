@@ -13,17 +13,14 @@ const gitHubOrgAllUsers = async (reqBody) => {
 	const token = await retrieveGitHubAPIToken(reqBody);
 	//creating a new instance of the GH API to poll the API which takes GH token as Auth headers
 	const octokit = new Octokit({
-		auth: token
+		auth: token,
 	});
 
 	//request to get all commits from a specific repo
-	const allOrgMembers = await octokit.request(
-		"GET /orgs/{owner}/members",
-		{
-			owner: workspace.dataValues.orgName,
-		}
-	);
-	return allOrgMembers
+	const allOrgMembers = await octokit.request("GET /orgs/{owner}/members", {
+		owner: workspace.dataValues.orgName,
+	});
+	return allOrgMembers;
 };
 
 module.exports = gitHubOrgAllUsers;

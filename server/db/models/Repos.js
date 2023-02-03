@@ -1,16 +1,15 @@
-// const Sequelize = require("sequelize");
-// const db = require("../index.js");
+const Sequelize = require("sequelize");
+const db = require("../db");
 
+const Repos = db.define("repo", {
+	repoId: {
+		type: Sequelize.STRING,
+		allowNull: false,
+	},
+	repoName: {
+		type: Sequelize.STRING,
+		allowNull: false,
+	},
+});
 
-// const Repos = db.define("repo", {
-// 	repoId: {
-// 		type: Sequelize.STRING,
-// 		allowNull: false,
-// 	},
-// 	repoName: {
-// 		type: Sequelize.STRING,
-// 		allowNull: false,
-// 	},
-// });
-
-// module.exports = Repos;
+module.exports = Repos;

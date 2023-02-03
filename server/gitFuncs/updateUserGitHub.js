@@ -12,8 +12,10 @@ const updateUserGitHub = async (reqBody) => {
 			slackID: userSlackID,
 		},
 	});
-	user.update({ gitHubID: gitHubUser.value, gitHubLogin: gitHubUser.text.text });
-    
+	user.update({
+		gitHubID: gitHubUser.value,
+		gitHubLogin: gitHubUser.text.text,
+	});
 };
 
 module.exports = updateUserGitHub;
