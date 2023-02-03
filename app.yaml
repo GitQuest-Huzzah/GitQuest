@@ -1,4 +1,12 @@
 runtime: nodejs16
-
+env_variables:
+    SLACK_CLIENT_ID:
+    SLACK_CLIENT_SECRET:
+    GITHUB_CLIENT_ID:
+    GITHUB_CLIENT_SECRET:
+    DB_CONNECTION:
+    DB_NAME:
+    DB_PASSWORD:
+    DB_USER:
 beta_settings:
-    cloud_sql_instances: gitgoingslackbot:us-central1:gitgoingdb
+  cloud_sql_instances: gitgoingslackbot:us-central1:gitgoingdb
