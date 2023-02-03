@@ -10,10 +10,10 @@ const gitHubOrgAllUsers = async (reqBody) => {
 			teamID: reqBody.user.team_id,
 		},
 	});
-	const userGHToken = await retrieveGitHubAPIToken(reqBody);
+	const token = await retrieveGitHubAPIToken(reqBody);
 	//creating a new instance of the GH API to poll the API which takes GH token as Auth headers
 	const octokit = new Octokit({
-		auth: userGHToken.dataValues.gitHubToken
+		auth: token
 	});
 
 	//request to get all commits from a specific repo

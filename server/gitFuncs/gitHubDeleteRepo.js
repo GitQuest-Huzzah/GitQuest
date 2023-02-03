@@ -5,10 +5,9 @@ const gitHubDeleteRepo = async (reqBody) => {
 	const reposToDelete =
 		reqBody.view.state.values.adminDeleteRepoModal.adminDeleteRepoModalAction
 			.selected_options;
-	console.log(reposToDelete);
-	const userGHToken = await retrieveGitHubAPIToken(reqBody);
+	const token = await retrieveGitHubAPIToken(reqBody);
 	const octokit = new Octokit({
-		auth: userGHToken.dataValues.gitHubToken,
+		auth: token
 	});
 	reposToDelete.forEach(async (repo) => {
 		const [repoId, orgName] = repo.value.split(",");
