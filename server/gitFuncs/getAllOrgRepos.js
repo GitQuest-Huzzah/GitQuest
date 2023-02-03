@@ -1,10 +1,12 @@
 const { Octokit } = require("@octokit/core");
 const { Users, Workspaces } = require("../db");
+const retrieveGitHubAPIToken = require("./retrieveGitHubAPIToken");
 
 
 const getAllOrgRepos = async (reqBody) => {
+	const token = await retrieveGitHubAPIToken(reqBody);
 	const octokit = new Octokit({
-		auth: "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",
+		auth: token
 	});
 	const {
 		dataValues: {
