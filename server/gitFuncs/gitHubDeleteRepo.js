@@ -5,7 +5,6 @@ const gitHubDeleteRepo = async (reqBody) => {
 	const reposToDelete =
 		reqBody.view.state.values.adminDeleteRepoModal.adminDeleteRepoModalAction
 			.selected_options;
-	console.log(reposToDelete);
 	const token = await retrieveGitHubAPIToken(reqBody);
 	const octokit = new Octokit({
 		auth: token
