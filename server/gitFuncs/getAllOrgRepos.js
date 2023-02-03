@@ -4,7 +4,7 @@ const retrieveGitHubAPIToken = require("./retrieveGitHubAPIToken");
 
 
 const getAllOrgRepos = async (reqBody) => {
-	const token = retrieveGitHubAPIToken(reqBody);
+	const token = await retrieveGitHubAPIToken(reqBody);
 	const octokit = new Octokit({
 		auth: token
 	});
