@@ -11,7 +11,6 @@ Workspaces.hasMany(Users)
 Repos.belongsTo(Workspaces)
 Workspaces.hasMany(Repos)
 
-
 module.exports = {
     db, 
     Repos,
