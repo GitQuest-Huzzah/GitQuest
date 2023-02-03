@@ -20,21 +20,21 @@ const updateUserOnPR = async (reqBody) => {
       }
     }
   })
-  // console.log('user info', user)
+
   const numOfCommits = reqBody.pull_request.commits + user.dataValues.commits;
   const userExp = numOfCommits * 10;
   const numOfPulls = user.dataValues.pullRequests + 1;
+
+  const currLevel = user.dataValues.level;
+  let userGold = user.dataValues.gold;
+  let rewardGold = user.dataValues.rewardGold;
+  const userAchievements = user.dataValues.achievements;
 
   const achievementsPR = pullRequestAchievements();
   const achievementsCommit = commitAchievements();
   const levels = expLevel();
   const title = titles();
 
-  // const userLevel = levels[Object.keys(levels).reduce((acc, key, index, array)=>{
-  //   if(key > userExp && !acc){
-  //     return array[index-1]
-  //   }
-  // })];
 // export this func
   const userLevelFunc = (obj, keys, userExp) => {
     let level;
@@ -47,7 +47,13 @@ const updateUserOnPR = async (reqBody) => {
   }
   //end export
 
+  // update gold and reward gold based on leveling up
   const userLevel = userLevelFunc(levels, Object.keys(levels), userExp);
+  if(userLevel > currLevel){
+    let levelDiff = userLevel - currLevel;
+    userGold = userGold + (250 * levelDiff);
+    rewardGold = rewardGold + (50 * levelDiff);
+  }
 
   // export this one too
   const userTitleFunc = (obj, keys, userLevel) => {
@@ -91,15 +97,36 @@ const updateUserOnPR = async (reqBody) => {
 
   const userCommitAchieve = commitReqAchieveFunc(achievementsCommit, Object.keys(achievementsCommit), numOfCommits)
   
-  const userAchievementJSON = JSON.stringify([userCommitAchieve, userPRAchieve]);
-  
+  // check to see if user achievements already exist
+  // if so, keep those and add the new achievement
+  // otherwise, just add the new achievements
+  let parsedUserAchievements = JSON.parse(userAchievements);
+ 
+  for(const achieve of parsedUserAchievements){
+    if(JSON.stringify(achieve) !== JSON.stringify(userCommitAchieve)){
+      parsedUserAchievements = [...parsedUserAchievements, userCommitAchieve]
+      break;
+    }
+  }
+
+  for(const achieve of parsedUserAchievements){
+    if(JSON.stringify(achieve) !== JSON.stringify(userPRAchieve)){
+      parsedUserAchievements = [...parsedUserAchievements, userPRAchieve]
+      break;
+    }
+  }
+
+  let userAchievementJSON = JSON.stringify(parsedUserAchievements);
+
   await user.update({
     commits: numOfCommits,
     pullRequests: numOfPulls,
     level: userLevel,
     title: userTitle,
     exp: userExp,
-    achievements: userAchievementJSON
+    achievements: userAchievementJSON,
+    gold: userGold,
+    rewardGold: rewardGold
   })
 }
 
