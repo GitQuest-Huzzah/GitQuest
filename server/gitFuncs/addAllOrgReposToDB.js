@@ -1,5 +1,4 @@
-const { Workspaces, Repos } = require("../db/");
-
+const { Workspaces, Repos } = require("../db");
 const addAllOrgReposToDB = async (reqBody) => {
 	const workspace = await Workspaces.findOne({
 		where: {
