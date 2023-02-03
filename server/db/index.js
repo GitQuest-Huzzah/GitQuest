@@ -2,7 +2,7 @@ const db = require("./db");
 const Repos = require("./models/Repos");
 const Users = require("./models/Users");
 const Workspaces = require("./models/Workspaces");
-const GoldLog = require('./models/GoldLog')
+const Goldlog = require('./models/Goldlog')
 
 //model associations
 
@@ -12,12 +12,13 @@ Workspaces.hasMany(Users);
 Repos.belongsTo(Workspaces);
 Workspaces.hasMany(Repos);
 
-Users.hasMany(GoldLog)
-GoldLog.belongsTo(Users)
+Users.hasMany(Goldlog)
+Goldlog.belongsTo(Users)
 
 module.exports = {
   db,
+  Goldlog,
   Repos,
   Users,
-  Workspaces,
+  Workspaces
 };
