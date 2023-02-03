@@ -3,6 +3,10 @@ const commitAchievements = require('./commitAchievements');
 const pullRequestAchievements = require('./pullRequestAchievements');
 const titles = require('./titles');
 const { Users, Workspaces } = require('../db');
+const userLevelFunc = require('./userLevelFunc');
+const userTitleFunc = require('./userTitleFunc');
+const pullReqAchieveFunc = require('./pullReqAchieveFunc');
+const commitReqAchieveFunc = require('./commitReqAchieveFunc');
 
 
 const updateUserOnPR = async (reqBody) => {
@@ -35,17 +39,6 @@ const updateUserOnPR = async (reqBody) => {
   const levels = expLevel();
   const title = titles();
 
-// update user's level based on EXP being updated
-  const userLevelFunc = (obj, keys, userExp) => {
-    let level;
-    for (const key of keys){
-      if(key <= userExp){
-        level = obj[key];
-      }
-    }
-    return level;
-  }
-
   // update gold and reward gold based on leveling up
   const userLevel = userLevelFunc(levels, Object.keys(levels), userExp);
   if(userLevel > currLevel){
@@ -55,47 +48,14 @@ const updateUserOnPR = async (reqBody) => {
   }
 
   // update user's title based on current level number
-  const userTitleFunc = (obj, keys, userLevel) => {
-    let title;
-    for (const key of keys){
-      if(key <= userLevel){
-        title = obj[key];
-      }
-    }
-    return title;
-  }
-
   const userTitle = userTitleFunc(title, Object.keys(title), userLevel)
-  
   // identify the most recent achievement based on pull requests
-  const pullReqAchieveFunc = (obj, keys, numOfPulls) => {
-    let achievement;
-    for(const key of keys){
-      if(key <= numOfPulls){
-        achievement = { [key]: obj[key] }
-      }
-    }
-    return achievement;
-  }
-
   const userPRAchieve = pullReqAchieveFunc(achievementsPR, Object.keys(achievementsPR), numOfPulls)
-
-// identify the most recent achievement for commits
-  const commitReqAchieveFunc = (obj, keys, numOfCommits) => {
-    let achievement;
-    for(const key of keys){
-      if(key <= numOfCommits){
-        achievement = { [key]: obj[key] }
-      }
-    }
-    return achievement;
-  }
-
+  // identify the most recent achievement for commits
   const userCommitAchieve = commitReqAchieveFunc(achievementsCommit, Object.keys(achievementsCommit), numOfCommits)
   
   // check to see if user achievements already exist
-  // if so, keep those and add the new achievement
-  // otherwise, initialize the achievements
+  // either add the initial achievement, or add new achievements to existing
   let parsedUserAchievements = JSON.parse(userAchievements);
  
   for(const achieve of parsedUserAchievements){
