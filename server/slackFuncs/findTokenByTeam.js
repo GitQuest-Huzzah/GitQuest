@@ -8,7 +8,6 @@ const findTokenByTeamId = async (teamId) => {
 				teamID: teamId,
 			},
 		});
-		console.log(token.dataValues, "token in find token")
 		return token.dataValues.botToken;
 	} catch (error) {
 		console.error(error);

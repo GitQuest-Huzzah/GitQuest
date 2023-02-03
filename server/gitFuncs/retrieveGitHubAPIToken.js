@@ -7,7 +7,6 @@ const retrieveGitHubAPIToken = async (reqBody) => {
 		},
 		attributes: ["gitHubToken"],
 	});
-	console.log(dataValues.gitHubToken, "token")
 	return dataValues.gitHubToken;
 };
 
