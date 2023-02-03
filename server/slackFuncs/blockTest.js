@@ -1,8 +1,10 @@
 const { WebClient } = require("@slack/web-api");
+const findTokenByTeamId = require("./findTokenByTeam");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 //blockTest responds to the call of /block on the app, which hits the path /api/commands/block
 const blockTest = async (reqBody, res) => {
+	const token = await findTokenByTeamId(reqBody.user.team_id)
 	await web.chat.postMessage({
 		blocks: [
 			{
@@ -66,7 +68,7 @@ const blockTest = async (reqBody, res) => {
 			},
 		],
 		channel: reqBody.channel_id,
-		token: "xoxb-4706667577361-4696519498212-BS2W96yuJQEyIf29kY6baP4i",
+		token: token
 	});
 };
 
