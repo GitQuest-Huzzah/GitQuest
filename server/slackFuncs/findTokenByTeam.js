@@ -4,11 +4,12 @@ const { Workspaces } = require("../db")
 const findTokenByTeamId = async (teamId)=>{
     try{
         
-        return await Workspaces.findOne({
+        const {dataValues} = await Workspaces.findOne({
             where:{
                 teamID: teamId
             }
         })
+        return dataValues.botToken
     } catch(error){
         console.error(error)
     }

@@ -3,8 +3,8 @@ const { Users, Workspaces } = require("../db");
 const { gitHubSetRepoHook } = require("../gitFuncs");
 const router = require("express").Router();
 
-const githubClientId ="***REMOVED***"
-const githubClientSecret = "***REMOVED***"
+const githubClientId =process.env.GITHUB_CLIENT_ID
+const githubClientSecret = process.env.GITHUB_CLIENT_SECRET
 //path is /api/github/auth/redirect
 router.get("/auth/redirect", (req, res, next) => {
 	res.json({ git: "authorized" });
