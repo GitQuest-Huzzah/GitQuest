@@ -8,7 +8,7 @@ const createOrUpdateOrg = async (reqBody) => {
 			teamID: reqBody.view.team_id,
 		},
 	});
-	const doesOrgExist = await findOrgOnGH(orgName);
+	const doesOrgExist = await findOrgOnGH(reqBody);
 	if (doesOrgExist) {
 		return await orgToUpdate.update({ orgName: orgName });
 	}
