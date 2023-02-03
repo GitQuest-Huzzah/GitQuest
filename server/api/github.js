@@ -3,12 +3,12 @@ const { Users, Workspaces } = require("../db");
 const { gitHubSetRepoHook } = require("../gitFuncs");
 const router = require("express").Router();
 
-const githubClientId =process.env.GITHUB_CLIENT_ID
-const githubClientSecret = process.env.GITHUB_CLIENT_SECRET
+
 //path is /api/github/auth/redirect
 router.get("/auth/redirect", (req, res, next) => {
 	res.json({ git: "authorized" });
-
+	console.log(process.env.GITHUB_CLIENT_ID,"GH CLIENT")
+	console.log(process.env.GITHUB_CLIENT_SECRET, "GH SECRET")
 	//we are decoding the state variable containing user information
 	const buffer64Obj = Buffer.from(req.query.state, "base64");
 	//we turn that base64 buffer into a utf8 string
@@ -17,8 +17,8 @@ router.get("/auth/redirect", (req, res, next) => {
 	const parsedUserInfo = JSON.parse(decodedString);
 	//body is the request body where we exchange our temporary code for a GH access token
 	const body = {
-		client_id: githubClientId,
-		client_secret: githubClientSecret,
+		client_id: process.env.GITHUB_CLIENT_ID,
+		client_secret: process.env.GITHUB_CLIENT_SECRET,
 		code: req.query.code,
 	};
 	//opts is the headers which contain the format of the response we would like from GH
