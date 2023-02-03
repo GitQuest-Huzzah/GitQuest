@@ -6,8 +6,7 @@ maybeLoadRemoteSecrets().then(() =>
     console.log(`Listening ${process.env.PORT}`)
   )
 );
-
-const maybeLoadRemoteSecrets = () => {
+function maybeLoadRemoteSecrets() {
   if (process.env.ENVIRONMENT === "development") return Promise.resolve();
 
   return retrieveRemoteSecrets();
