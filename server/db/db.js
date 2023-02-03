@@ -8,6 +8,7 @@ if (process.env.NODE_ENV !== "production") {
 	db = new Sequelize("postgres://localhost:5432/gitgoingdb", {
 		logging: false,
 	});
+	db.sync();
 }
 //this is the connection to the deployed DB
 if (process.env.NODE_ENV === "production") {
@@ -26,8 +27,8 @@ if (process.env.NODE_ENV === "production") {
 			}
 		))
 	
+		db.sync();
 }
 
-db.sync();
 
 module.exports = db;
