@@ -1,4 +1,5 @@
 const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
+const { app } = require("./server/app");
 function retrieveSecrets(){
 	const client = new SecretManagerServiceClient();
 	client
@@ -20,6 +21,8 @@ function retrieveSecrets(){
 			process.env['GITHUB_CLIENT_SECRET'] = parsedPayload.GITHUB_CLIENT_SECRET;
 			process.env['SLACK_CLIENT_ID'] = parsedPayload.SLACK_CLIENT_ID;
 			process.env['SLACK_CLIENT_SECRET'] = parsedPayload.SLACK_CLIENT_SECRET;
-		}).catch(console.error)
+		}).then(app.listen(process.env.PORT, () =>
+        console.log(`Listening ${process.env.PORT}`)
+    )).catch(console.error)
 };
 module.exports = retrieveSecrets;
