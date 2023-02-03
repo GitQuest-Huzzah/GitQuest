@@ -7,7 +7,6 @@ const findAllWorkSpaceRepos = require("./findAllWorkSpaceRepos");
 const findTokenByTeamId = require("./findTokenByTeam");
 const gitWorkFlow = require("./gitWorkFlow");
 const homeTab = require("./homeTab");
-const sendGitHubAuthLink = require("./sendGitHubLink");
 const slackInstallAuth = require("./slackInstallAuth");
 
 module.exports = {
@@ -20,6 +19,5 @@ module.exports = {
 	findTokenByTeamId,
 	gitWorkFlow,
 	homeTab,
-	sendGitHubAuthLink,
 	slackInstallAuth,
 };
