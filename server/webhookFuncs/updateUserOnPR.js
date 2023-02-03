@@ -35,7 +35,7 @@ const updateUserOnPR = async (reqBody) => {
   const levels = expLevel();
   const title = titles();
 
-// export this func
+// update user's level based on EXP being updated
   const userLevelFunc = (obj, keys, userExp) => {
     let level;
     for (const key of keys){
@@ -45,7 +45,6 @@ const updateUserOnPR = async (reqBody) => {
     }
     return level;
   }
-  //end export
 
   // update gold and reward gold based on leveling up
   const userLevel = userLevelFunc(levels, Object.keys(levels), userExp);
@@ -55,7 +54,7 @@ const updateUserOnPR = async (reqBody) => {
     rewardGold = rewardGold + (50 * levelDiff);
   }
 
-  // export this one too
+  // update user's title based on current level number
   const userTitleFunc = (obj, keys, userLevel) => {
     let title;
     for (const key of keys){
@@ -65,11 +64,10 @@ const updateUserOnPR = async (reqBody) => {
     }
     return title;
   }
-  // end export
 
   const userTitle = userTitleFunc(title, Object.keys(title), userLevel)
   
-  // export this guy
+  // identify the most recent achievement based on pull requests
   const pullReqAchieveFunc = (obj, keys, numOfPulls) => {
     let achievement;
     for(const key of keys){
@@ -79,11 +77,10 @@ const updateUserOnPR = async (reqBody) => {
     }
     return achievement;
   }
-  //end export
 
   const userPRAchieve = pullReqAchieveFunc(achievementsPR, Object.keys(achievementsPR), numOfPulls)
 
-//export dis shit
+// identify the most recent achievement for commits
   const commitReqAchieveFunc = (obj, keys, numOfCommits) => {
     let achievement;
     for(const key of keys){
@@ -93,13 +90,12 @@ const updateUserOnPR = async (reqBody) => {
     }
     return achievement;
   }
-  //end export
 
   const userCommitAchieve = commitReqAchieveFunc(achievementsCommit, Object.keys(achievementsCommit), numOfCommits)
   
   // check to see if user achievements already exist
   // if so, keep those and add the new achievement
-  // otherwise, just add the new achievements
+  // otherwise, initialize the achievements
   let parsedUserAchievements = JSON.parse(userAchievements);
  
   for(const achieve of parsedUserAchievements){
