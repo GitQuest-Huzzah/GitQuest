@@ -1,19 +1,15 @@
 const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 function retrieveSecrets(){
-    console.log("secret route hit")
 	const client = new SecretManagerServiceClient();
 	client
 		.accessSecretVersion({
 			name: "projects/1003391217227/secrets/ENV_VARIABLES/versions/14",
 		})
 		.then(([version]) => {
-			console.log("deploy route");
 			//turning the buffer value of the payload into a readable string
 			const payload = version.payload.data.toString("utf-8");
 			//parsing the payload string to get a JSON object
-			console.log(payload, "deploy payload pre parse");
 			const parsedPayload = JSON.parse(payload);
-			console.log(parsedPayload, "deploy payload");
 			//assigning the associated key value pairs from the payload to env variables
 			//these are now accessible anywhere in the project
 			process.env['DB_CONNECTION'] = parsedPayload.DB_CONNECTION;

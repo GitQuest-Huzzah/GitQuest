@@ -1,1 +1,0 @@
-process.env['TESTVAR'] = "woolybully"
