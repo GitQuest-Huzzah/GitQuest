@@ -1,21 +1,19 @@
-const { Model } = require("sequelize");
 const Sequelize = require("sequelize");
 const retrieveSecrets = require("../../retrieveSecret");
 
 //this is the connection to a localinstance of the DB
 console.log(process.env);
-const db = () =>{
-
+let db
 	//this is the connection to the deployed DB
 	if (process.env.NODE_ENV !== "production") {
-		return new Sequelize("postgres://localhost:5432/gitgoingdb", {
+		db= new Sequelize("postgres://localhost:5432/gitgoingdb", {
 			logging: false,
 		});
 		
 	}
 	if (process.env.NODE_ENV === "production") {
 		retrieveSecrets()
-		return new Sequelize(
+		db= new Sequelize(
 			process.env.DB_NAME,
 				process.env.DB_USER,
 				process.env.DB_PASSWORD,
@@ -30,5 +28,6 @@ const db = () =>{
 			)
 		
 		}
-}
-module.exports=db()
+
+
+module.exports=db
