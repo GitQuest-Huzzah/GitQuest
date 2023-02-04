@@ -1,11 +1,18 @@
 const { WebClient } = require("@slack/web-api");
 const findTokenByTeamId = require("./findTokenByTeam");
 const createAdminGHLink = require("./createAdminGHLink");
+const {Users} = require('../db')
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 // Listen to the app_home_opened Events API event to hear when a user opens your app from the sidebar
 const homeTab = async (reqBody) => {
 	const token = await findTokenByTeamId(reqBody.team_id);
+    const user = await Users.findOne({
+        where:{
+            slackID : reqBody.event.user
+        }
+    })
+    console.log(user)
 	const gHLink = createAdminGHLink({
 		teamId: reqBody.team_id,
 		userId: reqBody.event.user,
@@ -96,11 +103,7 @@ const homeTab = async (reqBody) => {
 						fields: [
 							{
 								type: "mrkdwn",
-								text: "*User Profile*\n*Level*: ${userLevel}\n*Title*:${userTitle} \n *Total Exp*: ${userExp}\n*Gold*: ${userGold} \n *Gold to Give*: ${rewardGold}",
-							},
-							{
-								type: "mrkdwn",
-								text: "*Achievments:${map over achieves brah}",
+								text: `*User Profile*\n*Level*: ${user.dataValues.level}\n*Title*:${user.dataValues.title} \n *Total Exp*: ${user.dataValues.exp}\n*Gold*: ${user.dataValues.gold} \n *Gold to Give*: ${user.dataValues.rewardGold}`,
 							},
 						],
 					},
