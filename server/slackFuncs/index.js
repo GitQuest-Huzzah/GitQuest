@@ -6,6 +6,7 @@ const createOrUpdateOrg = require("./createOrUpdateOrg");
 const findAllWorkSpaceRepos = require("./findAllWorkSpaceRepos");
 const findTokenByTeamId = require("./findTokenByTeam");
 const gitWorkFlow = require("./gitWorkFlow");
+const goldLogModal = require('./goldLogModal')
 const homeTab = require("./homeTab");
 const slackInstallAuth = require("./slackInstallAuth");
 
@@ -18,6 +19,7 @@ module.exports = {
 	findAllWorkSpaceRepos,
 	findTokenByTeamId,
 	gitWorkFlow,
+    goldLogModal,
 	homeTab,
 	slackInstallAuth,
 };

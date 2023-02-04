@@ -10,6 +10,7 @@ const {
 	adminRepoModal,
 	createOrUpdateOrg,
 	adminGitConnectUserModal,
+    goldLogModal
 } = require("../slackFuncs");
 const adminDeleteRepoModal = require("../slackFuncs/adminDeleteRepoModal");
 
@@ -42,7 +43,9 @@ router.post("/", (req, res, next) => {
 		)
 			adminDeleteRepoModal(parsedSubmission);
 		res.sendStatus(200);
-	}
+        if(parsedSubmission.actions[0].action_id === 'goldLogButton')
+            goldLogModal(parsedSubmission)
+    }
 
 	if (
 		parsedSubmission.view.external_id === "adminAddReposSubmit" &&
