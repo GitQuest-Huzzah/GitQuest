@@ -1,3 +1,4 @@
+const achievementsModal = require('./achievementsModal')
 const adminGitConnectUserModal = require("./adminGitConnectUserModal");
 const adminOrgModal = require("./adminOrgModal");
 const adminRepoModal = require("./adminRepoModal");
@@ -11,6 +12,7 @@ const homeTab = require("./homeTab");
 const slackInstallAuth = require("./slackInstallAuth");
 
 module.exports = {
+    achievementsModal,
 	adminGitConnectUserModal,
 	adminOrgModal,
 	adminRepoModal,

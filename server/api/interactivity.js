@@ -6,10 +6,11 @@ const {
 } = require("../gitFuncs");
 
 const {
+    achievementsModal,
 	adminOrgModal,
 	adminRepoModal,
-	createOrUpdateOrg,
 	adminGitConnectUserModal,
+	createOrUpdateOrg,
     goldLogModal
 } = require("../slackFuncs");
 const adminDeleteRepoModal = require("../slackFuncs/adminDeleteRepoModal");
@@ -45,6 +46,8 @@ router.post("/", (req, res, next) => {
 		res.sendStatus(200);
         if(parsedSubmission.actions[0].action_id === 'goldLogButton')
             goldLogModal(parsedSubmission)
+        if(parsedSubmission.actions[0].action_id === 'achievementButton')
+            achievementsModal(parsedSubmission)
     }
 
 	if (
