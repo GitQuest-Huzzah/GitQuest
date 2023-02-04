@@ -19,7 +19,7 @@ const router = require("express").Router();
 //all captured data from interactive slack messages hit this endpoint
 router.post("/", (req, res, next) => {
 	const parsedSubmission = JSON.parse(req.body.payload);
-	// console.log(parsedSubmission, "submission from org")
+	console.log(parsedSubmission, "BUTTON PUSHED")
 	if (parsedSubmission.type === "block_actions") {
 		if (
 			parsedSubmission.actions[0].action_id &&
