@@ -13,7 +13,7 @@ const homeTab = async (reqBody) => {
     try {
         // Call the views.publish method using the WebClient passed to listeners
         await web.views.publish({
-            user_id:'U04MVG0SRFG', 
+            user_id:reqBody.event.user,
             token: token,
             view: {
                 // Home tabs must be enabled in your app configuration page under "App Home"
