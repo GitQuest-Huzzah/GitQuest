@@ -137,7 +137,7 @@ const homeTab = async (reqBody) => {
                                     text: "Achievements",
                                     emoji: true,
                                 },
-                                action_id: "achievementsButton",
+                                action_id: "achievementButton",
                             },
                         ],
                     },
