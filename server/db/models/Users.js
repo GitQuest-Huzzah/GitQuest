@@ -51,8 +51,6 @@ const Users = db.define("user", {
 	},
 	achievements: {
 		type: Sequelize.JSONB,
-		defaultValue:
-			"[{'0': 'You have installed GitQuest! The only achievement that truly matters.'}]",
 	},
 });
 
