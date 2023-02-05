@@ -27,6 +27,11 @@ const homeTab = async (reqBody) => {
 				type: "home",
 				blocks: [
 					{
+						type: "image",
+						image_url: "https://storage.googleapis.com/slackphotos/gqbanner.png",
+						alt_text: "Git Quest Banner"
+					},
+					{
 						type: "section",
 						text: {
 							type: "mrkdwn",
