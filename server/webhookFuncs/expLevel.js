@@ -2,8 +2,8 @@ const expLevel = () => {
   // key is EXP points, value is level
   return {
     0: 1,
-    30: 2,
-    1000: 3,
+    10: 2,
+    20: 3,
     2500: 4,
     5000: 5,
     7500: 6,
