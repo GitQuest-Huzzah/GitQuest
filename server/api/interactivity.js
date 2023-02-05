@@ -6,10 +6,14 @@ const {
 } = require("../gitFuncs");
 
 const {
+    achievementsModal,
 	adminOrgModal,
 	adminRepoModal,
-	createOrUpdateOrg,
 	adminGitConnectUserModal,
+	createOrUpdateOrg,
+    giveGold,
+    giveGoldModal,
+    goldLogModal
 } = require("../slackFuncs");
 const adminDeleteRepoModal = require("../slackFuncs/adminDeleteRepoModal");
 
@@ -19,7 +23,7 @@ const router = require("express").Router();
 //all captured data from interactive slack messages hit this endpoint
 router.post("/", (req, res, next) => {
 	const parsedSubmission = JSON.parse(req.body.payload);
-	// console.log(parsedSubmission, "submission from org")
+	console.log(parsedSubmission, "BUTTON PUSHED")
 	if (parsedSubmission.type === "block_actions") {
 		if (
 			parsedSubmission.actions[0].action_id &&
@@ -42,7 +46,14 @@ router.post("/", (req, res, next) => {
 		)
 			adminDeleteRepoModal(parsedSubmission);
 		res.sendStatus(200);
-	}
+        if(parsedSubmission.actions[0].action_id === 'goldLogButton')
+            goldLogModal(parsedSubmission)
+        if(parsedSubmission.actions[0].action_id === 'achievementButton')
+            achievementsModal(parsedSubmission)
+        if(parsedSubmission.actions[0].action_id === 'giveGoldButton')
+            giveGoldModal(parsedSubmission)
+    }
+        
 
 	if (
 		parsedSubmission.view.external_id === "adminAddReposSubmit" &&
@@ -70,6 +81,10 @@ router.post("/", (req, res, next) => {
 	if (parsedSubmission.view.external_id === "adminDeleteReposSubmit" && parsedSubmission.type === "view_submission"){
 		res.send({ response_action:'clear'});
 		gitHubDeleteRepo(parsedSubmission);
+	}
+	if (parsedSubmission.view.callback_id=== "giveGoldSubmit" && parsedSubmission.type === "view_submission"){
+		res.send({ response_action:'clear'});
+        giveGold(parsedSubmission)
 	}
 });
 
