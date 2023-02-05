@@ -1,4 +1,4 @@
-# GitQuest
+# GitQuest!
 
 GitQuest is a slack app that allows you to gamify your GitHub work when connected to a repository.
 
