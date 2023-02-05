@@ -28,7 +28,7 @@ const goldLogModal = async (reqBody) => {
                 text: "Close",
                 emoji: true,
             },
-            blocks: achievements.map((log) => {
+            blocks: JSON.parse(achievements).map((log) => {
                 return {
                     type: "section",
                     text: {
