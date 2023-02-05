@@ -25,17 +25,11 @@ const homeTab = async (reqBody) => {
                 // Home tabs must be enabled in your app configuration page under "App Home"
                 type: "home",
                 blocks: [
-                		{
-						type: "image",
-						image_url: "https://storage.googleapis.com/slackphotos/gqbanner.png",
-						alt_text: "Git Quest Banner"
-					},
                     {
-                        type: "section",
-                        text: {
-                            type: "mrkdwn",
-                            text: `Hey there Git Quest **Your Rank and Name Here**`,
-                        },
+                        type: "image",
+                        image_url:
+                            "https://storage.googleapis.com/slackphotos/gqbanner.png",
+                        alt_text: "Git Quest Banner",
                     },
                     {
                         type: "actions",
