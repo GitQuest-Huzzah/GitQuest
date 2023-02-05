@@ -33,15 +33,23 @@ const goldLogModal = async (reqBody) => {
                 text: "Close",
                 emoji: true,
             },
-            blocks: goldLogs.map((log) => {
-                return {
-                    type: "section",
-                    text: {
-                        type: "mrkdwn",
-                        text: `${log.dataValues.description} ${log.dataValues.valueChange}` 
-                    },
-                };
-            }),
+            blocks: goldLogs.length
+                ? goldLogs.map((log) => {
+                      return {
+                          type: "section",
+                          text: {
+                              type: "mrkdwn",
+                              text: `${log.dataValues.description} ${log.dataValues.valueChange}`,
+                          },
+                      };
+                  })
+                : {
+                      type: "section",
+                      text: {
+                          type: "mrkdwn",
+                          text: `You don't have a gold log!`,
+                      },
+                  },
         },
     });
 };
