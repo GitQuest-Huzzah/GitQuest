@@ -6,7 +6,6 @@ const Users = require("../db/models/Users");
 const web = new WebClient();
 
 const goldLogModal = async (reqBody) => {
-    console.log(reqBody.user.id);
     const goldLogs = await GoldLog.findAll({
         include: {
             model: Users,
@@ -43,13 +42,13 @@ const goldLogModal = async (reqBody) => {
                           },
                       };
                   })
-                : {
+                : [{
                       type: "section",
                       text: {
                           type: "mrkdwn",
                           text: `You don't have a gold log!`,
                       },
-                  },
+                  }],
         },
     });
 };
