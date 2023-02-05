@@ -6,11 +6,14 @@ const web = new WebClient();
 
 const goldLogModal = async (reqBody) => {
     console.log(reqBody.user.id);
-    const {dataValues:{achievements}} = await Users.findOne({
-            where: {
-                slackID: reqBody.user.id,
-            },
+    const {
+        dataValues: { achievements },
+    } = await Users.findOne({
+        where: {
+            slackID: reqBody.user.id,
+        },
     });
+    const parsedAchievements = JSON.parse(achievements);
     const token = await findTokenByTeamId(reqBody.user.team_id);
     await web.views.open({
         trigger_id: reqBody.trigger_id,
@@ -28,15 +31,25 @@ const goldLogModal = async (reqBody) => {
                 text: "Close",
                 emoji: true,
             },
-            blocks: JSON.parse(achievements).map((log) => {
-                return {
-                    type: "section",
-                    text: {
-                        type: "mrkdwn",
-                        text: `${Object.values(log)[0]}`
-                    },
-                };
-            }),
+            blocks: parsedAchievements
+                ? parsedAchievements.map((log) => {
+                      return {
+                          type: "section",
+                          text: {
+                              type: "mrkdwn",
+                              text: `${Object.values(log)[0]}`,
+                          },
+                      };
+                  })
+                : [
+                      {
+                          type: "section",
+                          text: {
+                              type: "mrkdwn",
+                              text: `You don't have any achievements!`,
+                          },
+                      },
+                  ],
         },
     });
 };
