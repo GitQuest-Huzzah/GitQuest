@@ -11,6 +11,8 @@ const {
 	adminRepoModal,
 	adminGitConnectUserModal,
 	createOrUpdateOrg,
+    giveGold,
+    giveGoldModal,
     goldLogModal
 } = require("../slackFuncs");
 const adminDeleteRepoModal = require("../slackFuncs/adminDeleteRepoModal");
@@ -48,7 +50,10 @@ router.post("/", (req, res, next) => {
             goldLogModal(parsedSubmission)
         if(parsedSubmission.actions[0].action_id === 'achievementButton')
             achievementsModal(parsedSubmission)
+        if(parsedSubmission.actions[0].action_id === 'giveGoldButton')
+            giveGoldModal(parsedSubmission)
     }
+        
 
 	if (
 		parsedSubmission.view.external_id === "adminAddReposSubmit" &&
@@ -76,6 +81,10 @@ router.post("/", (req, res, next) => {
 	if (parsedSubmission.view.external_id === "adminDeleteReposSubmit" && parsedSubmission.type === "view_submission"){
 		res.send({ response_action:'clear'});
 		gitHubDeleteRepo(parsedSubmission);
+	}
+	if (parsedSubmission.view.callback_id=== "giveGoldSubmit" && parsedSubmission.type === "view_submission"){
+		res.send({ response_action:'clear'});
+        giveGold(parsedSubmission)
 	}
 });
 
