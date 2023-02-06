@@ -28,7 +28,7 @@ const homeTab = async (reqBody) => {
                     {
                         type: "image",
                         image_url:
-                            "https://storage.googleapis.com/slackphotos/gqbanner.png",
+                            `https://storage.googleapis.com/slackphotos/gqbanner.png`,
                         alt_text: "Git Quest Banner",
                     },
                     {
@@ -137,6 +137,15 @@ const homeTab = async (reqBody) => {
                                     emoji: true,
                                 },
                                 action_id: "achievementButton",
+                            },
+                            {
+                                type: "button",
+                                text: {
+                                    type: "plain_text",
+                                    text: "My Profile",
+                                    emoji: true,
+                                },
+                                action_id: "profileButton",
                             },
                         ],
                     },
