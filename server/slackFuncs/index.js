@@ -1,4 +1,6 @@
 const achievementsModal = require('./achievementsModal')
+const addQuest = require('./addQuest')
+const addQuestModal = require('./addQuestModal')
 const adminGitConnectUserModal = require("./adminGitConnectUserModal");
 const adminOrgModal = require("./adminOrgModal");
 const adminRepoModal = require("./adminRepoModal");
@@ -15,6 +17,8 @@ const slackInstallAuth = require("./slackInstallAuth");
 
 module.exports = {
     achievementsModal,
+    addQuest,
+    addQuestModal,
 	adminGitConnectUserModal,
 	adminOrgModal,
 	adminRepoModal,
