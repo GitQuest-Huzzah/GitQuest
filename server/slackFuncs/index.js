@@ -11,8 +11,8 @@ const giveGold = require('./giveGold')
 const giveGoldModal = require("./giveGoldModal")
 const goldLogModal = require('./goldLogModal')
 const homeTab = require("./homeTab");
+const profileModal = require('./profileModal');
 const slackInstallAuth = require("./slackInstallAuth");
-
 module.exports = {
     achievementsModal,
 	adminGitConnectUserModal,
@@ -27,5 +27,6 @@ module.exports = {
     giveGold,
     goldLogModal,
 	homeTab,
+	profileModal,
 	slackInstallAuth,
 };
