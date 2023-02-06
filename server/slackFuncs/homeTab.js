@@ -124,6 +124,15 @@ const homeTab = async (reqBody) => {
                                 type: "button",
                                 text: {
                                     type: "plain_text",
+                                    text: "Quest Log",
+                                    emoji: true,
+                                },
+                                action_id: "questLogButton",
+                            },
+                            {
+                                type: "button",
+                                text: {
+                                    type: "plain_text",
                                     text: "Give Gold to Give",
                                     emoji: true,
                                 },
