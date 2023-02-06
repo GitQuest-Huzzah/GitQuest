@@ -13,7 +13,8 @@ const {
 	createOrUpdateOrg,
     giveGold,
     giveGoldModal,
-    goldLogModal
+    goldLogModal,
+	profileModal
 } = require("../slackFuncs");
 const adminDeleteRepoModal = require("../slackFuncs/adminDeleteRepoModal");
 
@@ -52,6 +53,7 @@ router.post("/", (req, res, next) => {
             achievementsModal(parsedSubmission)
         if(parsedSubmission.actions[0].action_id === 'giveGoldButton')
             giveGoldModal(parsedSubmission)
+		if(parsedSubmission.actions[0].action_id === 'profileButton') profileModal(parsedSubmission)
     }
         
 
