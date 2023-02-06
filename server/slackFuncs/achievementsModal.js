@@ -40,7 +40,7 @@ const goldLogModal = async (reqBody) => {
                               text: `${Object.values(log)[0]}`,
                           },
                       };
-                  })
+                })
                 : [
                       {
                           type: "section",
@@ -50,8 +50,8 @@ const goldLogModal = async (reqBody) => {
                           },
                       },
                   ],
-        },
-    });
-};
+        }
+    })
+}
 
 module.exports = goldLogModal;
