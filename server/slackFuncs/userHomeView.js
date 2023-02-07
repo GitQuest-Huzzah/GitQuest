@@ -34,10 +34,10 @@ const userHomeView = (user) => {
                     type: "button",
                     text: {
                         type: "plain_text",
-                        text: "Quest Log",
+                        text: "View Quests",
                         emoji: true,
                     },
-                    action_id: "questLogButton",
+                    action_id: "viewQuestsButton",
                 },
                 {
                     type: "button",

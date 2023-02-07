@@ -21,7 +21,7 @@ const questLogModal = async (reqBody) => {
         token: await findTokenByTeamId(reqBody.user.team_id),
         view: {
             type: "modal",
-            callback_id:'questLogSubmit',
+            callback_id:'viewQuestsSubmit',
             title: {
                 type: "plain_text",
                 text: "Quest Log",
@@ -52,13 +52,13 @@ const questLogModal = async (reqBody) => {
 
                               {
                                   type: "section",
-                                      block_id:"questLogModalBlock",
+                                      block_id:"viewQuestsModalBlock",
                                   text: {
                                       type: "mrkdwn",
                                       text: "Select Availble Quest from Below",
                                   },
                                   accessory: {
-                                      action_id: "questLogModalAction",
+                                      action_id: "viewQuestsModalAction",
                                       type: "multi_external_select",
                                       placeholder: {
                                           type: "plain_text",
@@ -87,7 +87,7 @@ const questLogModal = async (reqBody) => {
                           type: "section",
                           text: {
                               type: "mrkdwn",
-                              text: "This is a mrkdwn section block :ghost: *this is bold*, and ~this is crossed out~, and <https://google.com|this is a link>",
+                              text: "There are no quests! Ask your quest giver to give ya some!",
                           },
                       },
                   ],
