@@ -6,7 +6,7 @@ const findTokenByTeamId = require('./findTokenByTeam')
 
 const addQuest = async (reqBody) => {
 
-    const name = reqBody.view.state.values.keyword.nameAction.value;
+    const name = reqBody.view.state.values.name.nameAction.value;
     const keyword = reqBody.view.state.values.keyword.keywordAction.value;
     const description =
         reqBody.view.state.values.description.descriptionAction.value;

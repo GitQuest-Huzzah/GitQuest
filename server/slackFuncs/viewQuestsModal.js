@@ -24,7 +24,7 @@ const questLogModal = async (reqBody) => {
             callback_id:'viewQuestsSubmit',
             title: {
                 type: "plain_text",
-                text: "Quest Log",
+                text: "View Quests",
                 emoji: true,
             },
             submit: {
