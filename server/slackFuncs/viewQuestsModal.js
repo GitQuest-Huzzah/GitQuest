@@ -46,7 +46,7 @@ const questLogModal = async (reqBody) => {
                                   type: "section",
                                   text: {
                                       type: "mrkdwn",
-                                      text: `*Keyword* ${quest.dataValues.keyword}\n*Description* ${quest.dataValues.description}\n*Gold Value* ${quest.dataValues.goldValue}\n*Exp Value* ${quest.dataValues.expValue}\n*Availability* ${quest.dataValues.status}`,
+                                      text: `*Name* ${quest.dataValues.name}\n*Keyword* ${quest.dataValues.keyword}\n*Description* ${quest.dataValues.description}\n*Gold Value* ${quest.dataValues.goldValue}\n*Exp Value* ${quest.dataValues.expValue}\n*Availability* ${quest.dataValues.status}`,
                                   },
                               },
 
@@ -74,7 +74,7 @@ const questLogModal = async (reqBody) => {
                                   type: "section",
                                   text: {
                                       type: "mrkdwn",
-                                      text: `*Keyword* ${quest.dataValues.keyword}\n*Description* ${quest.dataValues.description}\n*Gold Value* ${quest.dataValues.goldValue}\n*Exp Value* ${quest.dataValues.expValue}\n*Availability* ${quest.dataValues.status}`,
+                                      text: `*Name* ${quest.dataValues.name}\n*Keyword* ${quest.dataValues.keyword}\n*Description* ${quest.dataValues.description}\n*Gold Value* ${quest.dataValues.goldValue}\n*Exp Value* ${quest.dataValues.expValue}\n*Availability* ${quest.dataValues.status}`,
                                   },
                               },
                               ...acc,
