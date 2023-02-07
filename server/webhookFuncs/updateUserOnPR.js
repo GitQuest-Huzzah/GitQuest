@@ -93,7 +93,7 @@ const updateUserOnPR = async (reqBody) => {
         let userPRAchieveCount = 0
         for (const achieve of parsedUserAchievements) {
             if (JSON.stringify(achieve) === JSON.stringify(userPRAchieve)) {
-                userPRAchieve++
+                userPRAchieveCount++
                 // parsedUserAchievements = [
                 //     ...parsedUserAchievements,
                 //     userPRAchieve,
