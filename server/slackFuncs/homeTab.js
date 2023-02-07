@@ -3,7 +3,7 @@ const findTokenByTeamId = require("./findTokenByTeam");
 const createAdminGHLink = require("./createAdminGHLink");
 const { Users } = require("../db");
 const adminHomeView = require("./adminHomeView");
-const userHomeView = require('./userHomeView')
+const userHomeView = require("./userHomeView");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 // Listen to the app_home_opened Events API event to hear when a user opens your app from the sidebar
@@ -18,7 +18,7 @@ const homeTab = async (reqBody) => {
         teamId: reqBody.team_id,
         userId: reqBody.event.user,
     });
-    console.log(user)
+    console.log(user);
     try {
         // Call the views.publish method using the WebClient passed to listeners
         await web.views.publish({
@@ -27,7 +27,9 @@ const homeTab = async (reqBody) => {
             view: {
                 // Home tabs must be enabled in your app configuration page under "App Home"
                 type: "home",
-                blocks: user.dataValues.isAdmin ? adminHomeView(user, gHLink):userHomeView(user)
+                blocks: user.dataValues.isAdmin
+                    ? adminHomeView(user, gHLink)
+                    : userHomeView(user),
             },
         });
     } catch (error) {
