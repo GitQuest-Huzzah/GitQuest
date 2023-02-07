@@ -18,6 +18,7 @@ const {
     goldLogModal, 
     questLog,
     questLogModal
+	profileModal
 } = require("../slackFuncs");
 const adminDeleteRepoModal = require("../slackFuncs/adminDeleteRepoModal");
 
@@ -60,6 +61,7 @@ router.post("/", (req, res, next) => {
             addQuestModal(parsedSubmission)
         if(parsedSubmission.actions[0].action_id === 'questLogButton')
             questLogModal(parsedSubmission)
+		    if(parsedSubmission.actions[0].action_id === 'profileButton') profileModal(parsedSubmission)
     }
         
 

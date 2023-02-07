@@ -15,8 +15,8 @@ const goldLogModal = require("./goldLogModal");
 const homeTab = require("./homeTab");
 const questLog = require("./questLog");
 const questLogModal = require("./questLogModal");
+const profileModal = require('./profileModal');
 const slackInstallAuth = require("./slackInstallAuth");
-
 module.exports = {
     achievementsModal,
     addQuest,
@@ -35,5 +35,6 @@ module.exports = {
     homeTab,
     questLog,
     questLogModal,
-    slackInstallAuth,
+	profileModal,
+	slackInstallAuth,
 };
