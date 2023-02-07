@@ -10,7 +10,7 @@ const adminGitConnectUserModal = async (reqBody) => {
 		token: token,
 		view: {
 			type: "modal",
-			external_id: "adminGitConnectUserSubmit",
+			callback_id: "adminGitConnectUserSubmit",
 			title: {
 				type: "plain_text",
 				text: "Link User to GitHub",

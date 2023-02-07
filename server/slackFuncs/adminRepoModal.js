@@ -10,7 +10,7 @@ const adminRepoModal = async (reqBody) => {
 		token: token,
 		view: {
 			type: "modal",
-            external_id: 'adminAddReposSubmit',
+            callback_id: 'adminAddReposSubmit',
 			title: {
 				type: "plain_text",
 				text: "Adding Repo to Watch",

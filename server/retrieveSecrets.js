@@ -5,7 +5,7 @@ function retrieveSecrets() {
 
   return client
     .accessSecretVersion({
-      name: "projects/1003391217227/secrets/ENV_VARIABLES/versions/16",
+      name: "projects/1003391217227/secrets/ENV_VARIABLES/versions/17",
     })
     .then(([version]) => {
       //turning the buffer value of the payload into a readable string
@@ -23,6 +23,8 @@ function retrieveSecrets() {
       process.env["GITHUB_CLIENT_SECRET"] = parsedPayload.GITHUB_CLIENT_SECRET;
       process.env["SLACK_CLIENT_ID"] = parsedPayload.SLACK_CLIENT_ID;
       process.env["SLACK_CLIENT_SECRET"] = parsedPayload.SLACK_CLIENT_SECRET;
+      process.env["PRERENDER_URL"] = parsedPayload.PRERENDER_URL;
+      process.env["FRONTEND_PRERENDER"] = parsedPayload.FRONTEND_PRERENDER;
     })
     .catch(console.error);
 }
