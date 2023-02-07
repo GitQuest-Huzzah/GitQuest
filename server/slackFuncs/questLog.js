@@ -2,12 +2,7 @@ const Quest = require("../db/models/Quest");
 const Users = require("../db/models/Users");
 
 const questLog = async (reqBody) => {
-    console.log(reqBody.user);
-    console.log(
-        reqBody.view.state.values.questLogModalBlock.questLogModalAction
-            .selected_options,
-        "This is the values in questLog "
-    );
+
     const selectedQuests =
         reqBody.view.state.values.questLogModalBlock.questLogModalAction
             .selected_options;
@@ -26,6 +21,9 @@ const questLog = async (reqBody) => {
             },
         });
         user.addQuest(singleQuest);
+        await singleQuest.update({
+            status: 'active'
+        })
     });
 };
 
