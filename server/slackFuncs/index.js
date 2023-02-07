@@ -2,6 +2,7 @@ const achievementsModal = require("./achievementsModal");
 const addQuest = require("./addQuest");
 const addQuestModal = require("./addQuestModal");
 const adminGitConnectUserModal = require("./adminGitConnectUserModal");
+const adminHomeView = require('./adminHomeView')
 const adminOrgModal = require("./adminOrgModal");
 const adminRepoModal = require("./adminRepoModal");
 const blockTest = require("./blockTest");
@@ -23,6 +24,7 @@ module.exports = {
     addQuest,
     addQuestModal,
     adminGitConnectUserModal,
+    adminHomeView,
     adminOrgModal,
     adminRepoModal,
     blockTest,
