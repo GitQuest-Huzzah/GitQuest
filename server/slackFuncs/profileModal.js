@@ -32,7 +32,7 @@ const profileModal = async (reqBody) => {
 				{
 					type: "image",
 					image_url:
-						`http://34.27.227.112:3000/render?fullpage=true&renderType=jpeg&url=https://gitquest.fun/renderthisforme?${baseQuery}`,
+						`http://${process.env.PRERENDER_URL}/render?fullpage=true&renderType=jpeg&url=https://${process.env.FRONTEND_PRERENDER}?${baseQuery}`,
 					alt_text: "inspiration",
 				},
 			],
