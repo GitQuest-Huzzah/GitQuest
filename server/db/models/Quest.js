@@ -2,6 +2,10 @@ const Sequelize = require('sequelize')
 const db = require('../db.js');
 
 const Quest = db.define("quest", {
+    name:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
     keyword:{
         type:Sequelize.STRING,
         allowNull:false
