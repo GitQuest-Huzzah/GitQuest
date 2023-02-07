@@ -70,7 +70,7 @@ const updateUserOnPR = async (reqBody) => {
 
     // check to see if user achievements already exist
     // either add the initial achievement, or add new achievements to existing
-    let userAchievementJSON
+    let userAchievementJSON;
     if (userAchievements) {
         let parsedUserAchievements = JSON.parse(userAchievements);
 
@@ -95,20 +95,22 @@ const updateUserOnPR = async (reqBody) => {
         }
 
         userAchievementJSON = JSON.stringify(parsedUserAchievements);
-
-    }else{
-        userAchievementJSON = JSON.stringify([userCommitAchieve, userPRAchieve])
+    } else {
+        userAchievementJSON = JSON.stringify([
+            userCommitAchieve,
+            userPRAchieve,
+        ]);
     }
-        await user.update({
-            commits: numOfCommits,
-            pullRequests: numOfPulls,
-            level: userLevel,
-            title: userTitle,
-            exp: userExp,
-            achievements: userAchievementJSON,
-            gold: userGold,
-            rewardGold: rewardGold,
-        });
+    await user.update({
+        commits: numOfCommits,
+        pullRequests: numOfPulls,
+        level: userLevel,
+        title: userTitle,
+        exp: userExp,
+        achievements: userAchievementJSON,
+        gold: userGold,
+        rewardGold: rewardGold,
+    });
 };
 
 module.exports = updateUserOnPR;
