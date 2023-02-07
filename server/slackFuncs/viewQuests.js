@@ -1,10 +1,10 @@
 const Quest = require("../db/models/Quest");
 const Users = require("../db/models/Users");
 
-const questLog = async (reqBody) => {
+const viewQuests = async (reqBody) => {
 
     const selectedQuests =
-        reqBody.view.state.values.questLogModalBlock.questLogModalAction
+        reqBody.view.state.values.viewQuestsModalBlock.viewQuestsModalAction
             .selected_options;
 
     const user = await Users.findOne({
@@ -27,4 +27,4 @@ const questLog = async (reqBody) => {
     });
 };
 
-module.exports = questLog;
+module.exports = viewQuests;
