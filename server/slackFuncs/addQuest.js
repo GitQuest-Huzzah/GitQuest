@@ -6,6 +6,7 @@ const findTokenByTeamId = require('./findTokenByTeam')
 
 const addQuest = async (reqBody) => {
 
+    const name = reqBody.view.state.values.keyword.nameAction.value;
     const keyword = reqBody.view.state.values.keyword.keywordAction.value;
     const description =
         reqBody.view.state.values.description.descriptionAction.value;
@@ -36,6 +37,7 @@ const addQuest = async (reqBody) => {
     });
 
     const quest = await Quest.create({
+        name,
         keyword, 
         description, 
         expValue, 

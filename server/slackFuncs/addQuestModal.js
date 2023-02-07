@@ -35,6 +35,19 @@ const addQuestModal = async (reqBody) => {
                 },
                 {
                     type: "input",
+                    block_id:'name',
+                    element: {
+                        type: "plain_text_input",
+                        action_id: "nameAction",
+                    },
+                    label: {
+                        type: "plain_text",
+                        text: "Name",
+                        emoji: true,
+                    },
+                },
+                {
+                    type: "input",
                     block_id:'keyword',
                     element: {
                         type: "plain_text_input",
