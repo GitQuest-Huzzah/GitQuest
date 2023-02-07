@@ -10,7 +10,7 @@ const adminDeleteRepoModal = async (reqBody) => {
 		token: token,
 		view: {
 			type: "modal",
-            external_id: 'adminDeleteReposSubmit',
+            callback_id: 'adminDeleteReposSubmit',
 			title: {
 				type: "plain_text",
 				text: "Remove Watched Repo",

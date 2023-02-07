@@ -19,7 +19,7 @@ const goldLogModal = async (reqBody) => {
         trigger_id: reqBody.trigger_id,
         token: token,
         view: {
-            external_id: "achievementsModal",
+            callback_id: "achievementsModal",
             type: "modal",
             title: {
                 type: "plain_text",

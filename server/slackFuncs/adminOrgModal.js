@@ -9,7 +9,7 @@ const adminOrgModal = async (reqBody) => {
 		trigger_id: reqBody.trigger_id,
 		token: token,
 		view: {
-			external_id: "adminAddOrgSubmit",
+			callback_id: "adminAddOrgSubmit",
 			type: "modal",
 			title: {
 				type: "plain_text",

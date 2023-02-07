@@ -66,7 +66,7 @@ router.post("/", (req, res, next) => {
         
 
 	if (
-		parsedSubmission.view.external_id === "adminAddReposSubmit" &&
+		parsedSubmission.view.callback_id === "adminAddReposSubmit" &&
 		parsedSubmission.type === "view_submission"
 	) {
 		res.send({ response_action: "clear" });
@@ -75,20 +75,20 @@ router.post("/", (req, res, next) => {
 	}
 
 	if (
-		parsedSubmission.view.external_id === "adminAddOrgSubmit" &&
+		parsedSubmission.view.callback_id === "adminAddOrgSubmit" &&
 		parsedSubmission.type === "view_submission"
 	) {
 		res.send({ response_action: "clear" });
 		createOrUpdateOrg(parsedSubmission);
 	}
 	if (
-		parsedSubmission.view.external_id === "adminGitConnectUserSubmit" &&
+		parsedSubmission.view.callback_id === "adminGitConnectUserSubmit" &&
 		parsedSubmission.type === "view_submission"
 	) {
 		res.send({ response_action: "clear" });
 		updateUserGitHub(parsedSubmission);
 	}
-	if (parsedSubmission.view.external_id === "adminDeleteReposSubmit" && parsedSubmission.type === "view_submission"){
+	if (parsedSubmission.view.callback_id === "adminDeleteReposSubmit" && parsedSubmission.type === "view_submission"){
 		res.send({ response_action:'clear'});
 		gitHubDeleteRepo(parsedSubmission);
 	}
