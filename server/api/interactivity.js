@@ -7,13 +7,17 @@ const {
 
 const {
     achievementsModal,
+    addQuest,
+    addQuestModal,
 	adminOrgModal,
 	adminRepoModal,
 	adminGitConnectUserModal,
 	createOrUpdateOrg,
     giveGold,
     giveGoldModal,
-    goldLogModal,
+    goldLogModal, 
+    questLog,
+    questLogModal
 	profileModal
 } = require("../slackFuncs");
 const adminDeleteRepoModal = require("../slackFuncs/adminDeleteRepoModal");
@@ -53,7 +57,11 @@ router.post("/", (req, res, next) => {
             achievementsModal(parsedSubmission)
         if(parsedSubmission.actions[0].action_id === 'giveGoldButton')
             giveGoldModal(parsedSubmission)
-		if(parsedSubmission.actions[0].action_id === 'profileButton') profileModal(parsedSubmission)
+        if(parsedSubmission.actions[0].action_id === 'addQuestButton')
+            addQuestModal(parsedSubmission)
+        if(parsedSubmission.actions[0].action_id === 'questLogButton')
+            questLogModal(parsedSubmission)
+		    if(parsedSubmission.actions[0].action_id === 'profileButton') profileModal(parsedSubmission)
     }
         
 
@@ -87,6 +95,14 @@ router.post("/", (req, res, next) => {
 	if (parsedSubmission.view.callback_id=== "giveGoldSubmit" && parsedSubmission.type === "view_submission"){
 		res.send({ response_action:'clear'});
         giveGold(parsedSubmission)
+	}
+	if (parsedSubmission.view.callback_id=== "addQuestSubmit" && parsedSubmission.type === "view_submission"){
+		res.send({ response_action:'clear'});
+        addQuest(parsedSubmission)
+	}
+	if (parsedSubmission.view.callback_id=== "questLogSubmit" && parsedSubmission.type === "view_submission"){
+		res.send({ response_action:'clear'});
+        questLog(parsedSubmission)
 	}
 });
 
