@@ -15,10 +15,10 @@ const giveGold = require("./giveGold");
 const giveGoldModal = require("./giveGoldModal");
 const goldLogModal = require("./goldLogModal");
 const homeTab = require("./homeTab");
-const questLog = require("./questLog");
-const questLogModal = require("./questLogModal");
 const profileModal = require('./profileModal');
 const slackInstallAuth = require("./slackInstallAuth");
+const viewQuests = require('./viewQuests')
+const viewQuestsModal = require('./viewQuestsModal')
 module.exports = {
     achievementsModal,
     addQuest,
@@ -37,8 +37,8 @@ module.exports = {
     giveGold,
     goldLogModal,
     homeTab,
-    questLog,
-    questLogModal,
 	profileModal,
 	slackInstallAuth,
+    viewQuests,
+    viewQuestsModal
 };

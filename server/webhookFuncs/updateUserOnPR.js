@@ -9,17 +9,15 @@ const pullReqAchieveFunc = require("./pullReqAchieveFunc");
 const commitReqAchieveFunc = require("./commitReqAchieveFunc");
 
 const updateUserOnPR = async (reqBody) => {
-    const userGithubId = reqBody.sender.id.toString();
-    const userOrgName = reqBody.organization.login;
 
     const user = await Users.findOne({
         where: {
-            gitHubID: userGithubId,
+            gitHubID: reqBody.sender.id.toString()
         },
         include: {
             model: Workspaces,
             where: {
-                orgName: userOrgName,
+                orgName: reqBody.organization.login
             },
         },
     });
@@ -73,25 +71,43 @@ const updateUserOnPR = async (reqBody) => {
     let userAchievementJSON;
     if (userAchievements) {
         let parsedUserAchievements = JSON.parse(userAchievements);
-
+        let commitAchieveCount = 0
         for (const achieve of parsedUserAchievements) {
-            if (JSON.stringify(achieve) !== JSON.stringify(userCommitAchieve)) {
+            if (JSON.stringify(achieve) === JSON.stringify(userCommitAchieve)) {
+                commitAchieveCount += 1
+                // parsedUserAchievements = [
+                //     ...parsedUserAchievements,
+                //     userCommitAchieve,
+                // ];
+                // break;
+            }
+        }
+        if (commitAchieveCount === 0){
                 parsedUserAchievements = [
                     ...parsedUserAchievements,
                     userCommitAchieve,
                 ];
-                break;
+
+        }
+
+        let userPRAchieveCount = 0
+        for (const achieve of parsedUserAchievements) {
+            if (JSON.stringify(achieve) === JSON.stringify(userPRAchieve)) {
+                userPRAchieveCount++
+                // parsedUserAchievements = [
+                //     ...parsedUserAchievements,
+                //     userPRAchieve,
+                // ];
+                // break;
             }
         }
 
-        for (const achieve of parsedUserAchievements) {
-            if (JSON.stringify(achieve) !== JSON.stringify(userPRAchieve)) {
+        if(userPRAchieveCount === 0){
                 parsedUserAchievements = [
                     ...parsedUserAchievements,
                     userPRAchieve,
                 ];
-                break;
-            }
+
         }
 
         userAchievementJSON = JSON.stringify(parsedUserAchievements);
