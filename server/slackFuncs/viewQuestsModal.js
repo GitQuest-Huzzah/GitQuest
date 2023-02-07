@@ -1,6 +1,5 @@
 const { WebClient } = require("@slack/web-api");
 const findTokenByTeamId = require("./findTokenByTeam");
-const viewQuestBlockFunc = require("./viewQuestBlockFunc");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 const Quest = require("../db/models/Quest");
@@ -21,7 +20,7 @@ const questLogModal = async (reqBody) => {
         token: await findTokenByTeamId(reqBody.user.team_id),
         view: {
             type: "modal",
-            callback_id:'viewQuestsSubmit',
+            callback_id: "viewQuestsSubmit",
             title: {
                 type: "plain_text",
                 text: "View Quests",
@@ -39,7 +38,10 @@ const questLogModal = async (reqBody) => {
             },
             blocks: quests
                 ? quests.reduce((acc, quest, index, array) => {
-                      if (array.length - 1 == index) {
+                      if (
+                          array.length - 1 == index &&
+                          quest.dataValues.status === "available"
+                      ) {
                           return [
                               ...acc,
                               {
@@ -49,13 +51,12 @@ const questLogModal = async (reqBody) => {
                                       text: `*Name* ${quest.dataValues.name}\n*Keyword* ${quest.dataValues.keyword}\n*Description* ${quest.dataValues.description}\n*Gold Value* ${quest.dataValues.goldValue}\n*Exp Value* ${quest.dataValues.expValue}\n*Availability* ${quest.dataValues.status}`,
                                   },
                               },
-
                               {
                                   type: "section",
-                                      block_id:"viewQuestsModalBlock",
+                                  block_id: "viewQuestsModalBlock",
                                   text: {
                                       type: "mrkdwn",
-                                      text: "Select Availble Quest from Below",
+                                      text: "Select Available Quest from Below",
                                   },
                                   accessory: {
                                       action_id: "viewQuestsModalAction",
@@ -68,13 +69,24 @@ const questLogModal = async (reqBody) => {
                                   },
                               },
                           ];
-                      } else {
+                      } else if (quest.dataValues.status === "available") {
                           acc = [
                               {
                                   type: "section",
                                   text: {
                                       type: "mrkdwn",
                                       text: `*Name* ${quest.dataValues.name}\n*Keyword* ${quest.dataValues.keyword}\n*Description* ${quest.dataValues.description}\n*Gold Value* ${quest.dataValues.goldValue}\n*Exp Value* ${quest.dataValues.expValue}\n*Availability* ${quest.dataValues.status}`,
+                                  },
+                              },
+                              ...acc,
+                          ];
+                      } else {
+                          acc = [
+                              {
+                                  type: "section",
+                                  text: {
+                                      type: "mrkdwn",
+                                      text: "There are no available quests!",
                                   },
                               },
                               ...acc,
