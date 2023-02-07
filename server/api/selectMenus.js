@@ -15,7 +15,7 @@ router.post("/", async (req, res, next) => {
 	if (parsedSubmission.view.callback_id === "adminDeleteReposSubmit"){
 		res.send(await externalRepoDeleteSelectMenu(parsedSubmission)).status(200)
 	}
-	if (parsedSubmission.view.callback_id=== "questLogSubmit"){
+	if (parsedSubmission.view.callback_id=== "viewQuestsSubmit"){
 		res.send(await externalQuestLogSelect(parsedSubmission)).status(200)
 	}
 });
