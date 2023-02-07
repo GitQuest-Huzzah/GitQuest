@@ -23,6 +23,9 @@ const Quest = db.define("quest", {
         allowNull:false,
         defaultValue: 'available'
     },
+    pullRequestID:{
+        type:Sequelize.INTEGER,
+    },
 })
 
 module.exports = Quest;

@@ -16,7 +16,6 @@ const questLogModal = async (reqBody) => {
         },
     });
 
-    console.log(quests, "THESE ARE THE QUESTS");
     await web.views.open({
         trigger_id: reqBody.trigger_id,
         token: await findTokenByTeamId(reqBody.user.team_id),
@@ -53,6 +52,7 @@ const questLogModal = async (reqBody) => {
 
                               {
                                   type: "section",
+                                      block_id:"questLogModalBlock",
                                   text: {
                                       type: "mrkdwn",
                                       text: "Select Availble Quest from Below",
