@@ -38,6 +38,15 @@ const homeTab = async (reqBody) => {
                                 type: "button",
                                 text: {
                                     type: "plain_text",
+                                    text: "Add Quest",
+                                    emoji: true,
+                                },
+                                action_id: "addQuestButton",
+                            },
+                            {
+                                type: "button",
+                                text: {
+                                    type: "plain_text",
                                     text: "Add or Update Org Name",
                                     emoji: true,
                                 },
@@ -111,6 +120,15 @@ const homeTab = async (reqBody) => {
                     {
                         type: "actions",
                         elements: [
+                            {
+                                type: "button",
+                                text: {
+                                    type: "plain_text",
+                                    text: "Quest Log",
+                                    emoji: true,
+                                },
+                                action_id: "questLogButton",
+                            },
                             {
                                 type: "button",
                                 text: {

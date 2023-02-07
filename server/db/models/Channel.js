@@ -1,16 +1,15 @@
 const Sequelize = require('sequelize')
 const db = require('../db.js');
 
-const Goldlog = db.define("goldlog", {
-    description:{
+const Channel = db.define("channel", {
+    name:{
         type:Sequelize.STRING,
         allowNull:false
     },
-    valueChange:{
+    slackID:{
         type:Sequelize.STRING,
         allowNull:false
     },
 })
 
-module.exports = Goldlog;
-
+module.exports = Channel;
