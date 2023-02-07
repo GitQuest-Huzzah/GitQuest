@@ -2,6 +2,8 @@ const { WebClient } = require("@slack/web-api");
 const findTokenByTeamId = require("./findTokenByTeam");
 const createAdminGHLink = require("./createAdminGHLink");
 const { Users } = require("../db");
+const adminHomeView = require("./adminHomeView");
+const userHomeView = require('./userHomeView')
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 // Listen to the app_home_opened Events API event to hear when a user opens your app from the sidebar
@@ -16,6 +18,7 @@ const homeTab = async (reqBody) => {
         teamId: reqBody.team_id,
         userId: reqBody.event.user,
     });
+    console.log(user)
     try {
         // Call the views.publish method using the WebClient passed to listeners
         await web.views.publish({
@@ -24,150 +27,7 @@ const homeTab = async (reqBody) => {
             view: {
                 // Home tabs must be enabled in your app configuration page under "App Home"
                 type: "home",
-                blocks: [
-                    {
-                        type: "image",
-                        image_url:
-                            `https://storage.googleapis.com/slackphotos/gqbanner.png`,
-                        alt_text: "Git Quest Banner",
-                    },
-                    {
-                        type: "actions",
-                        elements: [
-                            {
-                                type: "button",
-                                text: {
-                                    type: "plain_text",
-                                    text: "Add Quest",
-                                    emoji: true,
-                                },
-                                action_id: "addQuestButton",
-                            },
-                            {
-                                type: "button",
-                                text: {
-                                    type: "plain_text",
-                                    text: "Add or Update Org Name",
-                                    emoji: true,
-                                },
-                                value: "Add or Update Org Name",
-                                action_id: "adminOrgModalButton",
-                            },
-                            {
-                                type: "button",
-                                text: {
-                                    type: "plain_text",
-                                    text: "Link Org To GitHub",
-                                    emoji: true,
-                                },
-                                value: "Link Org To GitHub",
-                                url: gHLink,
-                            },
-                            {
-                                type: "button",
-                                text: {
-                                    type: "plain_text",
-                                    text: "Repos to connect",
-                                    emoji: true,
-                                },
-                                value: "Repos to connect",
-                                action_id: "adminRepoModalButton",
-                            },
-                            {
-                                type: "button",
-                                text: {
-                                    type: "plain_text",
-                                    text: "Repos to Delete",
-                                    emoji: true,
-                                },
-                                value: "Repos to Delete",
-                                action_id: "adminRepoDeleteModalButton",
-                            },
-                            {
-                                type: "button",
-                                text: {
-                                    type: "plain_text",
-                                    text: "Link Users To GitHub",
-                                    emoji: true,
-                                },
-                                value: "Connect User To GitHub Account",
-                                action_id: "adminGitConnectUserModalButton",
-                            },
-                        ],
-                    },
-                    {
-                        type: "header",
-                        text: {
-                            type: "plain_text",
-                            text: "Welcome Hero!",
-                        },
-                    },
-                    {
-                        type: "divider",
-                    },
-                    {
-                        type: "section",
-                        fields: [
-                            {
-                                type: "mrkdwn",
-                                text: `*User Profile*\n*Level*: ${user.dataValues.level}\n*Title*:${user.dataValues.title} \n *Total Exp*: ${user.dataValues.exp}\n*Gold*: ${user.dataValues.gold} \n *Gold to Give*: ${user.dataValues.rewardGold}`,
-                            },
-                        ],
-                    },
-                    {
-                        type: "divider",
-                    },
-                    {
-                        type: "actions",
-                        elements: [
-                            {
-                                type: "button",
-                                text: {
-                                    type: "plain_text",
-                                    text: "Quest Log",
-                                    emoji: true,
-                                },
-                                action_id: "questLogButton",
-                            },
-                            {
-                                type: "button",
-                                text: {
-                                    type: "plain_text",
-                                    text: "Give Gold to Give",
-                                    emoji: true,
-                                },
-                                action_id: "giveGoldButton",
-                            },
-                            {
-                                type: "button",
-                                text: {
-                                    type: "plain_text",
-                                    text: "Gold Log",
-                                    emoji: true,
-                                },
-                                action_id: "goldLogButton",
-                            },
-                            {
-                                type: "button",
-                                text: {
-                                    type: "plain_text",
-                                    text: "Achievements",
-                                    emoji: true,
-                                },
-                                action_id: "achievementButton",
-                            },
-                            {
-                                type: "button",
-                                text: {
-                                    type: "plain_text",
-                                    text: "My Profile",
-                                    emoji: true,
-                                },
-                                action_id: "profileButton",
-                            },
-                        ],
-                    },
-                ],
+                blocks: user.dataValues.isAdmin ? adminHomeView(user, gHLink):userHomeView(user)
             },
         });
     } catch (error) {
