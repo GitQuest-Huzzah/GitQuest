@@ -22,6 +22,15 @@ const adminHomeView = (user, gHLink) => {
                     type: "button",
                     text: {
                         type: "plain_text",
+                        text: "Assign Active Quest and Complete",
+                        emoji: true,
+                    },
+                    action_id: "assignQuestCompleteButton",
+                },
+                {
+                    type: "button",
+                    text: {
+                        type: "plain_text",
                         text: "Add or Update Org Name",
                         emoji: true,
                     },

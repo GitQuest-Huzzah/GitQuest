@@ -9,6 +9,8 @@ const {
     achievementsModal,
     addQuest,
     addQuestModal,
+    adminAssignQuestComplete,
+    adminAssignQuestCompleteModal,
     adminOrgModal,
     adminRepoModal,
     adminGitConnectUserModal,
@@ -61,6 +63,8 @@ router.post("/", (req, res, next) => {
             profileModal(parsedSubmission);
         if (parsedSubmission.actions[0].action_id === "questLogButton")
             questLogModal(parsedSubmission);
+        if (parsedSubmission.actions[0].action_id === "assignQuestCompleteButton")
+            adminAssignQuestCompleteModal(parsedSubmission);
     }
 
     if (
@@ -120,6 +124,13 @@ router.post("/", (req, res, next) => {
     ) {
         res.send({ response_action: "clear" });
         questLog(parsedSubmission);
+    }
+    if (
+        parsedSubmission.view.callback_id === "assignQuestCompleteSubmit" &&
+        parsedSubmission.type === "view_submission"
+    ) {
+        res.send({ response_action: "clear" });
+        adminAssignQuestComplete(parsedSubmission);
     }
 });
 
