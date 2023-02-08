@@ -1,4 +1,4 @@
-const Quest = require("../../server/db");
+const { Quest } = require("../../server/db");
 
 const questLog = (reqBody) => {
 	const quests =

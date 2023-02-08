@@ -1,6 +1,6 @@
 const { Octokit } = require("@octokit/core");
 const { Repos } = require("../../server/db");
-const findGitHubAPIToken = require("../");
+const findGitHubAPIToken = require("../queryFuncs/findGitHubAPIToken");
 const gitHubDeleteRepo = async (reqBody) => {
 	const reposToDelete =
 		reqBody.view.state.values.adminDeleteRepoModal.adminDeleteRepoModalAction
