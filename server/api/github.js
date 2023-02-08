@@ -6,18 +6,18 @@ router.get("/auth/redirect", async (req, res, next) => {
 	const GHsuccess = await gitHubInstall(req);
 	GHsuccess.dataValues.gitHubToken
 		? res.send(
-				<script>
+				`<script>
 					{" "}
 					window.alert("You Have successfully connected your GitHub Account!");
 					window.close()
-				</script>
+				</script>`
 		  )
 		: res.send(
-				<script>
+				`<script>
 					{" "}
 					window.alert("Looks like something went wrong please contact GitQuest
 					for help or try again!); window.close()
-				</script>
+				</script>`
 		  );
 });
 
