@@ -4,11 +4,11 @@ const {
 	adminAssignQuestComplete,
 	createOrUpdateOrg,
 	gitHubDeleteRepo,
-	gitHubSetRepoHook,
 	giveGold,
 	questLog,
 	updateUserGitHub,
 	viewQuests,
+	gitHubSetRepoHook,
 } = require("../../helperFuncs");
 
 const {
