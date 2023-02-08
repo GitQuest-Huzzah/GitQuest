@@ -1,4 +1,4 @@
-const { gitHubSetRepoHook, gitHubInstall } = require("../gitFuncs");
+const { gitHubSetRepoHook, gitHubInstall } = require("../../helperFuncs");
 const router = require("express").Router();
 
 //path is /api/github/auth/redirect
