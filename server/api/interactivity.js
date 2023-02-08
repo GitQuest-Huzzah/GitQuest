@@ -1,27 +1,28 @@
 const {
-	addAllOrgReposToDB,
+	addQuest,
+	createOrUpdateOrg,
+	giveGold,
+	viewQuests,
+} = require("../../apiFuncs/slackFuncs");
+const {
 	gitHubSetRepoHook,
-	updateUserGitHub,
+	addAllOrgReposToDB,
 	gitHubDeleteRepo,
-} = require("../gitFuncs");
+	updateUserGitHub,
+} = require("../../apiFuncs/gitFuncs");
 
 const {
-    achievementsModal,
-    addQuest,
-    addQuestModal,
+	achievementsModal,
+	addQuestModal,
+	adminDeleteRepoModal,
+	adminGitConnectUserModal,
 	adminOrgModal,
 	adminRepoModal,
-	adminGitConnectUserModal,
-	createOrUpdateOrg,
-    giveGold,
-    giveGoldModal,
-    goldLogModal, 
+	giveGoldModal,
+	goldLogModal,
 	profileModal,
-    viewQuests,
-    viewQuestsModal
-
-} = require("../slackFuncs");
-const adminDeleteRepoModal = require("../slackFuncs/adminDeleteRepoModal");
+	viewQuestsModal,
+} = require("../../slackHomeTab");
 
 const router = require("express").Router();
 
@@ -52,19 +53,19 @@ router.post("/", (req, res, next) => {
 		)
 			adminDeleteRepoModal(parsedSubmission);
 		res.sendStatus(200);
-        if(parsedSubmission.actions[0].action_id === 'goldLogButton')
-            goldLogModal(parsedSubmission)
-        if(parsedSubmission.actions[0].action_id === 'achievementButton')
-            achievementsModal(parsedSubmission)
-        if(parsedSubmission.actions[0].action_id === 'giveGoldButton')
-            giveGoldModal(parsedSubmission)
-        if(parsedSubmission.actions[0].action_id === 'addQuestButton')
-            addQuestModal(parsedSubmission)
-        if(parsedSubmission.actions[0].action_id === 'viewQuestsButton')
-            viewQuestsModal(parsedSubmission)
-		    if(parsedSubmission.actions[0].action_id === 'profileButton') profileModal(parsedSubmission)
-    }
-        
+		if (parsedSubmission.actions[0].action_id === "goldLogButton")
+			goldLogModal(parsedSubmission);
+		if (parsedSubmission.actions[0].action_id === "achievementButton")
+			achievementsModal(parsedSubmission);
+		if (parsedSubmission.actions[0].action_id === "giveGoldButton")
+			giveGoldModal(parsedSubmission);
+		if (parsedSubmission.actions[0].action_id === "addQuestButton")
+			addQuestModal(parsedSubmission);
+		if (parsedSubmission.actions[0].action_id === "viewQuestsButton")
+			viewQuestsModal(parsedSubmission);
+		if (parsedSubmission.actions[0].action_id === "profileButton")
+			profileModal(parsedSubmission);
+	}
 
 	if (
 		parsedSubmission.view.callback_id === "adminAddReposSubmit" &&
@@ -89,21 +90,33 @@ router.post("/", (req, res, next) => {
 		res.send({ response_action: "clear" });
 		updateUserGitHub(parsedSubmission);
 	}
-	if (parsedSubmission.view.callback_id === "adminDeleteReposSubmit" && parsedSubmission.type === "view_submission"){
-		res.send({ response_action:'clear'});
+	if (
+		parsedSubmission.view.callback_id === "adminDeleteReposSubmit" &&
+		parsedSubmission.type === "view_submission"
+	) {
+		res.send({ response_action: "clear" });
 		gitHubDeleteRepo(parsedSubmission);
 	}
-	if (parsedSubmission.view.callback_id=== "giveGoldSubmit" && parsedSubmission.type === "view_submission"){
-		res.send({ response_action:'clear'});
-        giveGold(parsedSubmission)
+	if (
+		parsedSubmission.view.callback_id === "giveGoldSubmit" &&
+		parsedSubmission.type === "view_submission"
+	) {
+		res.send({ response_action: "clear" });
+		giveGold(parsedSubmission);
 	}
-	if (parsedSubmission.view.callback_id=== "addQuestSubmit" && parsedSubmission.type === "view_submission"){
-		res.send({ response_action:'clear'});
-        addQuest(parsedSubmission)
+	if (
+		parsedSubmission.view.callback_id === "addQuestSubmit" &&
+		parsedSubmission.type === "view_submission"
+	) {
+		res.send({ response_action: "clear" });
+		addQuest(parsedSubmission);
 	}
-	if (parsedSubmission.view.callback_id=== "viewQuestsSubmit" && parsedSubmission.type === "view_submission"){
-		res.send({ response_action:'clear'});
-        viewQuests(parsedSubmission)
+	if (
+		parsedSubmission.view.callback_id === "viewQuestsSubmit" &&
+		parsedSubmission.type === "view_submission"
+	) {
+		res.send({ response_action: "clear" });
+		viewQuests(parsedSubmission);
 	}
 });
 
