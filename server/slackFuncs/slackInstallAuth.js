@@ -6,6 +6,7 @@ const web = new WebClient();
 // the first block takes the code given by agreeing to install, and supplies the associated slack app information and then exchanges it for a official bot token
 const slackInstallAuth = async (req, res) => {
 	try {
+		console.log(req.query.state)
 		const installRequest = await web.oauth.v2.access({
 			code: req.query.code,
 			client_id: process.env.SLACK_CLIENT_ID,
