@@ -1,5 +1,4 @@
 const adminHomeView = (user, gHLink) => {
-    console.log("THIS IS FIRED");
     return [
         {
             type: "image",

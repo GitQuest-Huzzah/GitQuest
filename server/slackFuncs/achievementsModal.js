@@ -4,7 +4,7 @@ const Users = require("../db/models/Users");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 
-const achievements = async (reqBody) => {
+const achievementsModal = async (reqBody) => {
     const {
         dataValues: { achievements },
     } = await Users.findOne({
@@ -53,4 +53,4 @@ const achievements = async (reqBody) => {
     });
 };
 
-module.exports = achievements;
+module.exports = achievementsModal;
