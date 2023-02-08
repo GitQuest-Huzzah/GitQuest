@@ -1,10 +1,10 @@
 const db = require("./db");
 const Channel = require('./models/Channel')
-const Goldlog = require("./models/Goldlog");
-const Quest = require("./models/Quest");
 const Repos = require("./models/Repos");
 const Users = require("./models/Users");
 const Workspaces = require("./models/Workspaces");
+const Goldlog = require("./models/Goldlog");
+const Quest = require("./models/Quest");
 
 //model associations
 
