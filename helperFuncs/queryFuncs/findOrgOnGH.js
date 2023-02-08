@@ -1,6 +1,5 @@
 const { Octokit } = require("@octokit/core");
-const findGitHubAPIToken = require("../");
-
+const findGitHubAPIToken = require("./findGitHubAPIToken");
 const findOrgOnGH = async (reqBody) => {
     const token = await findGitHubAPIToken(reqBody)
     const octokit = new Octokit({
