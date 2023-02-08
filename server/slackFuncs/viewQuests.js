@@ -3,8 +3,9 @@ const Users = require("../db/models/Users");
 
 const viewQuests = async (reqBody) => {
 
+    
     const selectedQuests =
-        reqBody.view.state.values.viewQuestsModalBlock.viewQuestsModalAction
+        reqBody.view.state.values.questBlock.questAction
             .selected_options;
 
     const user = await Users.findOne({

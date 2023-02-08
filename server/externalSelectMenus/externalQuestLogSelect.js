@@ -1,9 +1,4 @@
-const { findAllAvailableQuests } = require("../slackFuncs");
-
-const externalQuestLogSelect = async (parsedSubmission) => {
-  const quests = await findAllAvailableQuests(parsedSubmission);
-
-
+const externalQuestLogSelect = async (quests, parsedSubmission) => {
     for (const [index, quest] of quests.entries()) {
     	if (
     		quest.dataValues.keyword.includes(parsedSubmission.value) &&
