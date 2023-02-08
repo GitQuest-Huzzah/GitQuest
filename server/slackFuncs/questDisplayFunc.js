@@ -20,7 +20,9 @@ const questDisplayFunc = (quests, status) => {
                     text:
                         status === "available"
                             ? "Select Available Quests"
-                            : "Want to give up  on a Quest? Select below and submit",
+                            : status === "active"
+                            ? "Want to give up  on a Quest? Select below and submit"
+                            : "Select Quest to complete to a Player",
                 },
                 accessory: {
                     action_id: "questAction",
@@ -32,6 +34,27 @@ const questDisplayFunc = (quests, status) => {
                     min_query_length: 0,
                 },
             },
+            !status
+                ? {
+                      type: "section",
+                    block_id:"userSelectBlock",
+                      text: {
+                          type: "mrkdwn",
+                          text: "Select User to assign Awards!",
+                      },
+                      accessory: {
+                          type: "users_select",
+                          placeholder: {
+                              type: "plain_text",
+                              text: "Select a user",
+                              emoji: true,
+                          },
+                          action_id: "userSelectAction",
+                      },
+                  }
+                : {
+                      type: "divider",
+                  },
         ];
         return returnArr;
     } else {
@@ -43,7 +66,9 @@ const questDisplayFunc = (quests, status) => {
                     text:
                         status === "available"
                             ? "There are no available Quests"
-                            : "You do not have any active Quests",
+                            : status === "active"
+                            ? "You do not have any active Quests"
+                            : "There are no active quests to assign",
                 },
             },
         ];
