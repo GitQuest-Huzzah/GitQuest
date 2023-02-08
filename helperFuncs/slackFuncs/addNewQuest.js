@@ -1,6 +1,6 @@
 const { WebClient } = require("@slack/web-api");
 const web = new WebClient();
-const findTokenByTeamId = require("./findTokenByTeamId");
+const findTokenByTeamId = require("../");
 const {Workspaces, Quest} = require('../../server/db')
 const addNewQuest = async (reqBody) => {
 	const name = reqBody.view.state.values.name.nameAction.value;
