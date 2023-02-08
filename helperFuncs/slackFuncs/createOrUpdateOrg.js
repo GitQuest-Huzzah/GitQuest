@@ -1,5 +1,5 @@
 const { Workspaces } = require("../../server/db");
-const { findOrgOnGH } = require("../");
+const findOrgOnGH = require("../queryFuncs/findOrgOnGH");
 
 const createOrUpdateOrg = async (reqBody) => {
 	const orgName = reqBody.view.state.values.OwnerName.Owner_Input.value;
