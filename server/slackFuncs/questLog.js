@@ -1,5 +1,20 @@
+const Quest = require("../db/models/Quest");
 
-const questLog = ()=>{
+const questLog = (reqBody) => {
+    const quests =
+        reqBody.view.state.values.questBlock.questAction
+            .selected_options;
 
-}
-module.exports = questLog
+
+    quests.forEach(async (quest) => {
+        singleQuest = await Quest.findOne({
+            where: {
+                id: quest.value,
+            },
+        });
+        singleQuest.update({
+            status: 'available'
+        })
+    });
+};
+module.exports = questLog;
