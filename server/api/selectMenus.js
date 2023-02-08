@@ -4,7 +4,7 @@ const {
     externalRepoDeleteSelectMenu,
     externalQuestLogSelect,
 } = require("../externalSelectMenus");
-const { findAllAvailableQuests, findAllActiveQuestsPerUser } = require("../slackFuncs");
+const { findAllAvailableQuests, findAllActiveQuestsPerUser,findAllActiveQuests } = require("../slackFuncs");
 
 const router = require("express").Router();
 
@@ -31,6 +31,10 @@ router.post("/", async (req, res, next) => {
     }
     if (parsedSubmission.view.callback_id === "questLogSubmit") {
         const quests = await findAllActiveQuestsPerUser(parsedSubmission);
+        res.send(await externalQuestLogSelect(quests,parsedSubmission)).status(200);
+    }
+    if (parsedSubmission.view.callback_id === "assignQuestCompleteSubmit") {
+        const quests = await findAllActiveQuests(parsedSubmission);
         res.send(await externalQuestLogSelect(quests,parsedSubmission)).status(200);
     }
 });

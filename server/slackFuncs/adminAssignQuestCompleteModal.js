@@ -2,22 +2,23 @@ const { WebClient } = require("@slack/web-api");
 const findTokenByTeamId = require("./findTokenByTeam");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
-const questDisplayFunc = require('./questDisplayFunc')
-const findAllAvailableQuests = require('./findAllAvailableQuests')
+const questDisplayFunc = require("./questDisplayFunc")
+const findAllActiveQuests = require('./findAllActiveQuests')
 
-const viewQuestsModal = async (reqBody) => {
+const adminAssignQuestCompleteModal = async (reqBody) => {
 
-const quests = await findAllAvailableQuests(reqBody)
+    const quests = await findAllActiveQuests(reqBody)
+    console.log(quests, "these be the quests")
 
     await web.views.open({
         trigger_id: reqBody.trigger_id,
         token: await findTokenByTeamId(reqBody.user.team_id),
         view: {
             type: "modal",
-            callback_id: "viewQuestsSubmit",
+            callback_id: "assignQuestCompleteSubmit",
             title: {
                 type: "plain_text",
-                text: "View Quests",
+                text: "Available Quests",
                 emoji: true,
             },
             submit: {
@@ -30,9 +31,10 @@ const quests = await findAllAvailableQuests(reqBody)
                 text: "Cancel",
                 emoji: true,
             },
-            blocks: questDisplayFunc(quests, 'available')
+            blocks: questDisplayFunc(quests)
+
         },
     });
 };
 
-module.exports = viewQuestsModal;
+module.exports = adminAssignQuestCompleteModal;
