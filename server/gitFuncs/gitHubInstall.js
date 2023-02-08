@@ -1,7 +1,8 @@
 const axios = require("axios");
 const { Users, Workspaces } = require("../db");
 
-const gitHubInstall = (req) => {
+const gitHubInstall = async (req) => {
+	try {
 	//we are decoding the state variable containing user information
 	const buffer64Obj = Buffer.from(req.query.state, "base64");
 	//we turn that base64 buffer into a utf8 string
@@ -17,8 +18,8 @@ const gitHubInstall = (req) => {
 	//opts is the headers which contain the format of the response we would like from GH
 	//we then proceed to make that call to GH to exchange code for token
 	const opts = { headers: { accept: "application/json" } };
-	(async () => {
-		try {
+	
+		
 			const res = await axios.post(
 				`https://github.com/login/oauth/access_token`,
 				body,
@@ -49,11 +50,12 @@ const gitHubInstall = (req) => {
 				slackID: parsedUserInfo.userId,
 				gitHubToken: res.data.access_token,
 			});
-			return await newUser.setWorkspaces(newUsersWorkspace);
+			await newUser.setWorkspaces(newUsersWorkspace);
+			return newUser;
 		} catch (error) {
 			console.error(error);
 		}
-	})();
+	;
 };
 
 module.exports = gitHubInstall;
