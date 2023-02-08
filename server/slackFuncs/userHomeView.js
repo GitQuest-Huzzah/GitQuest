@@ -34,11 +34,55 @@ const userHomeView = (user) => {
                     type: "button",
                     text: {
                         type: "plain_text",
+                        text: "My Profile",
+                        emoji: true,
+                    },
+                    action_id: "profileButton",
+                },
+                {
+                    type: "button",
+                    text: {
+                        type: "plain_text",
+                        text: "Achievements",
+                        emoji: true,
+                    },
+                    action_id: "achievementButton",
+                },
+            ],
+        },
+        {
+            type: "divider",
+        },
+        {
+            type: "actions",
+            elements: [
+                {
+                    type: "button",
+                    text: {
+                        type: "plain_text",
                         text: "View Available Quests",
                         emoji: true,
                     },
                     action_id: "viewQuestsButton",
                 },
+                {
+                    type: "button",
+                    callback_id:"questLogButton",
+                    text: {
+                        type: "plain_text",
+                        text: "Quest Log",
+                        emoji: true,
+                    },
+                    action_id: "questLogButton",
+                },
+            ],
+        },
+        {
+            type: "divider",
+        },
+        {
+            type: "actions",
+            elements: [
                 {
                     type: "button",
                     text: {
@@ -56,24 +100,6 @@ const userHomeView = (user) => {
                         emoji: true,
                     },
                     action_id: "goldLogButton",
-                },
-                {
-                    type: "button",
-                    text: {
-                        type: "plain_text",
-                        text: "Achievements",
-                        emoji: true,
-                    },
-                    action_id: "achievementButton",
-                },
-                {
-                    type: "button",
-                    text: {
-                        type: "plain_text",
-                        text: "My Profile",
-                        emoji: true,
-                    },
-                    action_id: "profileButton",
                 },
             ],
         },

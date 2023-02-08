@@ -4,8 +4,7 @@ const Users = require("../db/models/Users");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 
-const goldLogModal = async (reqBody) => {
-    console.log(reqBody.user.id);
+const achievements = async (reqBody) => {
     const {
         dataValues: { achievements },
     } = await Users.findOne({
@@ -40,7 +39,7 @@ const goldLogModal = async (reqBody) => {
                               text: `${Object.values(log)[0]}`,
                           },
                       };
-                })
+                  })
                 : [
                       {
                           type: "section",
@@ -50,8 +49,8 @@ const goldLogModal = async (reqBody) => {
                           },
                       },
                   ],
-        }
-    })
-}
+        },
+    });
+};
 
-module.exports = goldLogModal;
+module.exports = achievements;
