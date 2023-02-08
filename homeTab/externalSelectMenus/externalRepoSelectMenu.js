@@ -1,6 +1,6 @@
-const { getAllOrgRepos } = require("../../helperFuncs")
+const { findAllOrgRepos } = require("../../helperFuncs");
 const externalRepoSelectMenu = async (parsedSubmission) => {
-    const {data} = await getAllOrgRepos(parsedSubmission);
+    const {data} = await findAllOrgRepos(parsedSubmission);
     for (const [index, repo] of data.entries()) {
         if (
             repo.name.includes(parsedSubmission.value) &&

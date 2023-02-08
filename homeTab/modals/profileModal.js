@@ -13,6 +13,8 @@ const profileModal = async (reqBody) => {
 	const renderQuery = {
 		component: "profile",
 		user: user.gitHubLogin,
+		reward: user.rewardGold,
+		level: user.level,
 		gold: user.gold,
 		xp: user.exp,
 		rank: user.title,

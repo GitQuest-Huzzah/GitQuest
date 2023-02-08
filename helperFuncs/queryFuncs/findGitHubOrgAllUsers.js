@@ -1,10 +1,9 @@
 const { Octokit } = require("@octokit/core");
 const { Workspaces } = require("../../server/db");
-const findGitHubAPIToken = require("../");
-
+const findGitHubAPIToken = require("./findGitHubAPIToken");
 //find a user's slackID to supply the GH API with access Token
 //the reqBody is the req.body from a slack command received at it's associated endpoint
-const gitHubOrgAllUsers = async (reqBody) => {
+const findGitHubOrgAllUsers = async (reqBody) => {
 	const workspace = await Workspaces.findOne({
 		where: {
 			teamID: reqBody.user.team_id,
@@ -23,4 +22,4 @@ const gitHubOrgAllUsers = async (reqBody) => {
 	return allOrgMembers;
 };
 
-module.exports = gitHubOrgAllUsers;
+module.exports = findGitHubOrgAllUsers;
