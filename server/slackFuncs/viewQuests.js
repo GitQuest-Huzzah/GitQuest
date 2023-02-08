@@ -14,7 +14,6 @@ const viewQuests = async (reqBody) => {
     });
 
     selectedQuests.forEach(async (quest) => {
-        console.log(quest)
         singleQuest = await Quest.findOne({
             where: {
                 id: quest.value

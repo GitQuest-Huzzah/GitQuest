@@ -18,7 +18,6 @@ const slackInstallAuth = async (req, res) => {
 				slackID: installRequest.authed_user.id,
 			},
 		});
-		console.log(checkExistingInstall, "check existing did this work?")
 		if (checkExistingInstall)
 			return false;
 		const adminUser = await Users.create({
@@ -50,7 +49,6 @@ const slackInstallAuth = async (req, res) => {
 			await newUser.setWorkspace(newWorkspace);
 		});
 		await adminUser.setWorkspace(newWorkspace);
-		console.log("did it make it to the end even though it shouldn't?")
 		return true;
 	} catch (error) {
 		console.error(error);

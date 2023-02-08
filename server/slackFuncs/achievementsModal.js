@@ -5,7 +5,6 @@ const Users = require("../db/models/Users");
 const web = new WebClient();
 
 const goldLogModal = async (reqBody) => {
-    console.log(reqBody.user.id);
     const {
         dataValues: { achievements },
     } = await Users.findOne({
