@@ -1,8 +1,8 @@
 const { Octokit } = require("@octokit/core");
 const { Users, Workspaces } = require("../../server/db");
-const findGitHubAPIToken = require("../");
+const findGitHubAPIToken = require("./findGitHubAPIToken");
 
-const getAllOrgRepos = async (reqBody) => {
+const findAllOrgRepos = async (reqBody) => {
 	const token = await findGitHubAPIToken(reqBody);
 	const octokit = new Octokit({
 		auth: token,
@@ -26,4 +26,4 @@ const getAllOrgRepos = async (reqBody) => {
 	});
 };
 
-module.exports = getAllOrgRepos;
+module.exports = findAllOrgRepos;
