@@ -2,8 +2,9 @@ const { gitHubSetRepoHook, gitHubInstall } = require("../gitFuncs");
 const router = require("express").Router();
 
 //path is /api/github/auth/redirect
-router.get("/auth/redirect", (req, res, next) => {
-	gitHubInstall(req);
+router.get("/auth/redirect", async (req, res, next) => {
+	const GHsuccess = await gitHubInstall(req);
+	console.log(GHsuccess)
 	res.json({ git: "authorized" });
 });
 
