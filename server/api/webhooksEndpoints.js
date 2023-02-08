@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const {updateQuestsOnPR, addPRIDToQuest, updateQuestsOnPR} = require('../../helperFuncs');
+const { addPRIDToQuest, updateQuestsOnPR} = require('../../helperFuncs');
 
 //path is /api/webhook
 router.post("/", (req, res) => {

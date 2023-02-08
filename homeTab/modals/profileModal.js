@@ -1,6 +1,6 @@
 const { WebClient } = require("@slack/web-api");
-const { Users } = require("../db");
-const findTokenByTeamId = require("./findTokenByTeamId");
+const { Users } = require("../../server/db");
+const {findTokenByTeamId} = require("../../helperFuncs");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 const profileModal = async (reqBody) => {
