@@ -1,6 +1,6 @@
 const { WebClient } = require("@slack/web-api");
-const {Users, Goldlog} = require('../../server/db')
-const findTokenByTeamId = require("./findTokenByTeamId");
+const { Users, Goldlog } = require("../../server/db");
+const findTokenByTeamId = require("../queryFuncs/findTokenByTeamId");
 const web = new WebClient();
 
 const giveGold = async (reqBody) => {
