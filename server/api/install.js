@@ -1,4 +1,4 @@
-const { slackInstallAuth } = require("../../apiFuncs/authFuncs");
+const { slackInstallAuth } = require("../slackFuncs");
 
 const router = require("express").Router();
 
