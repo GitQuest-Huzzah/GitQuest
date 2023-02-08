@@ -4,8 +4,21 @@ const router = require("express").Router();
 //path is /api/github/auth/redirect
 router.get("/auth/redirect", async (req, res, next) => {
 	const GHsuccess = await gitHubInstall(req);
-	console.log(GHsuccess)
-	res.json({ git: "authorized" });
+	GHsuccess.dataValues.gitHubToken
+		? res.send(
+				<script>
+					{" "}
+					window.alert("You Have successfully connected your GitHub Account!");
+					window.close()
+				</script>
+		  )
+		: res.send(
+				<script>
+					{" "}
+					window.alert("Looks like something went wrong please contact GitQuest
+					for help or try again!); window.close()
+				</script>
+		  );
 });
 
 //path is api/github/setrepo
