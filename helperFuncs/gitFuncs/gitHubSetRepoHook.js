@@ -1,6 +1,6 @@
 const { Octokit } = require("@octokit/core");
 const { Users, Workspaces } = require("../../server/db");
-const findGitHubAPIToken = require("../");
+const findGitHubAPIToken = require("../queryFuncs/findGitHubAPIToken");
 
 const gitHubSetRepoHook = async (reqBody) => {
 	const token = await findGitHubAPIToken(reqBody);

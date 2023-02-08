@@ -7,12 +7,12 @@ const commitReqAchieveFunc = require("./webhookFuncs/commitReqAchieveFunc");
 const createAdminGHLink = require("./slackFuncs/createAdminGHLink");
 const createOrUpdateOrg = require("./slackFuncs/createOrUpdateOrg");
 const expLevel = require("./webhookFuncs/expLevel");
-const findAllActiveQuestPerUser = require("./queryFuncs/findAllActiveQuestPerUser");
+const findAllActiveQuestsPerUser = require("./queryFuncs/findAllActiveQuestPerUser");
 const findAllActiveQuests = require("./queryFuncs/findAllActiveQuests");
+const findAllAvailableQuests = require("./queryFuncs/findAllAvailableQuests")
 const findAllOrgRepos = require("./queryFuncs/findAllOrgRepos");
 const findAllReposInDB = require("./queryFuncs/findAllReposInDB");
 const findAllWorkSpaceRepos = require("./queryFuncs/findAllWorkSpaceRepos");
-const findAvailableQuests = require("./queryFuncs/findAllAvailableQuests");
 const findGitHubAPIToken = require("./queryFuncs/findGitHubAPIToken");
 const findGitHubOrgAllUsers = require("./queryFuncs/findGitHubOrgAllUsers");
 const findOrgOnGH = require("./queryFuncs/findOrgOnGH");
@@ -44,12 +44,12 @@ module.exports = {
 	createAdminGHLink,
 	createOrUpdateOrg,
 	expLevel,
-	findAllActiveQuestPerUser,
+	findAllActiveQuestsPerUser,
 	findAllActiveQuests,
+	findAllAvailableQuests,
 	findAllOrgRepos,
 	findAllReposInDB,
 	findAllWorkSpaceRepos,
-	findAvailableQuests,
 	findGitHubAPIToken,
 	findGitHubOrgAllUsers,
 	findOrgOnGH,
