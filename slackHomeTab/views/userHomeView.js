@@ -34,7 +34,7 @@ const userHomeView = (user) => {
                     type: "button",
                     text: {
                         type: "plain_text",
-                        text: "View Quests",
+                        text: "View Available Quests",
                         emoji: true,
                     },
                     action_id: "viewQuestsButton",
