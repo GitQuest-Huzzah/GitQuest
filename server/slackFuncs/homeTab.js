@@ -18,7 +18,6 @@ const homeTab = async (reqBody) => {
         teamId: reqBody.team_id,
         userId: reqBody.event.user,
     });
-    console.log(user);
     try {
         // Call the views.publish method using the WebClient passed to listeners
         await web.views.publish({

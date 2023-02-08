@@ -15,14 +15,12 @@ const addPRIDToQuest = async (reqBody) => {
             },
         },
     });
-    console.log(user, 'this is the user')
 
     const quests = await Quest.findAll({
         where: {
             userId : user.id 
         },
     });
-    console.log(quests, 'this is all the users quests')
     
     const prQuest = quests.reduce((acc, quest)=>{
         if(reqBody.pull_request.title.split(' ')[0] === quest.keyword){
@@ -31,7 +29,6 @@ const addPRIDToQuest = async (reqBody) => {
         return acc
     })
 
-    console.log(prQuest, 'this is the quest that is associated with the PR')
 
     if (prQuest) {
         prQuest.update({

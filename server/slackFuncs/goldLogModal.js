@@ -14,7 +14,6 @@ const goldLogModal = async (reqBody) => {
             },
         },
     });
-    console.log(goldLogs);
     const token = await findTokenByTeamId(reqBody.user.team_id);
     await web.views.open({
         trigger_id: reqBody.trigger_id,
