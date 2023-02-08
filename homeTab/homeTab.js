@@ -1,5 +1,5 @@
 const { WebClient } = require("@slack/web-api");
-const {createAdminGHLink,findTokenByTeamId} = require("../helperFuncs");
+const { createAdminGHLink, findTokenByTeamId } = require("../helperFuncs");
 const { Users } = require("../server/db");
 const adminHomeView = require("./adminHomeView");
 const userHomeView = require("./userHomeView");
