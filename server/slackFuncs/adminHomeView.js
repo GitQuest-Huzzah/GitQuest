@@ -99,11 +99,48 @@ const adminHomeView = (user, gHLink) => {
                     type: "button",
                     text: {
                         type: "plain_text",
+                        text: "My Profile",
+                        emoji: true,
+                    },
+                    action_id: "profileButton",
+                },
+                {
+                    type: "button",
+                    text: {
+                        type: "plain_text",
+                        text: "Achievements",
+                        emoji: true,
+                    },
+                    action_id: "achievementButton",
+                },
+            ],
+        },
+        {
+            type: "actions",
+            elements: [
+                {
+                    type: "button",
+                    text: {
+                        type: "plain_text",
                         text: "View Available Quests",
                         emoji: true,
                     },
                     action_id: "viewQuestsButton",
                 },
+                {
+                    type: "button",
+                    text: {
+                        type: "plain_text",
+                        text: "Quest Log",
+                        emoji: true,
+                    },
+                    action_id: "questLogButton",
+                },
+            ],
+        },
+        {
+            type: "actions",
+            elements: [
                 {
                     type: "button",
                     text: {
@@ -122,25 +159,10 @@ const adminHomeView = (user, gHLink) => {
                     },
                     action_id: "goldLogButton",
                 },
-                {
-                    type: "button",
-                    text: {
-                        type: "plain_text",
-                        text: "Achievements",
-                        emoji: true,
-                    },
-                    action_id: "achievementButton",
-                },
-                {
-                    type: "button",
-                    text: {
-                        type: "plain_text",
-                        text: "My Profile",
-                        emoji: true,
-                    },
-                    action_id: "profileButton",
-                },
             ],
+        },
+        {
+            type: "divider",
         },
     ];
 };
