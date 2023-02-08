@@ -18,9 +18,7 @@ const slackInstallAuth = async (req, res) => {
 			},
 		});
 		if (checkExistingInstall)
-			return alert(
-				"GitQuest has already been installed on this Slack Workspace"
-			);
+			return false;
 		const adminUser = await Users.create({
 			slackID: installRequest.authed_user.id,
 			isAdmin: true,
