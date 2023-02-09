@@ -2,7 +2,7 @@ const { WebClient } = require("@slack/web-api");
 const { findTokenByTeamId } = require("../../helperFuncs");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
-const {  questDisplay, findAllAvailableQuests } = require("../../helperFuncs");
+const { questDisplay, findAllAvailableQuests } = require("../../helperFuncs");
 const viewQuestsModal = async (reqBody) => {
 	const quests = await findAllAvailableQuests(reqBody);
 

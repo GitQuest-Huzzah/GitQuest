@@ -1,5 +1,5 @@
 const db = require("./db");
-const Channel = require('./models/Channel')
+const Channel = require("./models/Channel");
 const Repos = require("./models/Repos");
 const Users = require("./models/Users");
 const Workspaces = require("./models/Workspaces");
@@ -17,20 +17,20 @@ Workspaces.hasMany(Repos);
 Users.hasMany(Goldlog);
 Goldlog.belongsTo(Users);
 
-Workspaces.hasMany(Quest)
-Quest.belongsTo(Workspaces)
+Workspaces.hasMany(Quest);
+Quest.belongsTo(Workspaces);
 
-Users.hasMany(Quest)
-Quest.belongsTo(Users)
+Users.hasMany(Quest);
+Quest.belongsTo(Users);
 
-Workspaces.hasMany(Channel)
-Channel.belongsTo(Workspaces)
+Workspaces.hasMany(Channel);
+Channel.belongsTo(Workspaces);
 
 module.exports = {
-    db,
-    Goldlog,
-    Repos,
-    Users,
-    Workspaces,
-    Quest,
+	db,
+	Goldlog,
+	Repos,
+	Users,
+	Workspaces,
+	Quest,
 };

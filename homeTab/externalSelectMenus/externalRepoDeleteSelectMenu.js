@@ -1,11 +1,9 @@
 const { findAllReposInDB } = require("../../helperFuncs");
 const externalRepoDeleteSelectMenu = async (parsedSubmission) => {
 	const {
-		dataValues: {
-			workspace
-		},
+		dataValues: { workspace },
 	} = await findAllReposInDB(parsedSubmission);
-	const {repos}= workspace;
+	const { repos } = workspace;
 	for (const [index, repo] of repos.entries()) {
 		if (
 			repo.dataValues.repoName.includes(parsedSubmission.value) &&
@@ -31,7 +29,7 @@ const externalRepoDeleteSelectMenu = async (parsedSubmission) => {
 						type: "plain_text",
 						text: `${repo.dataValues.repoName}`,
 					},
-					value:`${[repo.dataValues.repoId,workspace.dataValues.orgName]}`
+					value: `${[repo.dataValues.repoId, workspace.dataValues.orgName]}`,
 				};
 				acc.push(currentrepo);
 				return acc;
