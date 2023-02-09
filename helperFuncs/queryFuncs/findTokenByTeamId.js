@@ -14,5 +14,4 @@ const findTokenByTeamId = async (teamId) => {
 	}
 };
 
-
 module.exports = findTokenByTeamId;

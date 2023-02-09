@@ -1,6 +1,6 @@
 const { WebClient } = require("@slack/web-api");
-const {findTokenByTeamId} = require("../../helperFuncs");
-const {Users, Goldlog} = require('../../server/db')
+const { findTokenByTeamId } = require("../../helperFuncs");
+const { Users, Goldlog } = require("../../server/db");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 
