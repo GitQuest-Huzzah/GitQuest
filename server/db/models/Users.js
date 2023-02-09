@@ -1,8 +1,13 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-
 const Users = db.define("user", {
+	email: {
+		type: Sequelize.STRING,
+		validate: {
+			isEmail: true,
+		},
+	},
 	slackID: {
 		type: Sequelize.STRING,
 		allowNull: false,
