@@ -3,6 +3,7 @@ const { Users, Workspaces } = require("../../server/db");
 
 const gitHubInstall = async (req) => {
 	try {
+		console.log(req.query.state)
 	//we are decoding the state variable containing user information
 	const buffer64Obj = Buffer.from(req.query.state, "base64");
 	//we turn that base64 buffer into a utf8 string

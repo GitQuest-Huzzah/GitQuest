@@ -7,7 +7,6 @@ const { findAllActiveQuests } = require("../../helperFuncs");
 
 const adminAssignQuestCompleteModal = async (reqBody) => {
 	const quests = await findAllActiveQuests(reqBody);
-	console.log(quests, "these be the quests");
 
 	await web.views.open({
 		trigger_id: reqBody.trigger_id,

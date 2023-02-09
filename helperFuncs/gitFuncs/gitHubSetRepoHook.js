@@ -10,15 +10,12 @@ const gitHubSetRepoHook = async (reqBody) => {
 		},
 		include: Workspaces,
 	});
-
 	const octokit = new Octokit({
 		auth: token,
 		// needs to be user.gitToken
 	});
 
-	const repos =
-		reqBody.view.state.values.adminRepoModal.adminRepoModalAction
-			.selected_options;
+	const repos = reqBody.view.state.values.adminRepoModal.adminRepoModalAction.selected_options;
 
 	repos.forEach(async (repo) => {
 		await octokit.request("POST /repos/{owner}/{repo}/hooks", {
