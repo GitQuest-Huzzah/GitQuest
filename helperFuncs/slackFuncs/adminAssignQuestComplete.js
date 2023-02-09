@@ -1,4 +1,4 @@
-const { Quest, Users, Goldlog } = require("../../server/db/");
+const { Quest, Users, Playerstat } = require("../../server/db/");
 const  userLevelFunc  = require("../webhookFuncs/userLevelFunc")
 
 const adminAssignQuestComplete = async (reqBody) => {
@@ -10,6 +10,9 @@ const adminAssignQuestComplete = async (reqBody) => {
 		where: {
 			slackID: userId,
 		},
+        include:{
+            model: Playerstat
+        }
 	});
 
 	if (user && quests.length) {
