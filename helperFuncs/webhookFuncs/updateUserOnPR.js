@@ -6,12 +6,17 @@ const updateUserOnPR = async (reqBody) => {
         where: {
             gitHubID: reqBody.sender.id.toString(),
         },
-        include: {
-            model: Workspaces,
-            where: {
-                orgName: reqBody.organization.login,
+        include: [
+            {
+                model: Workspaces,
+                where: {
+                    orgName: reqBody.organization.login,
+                },
             },
-        },
+            {
+                model: Playerstat,
+            },
+        ],
     });
 
     const numOfCommits = reqBody.pull_request.commits + user.dataValues.commits;
