@@ -1,7 +1,6 @@
 const { Quest, Users, Goldlog } = require("../../server/db/");
 
 const adminAssignQuestComplete = async (reqBody) => {
-	console.log(reqBody.view.state.values);
 	const quests =
 		reqBody.view.state.values.questBlock.questAction.selected_options;
 	const userId =
