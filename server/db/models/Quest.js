@@ -23,7 +23,7 @@ const Quest = db.define("quest", {
 		allowNull: false,
 	},
 	status: {
-		type: Sequelize.ENUM("completed", "active", "available", "discarded"),
+		type: Sequelize.STRING,
 		allowNull: false,
 		defaultValue: "available",
 	},

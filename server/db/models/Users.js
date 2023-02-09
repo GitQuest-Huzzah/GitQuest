@@ -54,9 +54,6 @@ const Users = db.define("user", {
 		type: Sequelize.INTEGER,
 		defaultValue: 0,
 	},
-	achievements: {
-		type: Sequelize.JSONB,
-	},
 });
 
 module.exports = Users;
