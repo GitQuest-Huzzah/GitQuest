@@ -6,31 +6,23 @@ const adminHomeView = (user, gHLink) => {
 			alt_text: "Git Quest Banner",
 		},
 		{
+			type: "header",
+			text: {
+				type: "plain_text",
+				text: "Setup Your Adventure!",
+			},
+		},
+		{
+			type: "divider",
+		},
+		{
 			type: "actions",
 			elements: [
 				{
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "Add Quest",
-						emoji: true,
-					},
-					action_id: "addQuestButton",
-				},
-				{
-					type: "button",
-					text: {
-						type: "plain_text",
-						text: "Assign Active Quest and Complete",
-						emoji: true,
-					},
-					action_id: "assignQuestCompleteButton",
-				},
-				{
-					type: "button",
-					text: {
-						type: "plain_text",
-						text: "Add or Update Org Name",
+						text: ":one: Set Org Name",
 						emoji: true,
 					},
 					value: "Add or Update Org Name",
@@ -40,60 +32,36 @@ const adminHomeView = (user, gHLink) => {
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "Link Org To GitHub",
+						text: ":two: Connect To GitHub",
 						emoji: true,
 					},
 					value: "Link Org To GitHub",
 					url: gHLink,
 				},
+			],
+		},
+		{
+			type: "actions",
+			elements: [
 				{
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "Repos to connect",
-						emoji: true,
-					},
-					value: "Repos to connect",
-					action_id: "adminRepoModalButton",
-				},
-				{
-					type: "button",
-					text: {
-						type: "plain_text",
-						text: "Repos to Delete",
-						emoji: true,
-					},
-					value: "Repos to Delete",
-					action_id: "adminRepoDeleteModalButton",
-				},
-				{
-					type: "button",
-					text: {
-						type: "plain_text",
-						text: "Link Users To GitHub",
+						text: ":three: Connect Users",
 						emoji: true,
 					},
 					value: "Connect User To GitHub Account",
 					action_id: "adminGitConnectUserModalButton",
 				},
-			],
-		},
-		{
-			type: "header",
-			text: {
-				type: "plain_text",
-				text: "Welcome Hero!",
-			},
-		},
-		{
-			type: "divider",
-		},
-		{
-			type: "section",
-			fields: [
 				{
-					type: "mrkdwn",
-					text: `*User Profile*\n*Level*: ${user.dataValues.level}\n*Title*:${user.dataValues.title} \n *Total Exp*: ${user.dataValues.exp}\n*Gold*: ${user.dataValues.gold} \n *Gold to Give*: ${user.dataValues.rewardGold}`,
+					type: "button",
+					text: {
+						type: "plain_text",
+						text: ":four: Connect Repos",
+						emoji: true,
+					},
+					value: "Repos to connect",
+					action_id: "adminRepoModalButton",
 				},
 			],
 		},
@@ -107,7 +75,65 @@ const adminHomeView = (user, gHLink) => {
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "My Profile",
+						text: ":skull_and_crossbones: Unfollow Repos",
+						emoji: true,
+					},
+					value: "Repos to Delete",
+					action_id: "adminRepoDeleteModalButton",
+				},
+			],
+		},
+		{
+			type: "header",
+			text: {
+				type: "plain_text",
+				text: "Quests!",
+			},
+		},
+		{
+			type: "divider",
+		},
+		{
+			type: "actions",
+			elements: [
+				{
+					type: "button",
+					text: {
+						type: "plain_text",
+						text: ":dragon_face: Add Quest",
+						emoji: true,
+					},
+					action_id: "addQuestButton",
+				},
+				{
+					type: "button",
+					text: {
+						type: "plain_text",
+						text: ":crown: Manage Quests",
+						emoji: true,
+					},
+					action_id: "assignQuestCompleteButton",
+				},
+			],
+		},
+		{
+			type: "header",
+			text: {
+				type: "plain_text",
+				text: `Welcome ${user.dataValues.gitHubLogin}!`,
+			},
+		},
+		{
+			type: "divider",
+		},
+		{
+			type: "actions",
+			elements: [
+				{
+					type: "button",
+					text: {
+						type: "plain_text",
+						text: ":crossed_swords: My Profile",
 						emoji: true,
 					},
 					action_id: "profileButton",
@@ -116,7 +142,7 @@ const adminHomeView = (user, gHLink) => {
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "Achievements",
+						text: ":trophy: Achievements",
 						emoji: true,
 					},
 					action_id: "achievementButton",
@@ -130,7 +156,7 @@ const adminHomeView = (user, gHLink) => {
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "View Available Quests",
+						text: ":crystal_ball: Available Quests",
 						emoji: true,
 					},
 					action_id: "viewQuestsButton",
@@ -139,7 +165,7 @@ const adminHomeView = (user, gHLink) => {
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "Quest Log",
+						text: ":scroll: Quest Log",
 						emoji: true,
 					},
 					action_id: "questLogButton",
@@ -153,19 +179,19 @@ const adminHomeView = (user, gHLink) => {
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "Give Gold to Give",
+						text: ":moneybag: Gold Log",
 						emoji: true,
 					},
-					action_id: "giveGoldButton",
+					action_id: "goldLogButton",
 				},
 				{
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "Gold Log",
+						text: ":money_with_wings: Reward Gold",
 						emoji: true,
 					},
-					action_id: "goldLogButton",
+					action_id: "giveGoldButton",
 				},
 			],
 		},
