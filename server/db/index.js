@@ -114,3 +114,42 @@ module.exports = {
     Quest,
     Playerstat,
 };
+
+// const testQuery = async () => {
+// 	try {
+// 		const adminUser = await Users.findOne({
+// 			where: {
+// 				id: 1, //this would be slackID in the real thing
+// 			},
+// 			include: {
+// 				model: Workspaces,
+// 			},
+// 		});
+// 		// console.log(adminUser)
+// 		const time = Math.round(new Date().getTime() / 1000);
+// 		const yesterday = time - 24 * 3600;
+// 		const questsReturn = await Quest.findAll({
+// 			where: {
+// 				updatedAt: {
+// 					[Op.between]: [yesterday, new Date()],
+// 				},
+// 			},
+// 			include: [
+// 				{
+// 					model: Workspaces,
+// 					where: {
+// 						id: adminUser.dataValues.workspaceId,
+// 					},
+// 				},
+// 				{ model: Users },
+// 			],
+// 		});
+// 		console.log(questsReturn);
+// 		return questsReturn;
+// 	} catch (error) {
+// 		console.error(error);
+// 	}
+// };
+
+// // console.log(tsYesterday);
+// console.log(testQuery(), "promise?");

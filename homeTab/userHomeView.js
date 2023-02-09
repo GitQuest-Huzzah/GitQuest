@@ -9,20 +9,8 @@ const userHomeView = (user) => {
 			type: "header",
 			text: {
 				type: "plain_text",
-				text: "Welcome Hero!",
+				text: `Welcome ${user.dataValues.gitHubLogin}!`,
 			},
-		},
-		{
-			type: "divider",
-		},
-		{
-			type: "section",
-			fields: [
-				{
-					type: "mrkdwn",
-					text: `*User Profile*\n*Level*: ${user.dataValues.level}\n*Title*:${user.dataValues.title} \n *Total Exp*: ${user.dataValues.exp}\n*Gold*: ${user.dataValues.gold} \n *Gold to Give*: ${user.dataValues.rewardGold}`,
-				},
-			],
 		},
 		{
 			type: "divider",
@@ -34,7 +22,7 @@ const userHomeView = (user) => {
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "My Profile",
+						text: ":crossed_swords: My Profile",
 						emoji: true,
 					},
 					action_id: "profileButton",
@@ -43,7 +31,7 @@ const userHomeView = (user) => {
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "Achievements",
+						text: ":trophy: Achievements",
 						emoji: true,
 					},
 					action_id: "achievementButton",
@@ -51,26 +39,22 @@ const userHomeView = (user) => {
 			],
 		},
 		{
-			type: "divider",
-		},
-		{
 			type: "actions",
 			elements: [
 				{
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "View Available Quests",
+						text: ":crystal_ball: Available Quests",
 						emoji: true,
 					},
 					action_id: "viewQuestsButton",
 				},
 				{
 					type: "button",
-					callback_id: "questLogButton",
 					text: {
 						type: "plain_text",
-						text: "Quest Log",
+						text: ":scroll: Quest Log",
 						emoji: true,
 					},
 					action_id: "questLogButton",
@@ -78,30 +62,30 @@ const userHomeView = (user) => {
 			],
 		},
 		{
-			type: "divider",
-		},
-		{
 			type: "actions",
 			elements: [
 				{
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "Give Gold to Give",
+						text: ":moneybag: Gold Log",
 						emoji: true,
 					},
-					action_id: "giveGoldButton",
+					action_id: "goldLogButton",
 				},
 				{
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: "Gold Log",
+						text: ":money_with_wings: Reward Gold",
 						emoji: true,
 					},
-					action_id: "goldLogButton",
+					action_id: "giveGoldButton",
 				},
 			],
+		},
+		{
+			type: "divider",
 		},
 	];
 };
