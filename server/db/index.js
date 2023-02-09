@@ -2,21 +2,22 @@ const Achievement = require("./models/Achievement");
 const Channel = require("./models/Channel");
 const db = require("./db");
 const Goldlog = require("./models/Goldlog");
+const Playerstat = require("./models/Playerstat");
 const Quest = require("./models/Quest");
 const Repos = require("./models/Repos");
 const Users = require("./models/Users");
 const Workspaces = require("./models/Workspaces");
 
 //model associations
-console.log(Achievement);
-console.log(Channel);
-console.log(Users);
 
 Users.belongsTo(Workspaces);
 Workspaces.hasMany(Users);
 
 Repos.belongsTo(Workspaces);
 Workspaces.hasMany(Repos);
+
+Playerstat.belongsTo(Users);
+Users.belongsTo(Playerstat);
 
 Users.hasMany(Goldlog);
 Goldlog.belongsTo(Users);
@@ -33,6 +34,28 @@ Channel.belongsTo(Workspaces);
 Users.belongsToMany(Achievement, { through: "users_achievement" });
 Achievement.belongsToMany(Users, { through: "users_achievement" });
 
+// (async()=>{
+
+// const playerOne = await Users.findOne({
+//     where:{
+//         id: 1
+//     }
+// })
+// const playerTwo = await Users.findOne({
+//     where:{
+//         id: 2
+//     }
+// })
+
+// const statOne = await Playerstat.create()
+// const statTwo = await Playerstat.create()
+
+// playerOne.setPlayerstat(statOne)
+// statOne.setUser(playerOne)
+// playerTwo.setPlayerstat(statTwo)
+// statTwo.setUser(playerTwo)
+
+// })()
 // Achievement.bulkCreate([
 //     {
 //         commitValue: 1,
@@ -89,4 +112,5 @@ module.exports = {
     Users,
     Workspaces,
     Quest,
+    Playerstat,
 };
