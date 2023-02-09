@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+// const seed = require('../../seed')
 
 const db = (() => {
 	switch (process.env.ENVIRONMENT) {
