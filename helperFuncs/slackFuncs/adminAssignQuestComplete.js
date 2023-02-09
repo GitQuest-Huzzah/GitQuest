@@ -1,4 +1,5 @@
 const { Quest, Users, Goldlog } = require("../../server/db/");
+const  userLevelFunc  = require("../webhookFuncs/userLevelFunc")
 
 const adminAssignQuestComplete = async (reqBody) => {
 	const quests =
@@ -18,18 +19,7 @@ const adminAssignQuestComplete = async (reqBody) => {
 					id: quest.value,
 				},
 			});
-
-			user.increment({
-				gold: singleQuest.dataValues.goldValue,
-				exp: singleQuest.dataValues.expValue,
-			});
-
-			const log = await Goldlog.create({
-				description: `You recieved ${singleQuest.dataValues.goldValue} from completing a quest`,
-				valueChange: `+ ${singleQuest.dataValues.goldValue}`,
-			});
-			user.addGoldlog(log);
-
+            userLevelFunc(user, singleQuest.dataValues.expValue, singleQuest.dataValues.goldValue)
 			singleQuest.update({
 				status: "completed",
 			});

@@ -6,7 +6,6 @@ const commitAchievements = require("./webhookFuncs/commitAchievements");
 const commitReqAchieveFunc = require("./webhookFuncs/commitReqAchieveFunc");
 const createAdminGHLink = require("./slackFuncs/createAdminGHLink");
 const createOrUpdateOrg = require("./slackFuncs/createOrUpdateOrg");
-const expLevel = require("./webhookFuncs/expLevel");
 const findAllActiveQuestsPerUser = require("./queryFuncs/findAllActiveQuestPerUser");
 const findAllActiveQuests = require("./queryFuncs/findAllActiveQuests");
 const findAllAvailableQuests = require("./queryFuncs/findAllAvailableQuests");
@@ -26,12 +25,11 @@ const pullRequestAchievements = require("./webhookFuncs/pullRequestAchievements"
 const questDisplay = require("./slackFuncs/questDisplay");
 const questLog = require("./slackFuncs/questLog");
 const slackInstallAuth = require("./slackFuncs/slackInstallAuth");
-const titles = require("./webhookFuncs/titles");
 const updateQuestsOnPR = require("./webhookFuncs/updateQuestsOnPR");
 const updateUserGitHub = require("./gitFuncs/updateUserGitHub");
 const updateUserOnPR = require("./webhookFuncs/updateUserOnPR");
+const userAchievement = require('./webhookFuncs/userAchievement')
 const userLevelFunc = require("./webhookFuncs/userLevelFunc");
-const userTitleFunc = require("./webhookFuncs/userTitleFunc");
 const viewQuests = require("./slackFuncs/viewQuests");
 
 module.exports = {
@@ -43,7 +41,6 @@ module.exports = {
 	commitReqAchieveFunc,
 	createAdminGHLink,
 	createOrUpdateOrg,
-	expLevel,
 	findAllActiveQuestsPerUser,
 	findAllActiveQuests,
 	findAllAvailableQuests,
@@ -63,11 +60,10 @@ module.exports = {
 	questDisplay,
 	questLog,
 	slackInstallAuth,
-	titles,
 	updateQuestsOnPR,
 	updateUserGitHub,
 	updateUserOnPR,
+    userAchievement,
 	userLevelFunc,
-	userTitleFunc,
 	viewQuests,
 };
