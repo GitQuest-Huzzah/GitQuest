@@ -26,34 +26,6 @@ const Users = db.define("user", {
 		defaultValue: false,
 		allowNull: false,
 	},
-	commits: {
-		type: Sequelize.INTEGER,
-		defaultValue: 0,
-	},
-	pullRequests: {
-		type: Sequelize.INTEGER,
-		defaultValue: 0,
-	},
-	level: {
-		type: Sequelize.INTEGER,
-		defaultValue: 1,
-	},
-	title: {
-		type: Sequelize.STRING,
-		defaultValue: "Neophyte",
-	},
-	exp: {
-		type: Sequelize.INTEGER,
-		defaultValue: 0,
-	},
-	gold: {
-		type: Sequelize.INTEGER,
-		defaultValue: 0,
-	},
-	rewardGold: {
-		type: Sequelize.INTEGER,
-		defaultValue: 0,
-	},
 });
 
 module.exports = Users;
