@@ -1,7 +1,7 @@
-const { Repos, Users, Workspaces } = require("../../server/db");
+const { Repos, User, Workspaces } = require("../../server/db");
 
 const findAllReposInDB = async (reqBody) => {
-	return await Users.findOne({
+	return await User.findOne({
 		where: {
 			slackID: reqBody.user.id,
 		},
