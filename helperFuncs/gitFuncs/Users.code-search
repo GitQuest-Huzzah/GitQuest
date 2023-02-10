@@ -1,0 +1,228 @@
+# Query: Users
+# Flags: CaseSensitive
+# ContextLines: 1
+
+55 results - 24 files
+
+helperFuncs/index.js:
+  15  const findGitHubAPIToken = require("./queryFuncs/findGitHubAPIToken");
+  16: const findGitHubOrgAllUsers = require("./queryFuncs/findGitHubOrgAllUsers");
+  17  const findOrgOnGH = require("./queryFuncs/findOrgOnGH");
+
+  51  	findGitHubAPIToken,
+  52: 	findGitHubOrgAllUsers,
+  53  	findOrgOnGH,
+
+helperFuncs/gitFuncs/gitHubInstall.js:
+   1  const axios = require("axios");
+   2: const { User, Workspaces } = require("../../server/db");
+   3  
+
+  27  		//check to see if a user with the associated user information already exists
+  28: 		const userAlreadyExists = await User.findOne({
+  29  			where: {
+
+  42  		//if the user is new and not found we create one and assign it to it's associated workspace
+  43: 		const newUsersWorkspace = await Workspaces.findOne({
+  44  			where: {
+
+  47  		});
+  48: 		const newUser = await User.create({
+  49  			slackID: parsedUserInfo.userId,
+
+  51  		});
+  52: 		await newUser.setWorkspaces(newUsersWorkspace);
+  53  		return newUser;
+
+helperFuncs/gitFuncs/gitHubSetRepoHook.js:
+  1  const { Octokit } = require("@octokit/core");
+  2: const { User, Workspaces } = require("../../server/db");
+  3  const findGitHubAPIToken = require("../queryFuncs/findGitHubAPIToken");
+
+  6  	const token = await findGitHubAPIToken(reqBody);
+  7: 	const user = await User.findOne({
+  8  		where: {
+
+helperFuncs/gitFuncs/updateUserGitHub.js:
+   1: const { User } = require("../../server/db");
+   2  
+
+   9  			.selected_user;
+  10: 	const user = await User.findOne({
+  11  		where: {
+
+helperFuncs/queryFuncs/findAllActiveQuestPerUser.js:
+  1: const { Quest, Workspaces, User } = require("../../server/db");
+  2  const findAllActiveQuestsPerUser = async (reqBody) => {
+  3: 	const user = await User.findOne({
+  4  		where: {
+
+helperFuncs/queryFuncs/findAllOrgRepos.js:
+   1  const { Octokit } = require("@octokit/core");
+   2: const { User, Workspaces } = require("../../server/db");
+   3  const findGitHubAPIToken = require("./findGitHubAPIToken");
+
+  15  		},
+  16: 	} = await User.findOne({
+  17  		where: {
+
+helperFuncs/queryFuncs/findAllReposInDB.js:
+  1: const { Repos, User, Workspaces } = require("../../server/db");
+  2  
+  3  const findAllReposInDB = async (reqBody) => {
+  4: 	return await User.findOne({
+  5  		where: {
+
+helperFuncs/queryFuncs/findGitHubAPIToken.js:
+  1: const { User } = require("../../server/db");
+  2  
+  3  const findGitHubAPIToken = async (reqBody) => {
+  4: 	const { dataValues } = await User.findOne({
+  5  		where: {
+
+helperFuncs/queryFuncs/findGitHubOrgAllUsers.js:
+   5  //the reqBody is the req.body from a slack command received at it's associated endpoint
+   6: const findGitHubOrgAllUsers = async (reqBody) => {
+   7  	const workspace = await Workspaces.findOne({
+
+  24  
+  25: module.exports = findGitHubOrgAllUsers;
+  26  
+
+helperFuncs/slackFuncs/adminAssignQuestComplete.js:
+   1: const { Achievement, Quest, User, Playerstat } = require("../../server/db/");
+   2  const userLevelFunc = require("../webhookFuncs/userLevelFunc");
+
+  10              .selected_user;
+  11:     const user = await User.findOne({
+  12          where: {
+
+helperFuncs/slackFuncs/giveGold.js:
+   1  const { WebClient } = require("@slack/web-api");
+   2: const { User, Goldlog } = require("../../server/db");
+   3  const findTokenByTeamId = require("../queryFuncs/findTokenByTeamId");
+
+   6  const giveGold = async (reqBody) => {
+   7: 	const recievingUser = await User.findOne({
+   8  		where: {
+
+  13  
+  14: 	const sendingUser = await User.findOne({
+  15  		where: {
+
+helperFuncs/slackFuncs/slackInstallAuth.js:
+   1  const { WebClient } = require("@slack/web-api");
+   2: const { User, Workspaces, Playerstat } = require("../../server/db");
+   3  
+
+  15          //adminUser block sets the installer of the app on a workspace as the admin for that workspace
+  16:         const checkExistingInstall = await User.findOne({
+  17              where: {
+
+  21          if (checkExistingInstall) return false;
+  22:         const adminUser = await User.create({
+  23              email: req.query.state,
+
+  47          filteredMembers.forEach(async (user) => {
+  48:             const newUser = await User.create({
+  49                  slackID: user["id"],
+
+helperFuncs/slackFuncs/viewQuests.js:
+  1: const { Quest, User } = require("../../server/db");
+  2  const viewQuests = async (reqBody) => {
+
+  5  
+  6: 	const user = await User.findOne({
+  7  		where: {
+
+helperFuncs/webhookFuncs/addPRIDToQuest.js:
+  1: const { Quest, User, Workspaces } = require("../../server/db");
+  2  
+  3  const addPRIDToQuest = async (reqBody) => {
+  4:     const user = await User.findOne({
+  5          where: {
+
+helperFuncs/webhookFuncs/updateQuestsOnPR.js:
+   1: const { Achievement, Quest, User, Playerstat } = require("../../server/db");
+   2  const userLevelFunc = require("../webhookFuncs/userLevelFunc");
+
+  10  
+  11:     const user = await User.findOne({
+  12          where: {
+
+helperFuncs/webhookFuncs/updateUserOnPR.js:
+  1: const { Achievement,User, Workspaces, Playerstat } = require("../../server/db");
+  2  const userLevelFunc = require("./userLevelFunc");
+
+  5  const updateUserOnPR = async (reqBody) => {
+  6:     const user = await User.findOne({
+  7          where: {
+
+helperFuncs/webhookFuncs/userAchievement.js:
+  1: const { Achievement, User } = require("../../server/db");
+  2  const updateAchievement = require("./updateAchievement");
+
+homeTab/adminHomeView.js:
+  49  						type: "plain_text",
+  50: 						text: ":three: Connect User",
+  51  						emoji: true,
+
+homeTab/homeTab.js:
+   2  const { createAdminGHLink, findTokenByTeamId } = require("../helperFuncs");
+   3: const { User, Playerstat } = require("../server/db");
+   4  const adminHomeView = require("./adminHomeView");
+
+  10  	const token = await findTokenByTeamId(reqBody.team_id);
+  11: 	const user = await User.findOne({
+  12  		where: {
+
+homeTab/externalSelectMenus/externalGitHubUserConnectSelectMenu.js:
+  1: const { findGitHubOrgAllUsers } = require("../../helperFuncs");
+  2  
+  3  const externalGitHubUserConnectSelectMenu = async (reqBody) => {
+  4: 	const allMembers = await findGitHubOrgAllUsers(reqBody);
+  5  	const memberGHAccounts = allMembers.data.map((member) => member);
+
+homeTab/modals/achievementsModal.js:
+   2  const { findTokenByTeamId } = require("../../helperFuncs");
+   3: const { User, Achievement  } = require ('../../server/db')
+   4  //instantiating an instance of the slack Web Client API
+
+   9  		dataValues: { achievements },
+  10: 	} = await User.findOne({
+  11  		where: {
+
+homeTab/modals/goldLogModal.js:
+   2  const { findTokenByTeamId } = require("../../helperFuncs");
+   3: const { User, Goldlog } = require("../../server/db");
+   4  //instantiating an instance of the slack Web Client API
+
+   9  		include: {
+  10: 			model: User,
+  11  			where: {
+
+homeTab/modals/profileModal.js:
+  1  const { WebClient } = require("@slack/web-api");
+  2: const { User, Playerstat } = require("../../server/db");
+  3  const { findTokenByTeamId } = require("../../helperFuncs");
+
+  7  	const token = await findTokenByTeamId(reqBody.user.team_id);
+  8: 	const user = await User.findOne({
+  9  		where: {
+
+server/db/index.js:
+   38  
+   39: // const playerOne = await User.findOne({
+   40  //     where:{
+
+   43  // })
+   44: // const playerTwo = await User.findOne({
+   45  //     where:{
+
+  119  // 	try {
+  120: // 		const adminUser = await User.findOne({
+  121  // 			where: {
+
+  143  // 				},
+  144: // 				{ model: User },
+  145  // 			],
