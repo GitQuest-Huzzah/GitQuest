@@ -26,6 +26,7 @@ const slackInstallAuth = async (req, res) => {
 		});
 		const stats = await Playerstat.create({});
 		adminUser.setPlayerstat(stats);
+		stats.setUser(adminUser)
 		//on install this also creates an associated workspace for the newly installed app
 		const newWorkspace = await Workspace.create({
 			botToken: installRequest.access_token,
@@ -51,6 +52,7 @@ const slackInstallAuth = async (req, res) => {
 			await newUser.setWorkspace(newWorkspace);
 			const stats = await Playerstat.create({});
 			newUser.setPlayerstat(stats);
+			stats.setUser(newUser)
 		});
 		await adminUser.setWorkspace(newWorkspace);
 		return true;

@@ -1,10 +1,10 @@
 const { WebClient } = require("@slack/web-api");
-const { User, Goldlog } = require("../../server/db");
+const { User, Goldlog, Playerstat } = require("../../server/db");
 const findTokenByTeamId = require("../queryFuncs/findTokenByTeamId");
 const web = new WebClient();
 
 const giveGold = async (reqBody) => {
-	const recievingUser = await User.findOne({
+	const receivingUser = await User.findOne({
 		where: {
 			slackID:
 				reqBody.view.state.values.userSelected.selectedUser.selected_user,
@@ -15,10 +15,13 @@ const giveGold = async (reqBody) => {
 		where: {
 			slackID: reqBody.user.id,
 		},
+		include:{
+			model: Playerstat
+		}
 	});
 
 	if (
-		sendingUser.dataValues.rewardGold <
+		sendingUser.dataValues.playerstat.dataValues.rewardGold <
 		reqBody.view.state.values.amountGiven.givenAmount.value
 	) {
 		await web.chat.postMessage({
@@ -57,7 +60,7 @@ const giveGold = async (reqBody) => {
 		return console.log("exiting");
 	}
 
-	if (!recievingUser) {
+	if (!receivingUser) {
 		await web.chat.postMessage({
 			blocks: [
 				{
@@ -73,18 +76,21 @@ const giveGold = async (reqBody) => {
 		});
 		return console.log("exiting");
 	}
-
-	await sendingUser.decrement("rewardGold", {
-		by: reqBody.view.state.values.amountGiven.givenAmount.value,
+	Playerstat.decrement("rewardGold", {
+		by: reqBody.view.state.values.amountGiven.givenAmount.value, where:{
+			userId: sendingUser.dataValues.id
+		}
 	});
-	await recievingUser.increment("gold", {
-		by: reqBody.view.state.values.amountGiven.givenAmount.value,
+	Playerstat.increment("gold", {
+		by: reqBody.view.state.values.amountGiven.givenAmount.value, where:{
+			userId: receivingUser.dataValues.id
+		}
 	});
-	const recievingUserLog = await Goldlog.create({
+	const receivingUserLog = await Goldlog.create({
 		description: "Someone gave you gold!",
 		valueChange: `+ ${reqBody.view.state.values.amountGiven.givenAmount.value}`,
 	});
-	await recievingUser.addGoldlog(recievingUserLog);
+	receivingUser.addGoldlog(receivingUserLog);
 };
 
 module.exports = giveGold;
