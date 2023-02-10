@@ -1,4 +1,4 @@
-const { Quest, Users, Workspaces } = require("../../server/db");
+const { Quest, Users, Workspace } = require("../../server/db");
 
 const addPRIDToQuest = async (reqBody) => {
     const user = await Users.findOne({
@@ -6,7 +6,7 @@ const addPRIDToQuest = async (reqBody) => {
             gitHubID: reqBody.sender.id.toString(),
         },
         include: {
-            model: Workspaces,
+            model: Workspace,
             where: {
                 orgName: reqBody.organization.login,
             },
