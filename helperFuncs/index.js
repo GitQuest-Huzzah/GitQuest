@@ -25,6 +25,7 @@ const pullRequestAchievements = require("./webhookFuncs/pullRequestAchievements"
 const questDisplay = require("./slackFuncs/questDisplay");
 const questLog = require("./slackFuncs/questLog");
 const slackInstallAuth = require("./slackFuncs/slackInstallAuth");
+const updateAchievement = require ('./webhookFuncs/updateAchievement')
 const updateQuestsOnPR = require("./webhookFuncs/updateQuestsOnPR");
 const updateUserGitHub = require("./gitFuncs/updateUserGitHub");
 const updateUserOnPR = require("./webhookFuncs/updateUserOnPR");
@@ -60,6 +61,7 @@ module.exports = {
 	questDisplay,
 	questLog,
 	slackInstallAuth,
+    updateAchievement,
 	updateQuestsOnPR,
 	updateUserGitHub,
 	updateUserOnPR,
