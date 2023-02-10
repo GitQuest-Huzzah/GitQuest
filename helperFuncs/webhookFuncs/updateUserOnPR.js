@@ -3,7 +3,7 @@ const userLevelFunc = require("./userLevelFunc");
 const userAchievement = require("./userAchievement");
 
 const updateUserOnPR = async (reqBody) => {
-    const user = await Users.findOne({
+    const user = await User.findOne({
         where: {
             gitHubID: reqBody.sender.id.toString(),
         },
