@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Users = db.define("user", {
+const User = db.define("user", {
 	email: {
 		type: Sequelize.STRING,
 		validate: {
@@ -28,4 +28,4 @@ const Users = db.define("user", {
 	},
 });
 
-module.exports = Users;
+module.exports = User;
