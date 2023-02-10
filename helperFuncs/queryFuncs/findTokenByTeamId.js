@@ -1,8 +1,8 @@
-const { Workspaces } = require("../../server/db");
+const { Workspace } = require("../../server/db");
 
 //finding bot token that belongs to a workspace to send response to proper instance of bot
 const findTokenByTeamId = (teamId) =>
-	Workspaces.findOne({
+	Workspace.findOne({
 		where: {
 			teamID: teamId,
 		},

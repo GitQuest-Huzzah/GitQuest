@@ -1,4 +1,4 @@
-const { Repos, Users, Workspaces } = require("../../server/db");
+const { Repo, Users, Workspace } = require("../../server/db");
 
 const findAllReposInDB = async (reqBody) => {
 	return await Users.findOne({
@@ -6,9 +6,9 @@ const findAllReposInDB = async (reqBody) => {
 			slackID: reqBody.user.id,
 		},
 		include: {
-			model: Workspaces,
+			model: Workspace,
 			include: {
-				model: Repos,
+				model: Repo,
 			},
 		},
 	});

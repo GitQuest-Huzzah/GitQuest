@@ -1,5 +1,5 @@
 const { WebClient } = require("@slack/web-api");
-const { Users, Workspaces, Playerstat } = require("../../server/db");
+const { Users, Workspace, Playerstat } = require("../../server/db");
 
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
@@ -27,7 +27,7 @@ const slackInstallAuth = async (req, res) => {
         const stats = await Playerstat.create({});
         adminUser.setPlayerstat(stats);
         //on install this also creates an associated workspace for the newly installed app
-        const newWorkspace = await Workspaces.create({
+        const newWorkspace = await Workspace.create({
             botToken: installRequest.access_token,
             teamID: installRequest.team.id,
             teamName: installRequest.team.name,

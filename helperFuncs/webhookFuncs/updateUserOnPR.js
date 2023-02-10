@@ -1,4 +1,4 @@
-const { Achievement,Users, Workspaces, Playerstat } = require("../../server/db");
+const { Achievement,Users, Workspace, Playerstat } = require("../../server/db");
 const userLevelFunc = require("./userLevelFunc");
 const userAchievement = require ('./userAchievement')
 
@@ -9,7 +9,7 @@ const updateUserOnPR = async (reqBody) => {
         },
         include: [
             {
-                model: Workspaces,
+                model: Workspace,
                 where: {
                     orgName: reqBody.organization.login,
                 },
