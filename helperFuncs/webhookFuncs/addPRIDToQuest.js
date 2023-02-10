@@ -6,7 +6,7 @@ const addPRIDToQuest = async (reqBody) => {
 			gitHubID: reqBody.sender.id.toString(),
 		},
 		include: {
-			model: Workspaces,
+			model: Workspace,
 			where: {
 				orgName: reqBody.organization.login,
 			},

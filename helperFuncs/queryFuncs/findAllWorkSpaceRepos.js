@@ -1,12 +1,12 @@
-const { Workspaces, Repos } = require("../../server/db");
+const { Workspace, Repo } = require("../../server/db");
 
 const findAllWorkSpaceRepos = async (team_id) => {
-	return await Workspaces.findOne({
+	return await Workspace.findOne({
 		where: {
 			teamID: team_id,
 		},
 		include: {
-			model: Repos,
+			model: Repo,
 		},
 	});
 };
