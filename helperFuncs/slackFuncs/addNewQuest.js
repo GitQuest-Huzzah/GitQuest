@@ -1,6 +1,6 @@
 const { WebClient } = require("@slack/web-api");
 const web = new WebClient();
-const { Workspaces, Quest } = require("../../server/db");
+const { Workspace, Quest } = require("../../server/db");
 const findTokenByTeamId = require("../queryFuncs/findTokenByTeamId");
 const addNewQuest = async (reqBody) => {
 	const name = reqBody.view.state.values.name.nameAction.value;
@@ -26,7 +26,7 @@ const addNewQuest = async (reqBody) => {
 		});
 		return console.log("exiting");
 	}
-	const workspace = await Workspaces.findOne({
+	const workspace = await Workspace.findOne({
 		where: {
 			teamID: reqBody.user.team_id,
 		},

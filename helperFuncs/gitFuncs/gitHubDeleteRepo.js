@@ -1,5 +1,5 @@
 const { Octokit } = require("@octokit/core");
-const { Repos } = require("../../server/db");
+const { Repo } = require("../../server/db");
 const findGitHubAPIToken = require("../queryFuncs/findGitHubAPIToken");
 const gitHubDeleteRepo = async (reqBody) => {
 	const reposToDelete =
@@ -11,7 +11,7 @@ const gitHubDeleteRepo = async (reqBody) => {
 	});
 	reposToDelete.forEach(async (repo) => {
 		const [repoId, orgName] = repo.value.split(",");
-		const destroyedRepo = await Repos.destroy({
+		const destroyedRepo = await Repo.destroy({
 			where: {
 				repoId: repoId,
 			},

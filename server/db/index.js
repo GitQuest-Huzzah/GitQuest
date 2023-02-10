@@ -4,17 +4,18 @@ const db = require("./db");
 const Goldlog = require("./models/Goldlog");
 const Playerstat = require("./models/Playerstat");
 const Quest = require("./models/Quest");
-const Repos = require("./models/Repos");
+const Repo = require("./models/Repo");
 const User = require("./models/User");
-const Workspaces = require("./models/Workspaces");
+const Workspace = require("./models/Workspace");
 
 //model associations
 
-User.belongsTo(Workspaces);
-Workspaces.hasMany(User);
+User.belongsTo(Workspace);
+Workspace.hasMany(User);
 
-Repos.belongsTo(Workspaces);
-Workspaces.hasMany(Repos);
+
+Repo.belongsTo(Workspace);
+Workspace.hasMany(Repo);
 
 Playerstat.belongsTo(User);
 User.belongsTo(Playerstat);
@@ -22,14 +23,14 @@ User.belongsTo(Playerstat);
 User.hasMany(Goldlog);
 Goldlog.belongsTo(User);
 
-Workspaces.hasMany(Quest);
-Quest.belongsTo(Workspaces);
+Workspace.hasMany(Quest);
+Quest.belongsTo(Workspace);
 
 User.hasMany(Quest);
 Quest.belongsTo(User);
 
-Workspaces.hasMany(Channel);
-Channel.belongsTo(Workspaces);
+Workspace.hasMany(Channel);
+Channel.belongsTo(Workspace);
 
 User.belongsToMany(Achievement, { through: "user_achievement" });
 Achievement.belongsToMany(User, { through: "user_achievement" });
@@ -105,14 +106,15 @@ Achievement.belongsToMany(User, { through: "user_achievement" });
 // ]);
 
 module.exports = {
-	Achievement,
-	db,
-	Goldlog,
-	Repos,
-	User,
-	Workspaces,
-	Quest,
-	Playerstat,
+    Achievement,
+    db,
+    Goldlog,
+    Repo,
+    User,
+    Workspace,
+    Quest,
+    Playerstat,
+
 };
 
 // const testQuery = async () => {

@@ -1,5 +1,6 @@
 const axios = require("axios");
-const { User, Workspaces } = require("../../server/db");
+
+const { User, Workspace } = require("../../server/db");
 
 const gitHubInstall = async (req) => {
 	try {
@@ -30,7 +31,7 @@ const gitHubInstall = async (req) => {
 				slackID: parsedUserInfo.userId,
 			},
 			include: {
-				model: Workspaces,
+				model: Workspace,
 			},
 		});
 		//if the user exists we update their GH access token
@@ -40,7 +41,7 @@ const gitHubInstall = async (req) => {
 			});
 		}
 		//if the user is new and not found we create one and assign it to it's associated workspace
-		const newUserWorkspace = await Workspaces.findOne({
+		const newUsersWorkspace = await Workspace.findOne({
 			where: {
 				teamID: parsedUserInfo.teamId,
 			},
@@ -49,7 +50,7 @@ const gitHubInstall = async (req) => {
 			slackID: parsedUserInfo.userId,
 			gitHubToken: res.data.access_token,
 		});
-		await newUser.setWorkspaces(newUsersWorkspace);
+		await newUser.setWorkspace(newUsersWorkspace);
 		return newUser;
 	} catch (error) {
 		console.error(error);
