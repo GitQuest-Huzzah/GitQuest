@@ -5,34 +5,34 @@ const Goldlog = require("./models/Goldlog");
 const Playerstat = require("./models/Playerstat");
 const Quest = require("./models/Quest");
 const Repos = require("./models/Repos");
-const Users = require("./models/Users");
+const User = require("./models/User");
 const Workspaces = require("./models/Workspaces");
 
 //model associations
 
-Users.belongsTo(Workspaces);
-Workspaces.hasMany(Users);
+User.belongsTo(Workspaces);
+Workspaces.hasMany(User);
 
 Repos.belongsTo(Workspaces);
 Workspaces.hasMany(Repos);
 
-Playerstat.belongsTo(Users);
-Users.belongsTo(Playerstat);
+Playerstat.belongsTo(User);
+User.belongsTo(Playerstat);
 
-Users.hasMany(Goldlog);
-Goldlog.belongsTo(Users);
+User.hasMany(Goldlog);
+Goldlog.belongsTo(User);
 
 Workspaces.hasMany(Quest);
 Quest.belongsTo(Workspaces);
 
-Users.hasMany(Quest);
-Quest.belongsTo(Users);
+User.hasMany(Quest);
+Quest.belongsTo(User);
 
 Workspaces.hasMany(Channel);
 Channel.belongsTo(Workspaces);
 
-Users.belongsToMany(Achievement, { through: "users_achievement" });
-Achievement.belongsToMany(Users, { through: "users_achievement" });
+User.belongsToMany(Achievement, { through: "user_achievement" });
+Achievement.belongsToMany(User, { through: "user_achievement" });
 
 // (async()=>{
 
@@ -109,7 +109,7 @@ module.exports = {
     db,
     Goldlog,
     Repos,
-    Users,
+    User,
     Workspaces,
     Quest,
     Playerstat,
