@@ -1,4 +1,4 @@
-const { Quest, Users, Goldlog } = require("../../server/db");
+const { Quest, Users, Playerstat } = require("../../server/db");
 const userLevelFunc = require('../webhookFuncs/userLevelFunc')
 const updateQuestsOnPR = async (reqBody) => {
 	const quest = await Quest.findOne({
@@ -11,6 +11,9 @@ const updateQuestsOnPR = async (reqBody) => {
 		where: {
 			gitHubID: reqBody.pull_request.user.id.toString(),
 		},
+        include:{
+            model: Playerstat
+        }
 	});
 
 	if (quest) {

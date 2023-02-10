@@ -36,10 +36,14 @@ const titlesEnum = {
 };
 
 const userLevelFunc = async (user, gainedExp, gainedGold) => {
+    console.log(user,'THIS IS USER PASSED IN LEVEL FUNC')
     const {
-        dataValues: { exp, level, gold, rewardGold },
+        dataValues: {
+            playerstat: {
+                dataValues: { exp, level, gold, rewardGold },
+            },
+        },
     } = user;
-
     const totalExp = gainedExp + exp;
 
     const levelFromExp = (exp) => {
