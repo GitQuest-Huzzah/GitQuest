@@ -47,7 +47,7 @@ const adminHomeView = (user, gHLink) => {
 					type: "button",
 					text: {
 						type: "plain_text",
-						text: ":three: Connect Users",
+						text: ":three: Connect User",
 						emoji: true,
 					},
 					value: "Connect User To GitHub Account",

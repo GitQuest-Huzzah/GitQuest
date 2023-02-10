@@ -1,4 +1,4 @@
-const { Users } = require("../../server/db");
+const { User } = require("../../server/db");
 
 const updateUserGitHub = async (reqBody) => {
 	const gitHubUser =
@@ -7,7 +7,7 @@ const updateUserGitHub = async (reqBody) => {
 	const userSlackID =
 		reqBody.view.state.values.adminGitConnectUserSlack.slackUserSelect
 			.selected_user;
-	const user = await Users.findOne({
+	const user = await User.findOne({
 		where: {
 			slackID: userSlackID,
 		},
