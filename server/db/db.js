@@ -25,6 +25,6 @@ const db = (() => {
 	}
 })();
 
-db.sync({force:true});
+db.sync();
 
 module.exports = db;

@@ -1,4 +1,4 @@
-const { Quest, User, Workspaces } = require("../../server/db");
+const { Quest, User, Workspace } = require("../../server/db");
 
 const addPRIDToQuest = async (reqBody) => {
 	const user = await User.findOne({
