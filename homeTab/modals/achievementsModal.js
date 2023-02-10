@@ -1,19 +1,19 @@
 const { WebClient } = require("@slack/web-api");
 const { findTokenByTeamId } = require("../../helperFuncs");
-const { Users, Achievement  } = require ('../../server/db')
+const { User, Achievement } = require("../../server/db");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 
 const achievementsModal = async (reqBody) => {
 	const {
 		dataValues: { achievements },
-	} = await Users.findOne({
+	} = await User.findOne({
 		where: {
 			slackID: reqBody.user.id,
 		},
-        include:{
-            model:Achievement
-        }
+		include: {
+			model: Achievement,
+		},
 	});
 
 	const token = await findTokenByTeamId(reqBody.user.team_id);
@@ -33,9 +33,9 @@ const achievementsModal = async (reqBody) => {
 				text: "Close",
 				emoji: true,
 			},
-			blocks:achievements 
+			blocks: achievements
 				? achievements.map((achievement) => {
-                    console.log(achievement)
+						console.log(achievement);
 						return {
 							type: "section",
 							text: {
