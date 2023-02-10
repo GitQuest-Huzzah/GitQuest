@@ -27,6 +27,6 @@ const seed = () => {
         { questsCompleted: 3, achievementType: "quest", description: "Your third quest!" },
         { questsCompleted: 5, achievementType: "quest", description: "Your fifth quest!" },
     ]);
+    console.log('seeding ends')
 };
-
 module.exports = seed;

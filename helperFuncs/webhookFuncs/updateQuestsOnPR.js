@@ -1,6 +1,6 @@
 const { Achievement, Quest, User, Playerstat } = require("../../server/db");
 const userLevelFunc = require("../webhookFuncs/userLevelFunc");
-const updateAchievement = require("../");
+const updateAchievement = require("./updateAchievement");
 const updateQuestsOnPR = async (reqBody) => {
 	const quest = await Quest.findOne({
 		where: {
@@ -26,16 +26,21 @@ const updateQuestsOnPR = async (reqBody) => {
 			"questsCompleted",
 			achievements
 		);
-		Playerstat.update(
-			{
-				questsCompleted,
-			},
-			{
-				where: {
-					userId: user.dataValues.id,
-				},
+		Playerstat.increment("questsCompleted", {
+			 where:{
+				userId: user.dataValues.id
 			}
-		);
+		});
+		// Playerstat.update(
+		// 	{
+		// 		questsCompleted,
+		// 	},
+		// 	{
+		// 		where: {
+		// 			userId: user.dataValues.id,
+		// 		},
+		// 	}
+		// );
 		user.addAchievement(achievement);
 		quest.update({
 			status: "completed",

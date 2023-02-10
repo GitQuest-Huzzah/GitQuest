@@ -1,10 +1,25 @@
 const { WebClient } = require("@slack/web-api");
 const { findTokenByTeamId } = require("../../helperFuncs");
+const { Playerstat, User } = require("../../server/db");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 
 const giveGoldModal = async (reqBody) => {
 	const token = await findTokenByTeamId(reqBody.user.team_id);
+	const {
+		dataValues: {
+			playerstat: {
+				dataValues: { rewardGold },
+			},
+		},
+	} = await User.findOne({
+		where: {
+			slackID: reqBody.user.id,
+		},
+		include: {
+			model: Playerstat,
+		},
+	});
 	await web.views.open({
 		trigger_id: reqBody.trigger_id,
 		token: token,
@@ -13,7 +28,7 @@ const giveGoldModal = async (reqBody) => {
 			callback_id: "giveGoldSubmit",
 			title: {
 				type: "plain_text",
-				text: "Give Gold to Give!",
+				text: "Reward a Teammate!",
 				emoji: true,
 			},
 			submit: {
@@ -32,7 +47,7 @@ const giveGoldModal = async (reqBody) => {
 					block_id: "userSelected",
 					text: {
 						type: "mrkdwn",
-						text: "Who ya givin gold to?",
+						text: "Who ye givin' yer gold to?",
 					},
 					accessory: {
 						type: "users_select",
@@ -54,7 +69,7 @@ const giveGoldModal = async (reqBody) => {
 					},
 					label: {
 						type: "plain_text",
-						text: "Amount to Give",
+						text: `Reward Amount (Available:${rewardGold}) `,
 						emoji: true,
 					},
 				},

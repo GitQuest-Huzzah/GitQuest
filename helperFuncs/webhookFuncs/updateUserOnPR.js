@@ -32,10 +32,8 @@ const updateUserOnPR = async (reqBody) => {
 	userLevelFunc(user, gainedExp);
 	userAchievement(user, numOfCommits, numOfPulls);
 
-	console.log(numOfPulls, numOfCommits);
-
 	// identify the most recent achievement based on pull requests
-	await Playerstat.update(
+	Playerstat.update(
 		{
 			commits: numOfCommits,
 			pullRequests: numOfPulls,
