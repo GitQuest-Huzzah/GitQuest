@@ -1,32 +1,27 @@
-const {
-	Achievement,
-	User,
-	Workspaces,
-	Playerstat,
-} = require("../../server/db");
+const { Achievement,User, Workspace, Playerstat } = require("../../server/db");
 const userLevelFunc = require("./userLevelFunc");
 const userAchievement = require("./userAchievement");
 
 const updateUserOnPR = async (reqBody) => {
-	const user = await User.findOne({
-		where: {
-			gitHubID: reqBody.sender.id.toString(),
-		},
-		include: [
-			{
-				model: Workspaces,
-				where: {
-					orgName: reqBody.organization.login,
-				},
-			},
-			{
-				model: Playerstat,
-			},
-			{
-				model: Achievement,
-			},
-		],
-	});
+    const user = await Users.findOne({
+        where: {
+            gitHubID: reqBody.sender.id.toString(),
+        },
+        include: [
+            {
+                model: Workspace,
+                where: {
+                    orgName: reqBody.organization.login,
+                },
+            },
+            {
+                model: Playerstat,
+            },
+            {
+                model: Achievement
+            }
+        ],
+    });
 
 	const numOfCommits =
 		reqBody.pull_request.commits +

@@ -1,9 +1,9 @@
-const { Workspaces } = require("../../server/db");
+const { Workspace } = require("../../server/db");
 const findOrgOnGH = require("../queryFuncs/findOrgOnGH");
 
 const createOrUpdateOrg = async (reqBody) => {
 	const orgName = reqBody.view.state.values.OwnerName.Owner_Input.value;
-	const orgToUpdate = await Workspaces.findOne({
+	const orgToUpdate = await Workspace.findOne({
 		where: {
 			teamID: reqBody.view.team_id,
 		},

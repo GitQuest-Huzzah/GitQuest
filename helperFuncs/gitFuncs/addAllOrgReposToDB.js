@@ -1,6 +1,6 @@
-const { Workspaces, Repos } = require("../../server/db");
+const { Workspace, Repo } = require("../../server/db");
 const addAllOrgReposToDB = async (reqBody) => {
-	const workspace = await Workspaces.findOne({
+	const workspace = await Workspace.findOne({
 		where: {
 			teamID: reqBody.view.team_id,
 		},
@@ -9,7 +9,7 @@ const addAllOrgReposToDB = async (reqBody) => {
 		reqBody.view.state.values.adminRepoModal.adminRepoModalAction
 			.selected_options;
 	reposToAdd.forEach(async (repo) => {
-		const singleRepo = await Repos.create({
+		const singleRepo = await Repo.create({
 			repoId: repo.value,
 			repoName: repo.text.text,
 		});
