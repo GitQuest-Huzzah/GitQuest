@@ -1,13 +1,13 @@
 const { WebClient } = require("@slack/web-api");
 const { findTokenByTeamId } = require("../../helperFuncs");
-const { Users, Goldlog } = require("../../server/db");
+const { User, Goldlog } = require("../../server/db");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 
 const goldLogModal = async (reqBody) => {
 	const goldLogs = await Goldlog.findAll({
 		include: {
-			model: Users,
+			model: User,
 			where: {
 				slackID: reqBody.user.id,
 			},

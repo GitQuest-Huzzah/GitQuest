@@ -1,9 +1,9 @@
-const { Quest, Users } = require("../../server/db");
+const { Quest, User } = require("../../server/db");
 const viewQuests = async (reqBody) => {
 	const selectedQuests =
 		reqBody.view.state.values.questBlock.questAction.selected_options;
 
-	const user = await Users.findOne({
+	const user = await User.findOne({
 		where: {
 			slackID: reqBody.user.id,
 		},

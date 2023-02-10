@@ -5,43 +5,44 @@ const Goldlog = require("./models/Goldlog");
 const Playerstat = require("./models/Playerstat");
 const Quest = require("./models/Quest");
 const Repo = require("./models/Repo");
-const Users = require("./models/Users");
+const User = require("./models/User");
 const Workspace = require("./models/Workspace");
 
 //model associations
 
-Users.belongsTo(Workspace);
-Workspace.hasMany(Users);
+User.belongsTo(Workspace);
+Workspace.hasMany(User);
+
 
 Repo.belongsTo(Workspace);
 Workspace.hasMany(Repo);
 
-Playerstat.belongsTo(Users);
-Users.belongsTo(Playerstat);
+Playerstat.belongsTo(User);
+User.belongsTo(Playerstat);
 
-Users.hasMany(Goldlog);
-Goldlog.belongsTo(Users);
+User.hasMany(Goldlog);
+Goldlog.belongsTo(User);
 
 Workspace.hasMany(Quest);
 Quest.belongsTo(Workspace);
 
-Users.hasMany(Quest);
-Quest.belongsTo(Users);
+User.hasMany(Quest);
+Quest.belongsTo(User);
 
 Workspace.hasMany(Channel);
 Channel.belongsTo(Workspace);
 
-Users.belongsToMany(Achievement, { through: "users_achievement" });
-Achievement.belongsToMany(Users, { through: "users_achievement" });
+User.belongsToMany(Achievement, { through: "user_achievement" });
+Achievement.belongsToMany(User, { through: "user_achievement" });
 
 // (async()=>{
 
-// const playerOne = await Users.findOne({
+// const playerOne = await User.findOne({
 //     where:{
 //         id: 1
 //     }
 // })
-// const playerTwo = await Users.findOne({
+// const playerTwo = await User.findOne({
 //     where:{
 //         id: 2
 //     }
@@ -109,15 +110,16 @@ module.exports = {
     db,
     Goldlog,
     Repo,
-    Users,
+    User,
     Workspace,
     Quest,
     Playerstat,
+
 };
 
 // const testQuery = async () => {
 // 	try {
-// 		const adminUser = await Users.findOne({
+// 		const adminUser = await User.findOne({
 // 			where: {
 // 				id: 1, //this would be slackID in the real thing
 // 			},
@@ -141,7 +143,7 @@ module.exports = {
 // 						id: adminUser.dataValues.workspaceId,
 // 					},
 // 				},
-// 				{ model: Users },
+// 				{ model: User },
 // 			],
 // 		});
 // 		console.log(questsReturn);

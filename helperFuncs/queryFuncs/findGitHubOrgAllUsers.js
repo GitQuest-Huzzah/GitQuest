@@ -22,4 +22,4 @@ const findGitHubOrgAllUsers = async (reqBody) => {
 	return allOrgMembers;
 };
 
-module.exports = findGitHubOrgAllUsers;
+module.exports = findGitHubOrgAllUser;
