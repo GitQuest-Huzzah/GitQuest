@@ -1,5 +1,5 @@
 const { Octokit } = require("@octokit/core");
-const { Users, Workspaces } = require("../../server/db");
+const { Users, Workspace } = require("../../server/db");
 const findGitHubAPIToken = require("./findGitHubAPIToken");
 
 const findAllOrgRepos = async (reqBody) => {
@@ -18,7 +18,7 @@ const findAllOrgRepos = async (reqBody) => {
 			slackID: reqBody.user.id,
 		},
 		include: {
-			model: Workspaces,
+			model: Workspace,
 		},
 	});
 	return await octokit.request("GET /orgs/{owner}/repos", {

@@ -1,4 +1,4 @@
-const { Quest, Workspaces } = require("../../server/db");
+const { Quest, Workspace } = require("../../server/db");
 
 const findAllActiveQuests = async (reqBody) => {
 	const quests = await Quest.findAll({
@@ -6,7 +6,7 @@ const findAllActiveQuests = async (reqBody) => {
 			status: "active",
 		},
 		include: {
-			model: Workspaces,
+			model: Workspace,
 			where: {
 				teamID: reqBody.user.team_id,
 			},

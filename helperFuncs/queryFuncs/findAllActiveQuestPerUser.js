@@ -1,4 +1,4 @@
-const { Quest, Workspaces, Users } = require("../../server/db");
+const { Quest, Workspace, Users } = require("../../server/db");
 const findAllActiveQuestsPerUser = async (reqBody) => {
 	const user = await Users.findOne({
 		where: {
@@ -12,7 +12,7 @@ const findAllActiveQuestsPerUser = async (reqBody) => {
 			userId: user.id,
 		},
 		include: {
-			model: Workspaces,
+			model: Workspace,
 			where: {
 				teamID: reqBody.user.team_id,
 			},

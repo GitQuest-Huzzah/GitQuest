@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Repos = db.define("repo", {
+const Repo = db.define("repo", {
 	repoId: {
 		type: Sequelize.STRING,
 		allowNull: false,
@@ -12,4 +12,4 @@ const Repos = db.define("repo", {
 	},
 });
 
-module.exports = Repos;
+module.exports = Repo;

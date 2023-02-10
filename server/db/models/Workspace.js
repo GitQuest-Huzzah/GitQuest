@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Workspaces = db.define("workspace", {
+const Workspace = db.define("workspace", {
 	botToken: {
 		type: Sequelize.STRING,
 		allowNull: false,
@@ -19,4 +19,4 @@ const Workspaces = db.define("workspace", {
 	},
 });
 
-module.exports = Workspaces;
+module.exports = Workspace;
