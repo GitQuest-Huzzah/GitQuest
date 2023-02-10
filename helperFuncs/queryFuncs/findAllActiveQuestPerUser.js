@@ -1,6 +1,6 @@
-const { Quest, Workspaces, Users } = require("../../server/db");
+const { Quest, Workspaces, User } = require("../../server/db");
 const findAllActiveQuestsPerUser = async (reqBody) => {
-	const user = await Users.findOne({
+	const user = await User.findOne({
 		where: {
 			slackID: reqBody.user.id,
 		},
