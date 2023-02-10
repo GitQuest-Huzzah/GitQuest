@@ -1,5 +1,5 @@
 const { Octokit } = require("@octokit/core");
-const { Users, Workspace } = require("../../server/db");
+const { User, Workspace } = require("../../server/db");
 const findGitHubAPIToken = require("./findGitHubAPIToken");
 
 const findAllOrgRepos = async (reqBody) => {
@@ -13,7 +13,7 @@ const findAllOrgRepos = async (reqBody) => {
 				dataValues: { orgName },
 			},
 		},
-	} = await Users.findOne({
+	} = await User.findOne({
 		where: {
 			slackID: reqBody.user.id,
 		},
