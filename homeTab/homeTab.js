@@ -1,6 +1,6 @@
 const { WebClient } = require("@slack/web-api");
 const { createAdminGHLink, findTokenByTeamId } = require("../helperFuncs");
-const { Users } = require("../server/db");
+const { Users, Playerstat } = require("../server/db");
 const adminHomeView = require("./adminHomeView");
 const userHomeView = require("./userHomeView");
 //instantiating an instance of the slack Web Client API
@@ -12,6 +12,9 @@ const homeTab = async (reqBody) => {
 		where: {
 			slackID: reqBody.event.user,
 		},
+        include:{
+            model: Playerstat
+        }
 	});
 	const gHLink = createAdminGHLink({
 		teamId: reqBody.team_id,
