@@ -1,17 +1,17 @@
 const { WebClient } = require("@slack/web-api");
-const { Users, Goldlog } = require("../../server/db");
+const { User, Goldlog } = require("../../server/db");
 const findTokenByTeamId = require("../queryFuncs/findTokenByTeamId");
 const web = new WebClient();
 
 const giveGold = async (reqBody) => {
-	const recievingUser = await Users.findOne({
+	const recievingUser = await User.findOne({
 		where: {
 			slackID:
 				reqBody.view.state.values.userSelected.selectedUser.selected_user,
 		},
 	});
 
-	const sendingUser = await Users.findOne({
+	const sendingUser = await User.findOne({
 		where: {
 			slackID: reqBody.user.id,
 		},

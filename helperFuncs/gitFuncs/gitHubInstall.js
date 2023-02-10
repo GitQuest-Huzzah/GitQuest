@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Users, Workspaces } = require("../../server/db");
+const { User, Workspaces } = require("../../server/db");
 
 const gitHubInstall = async (req) => {
 	try {
@@ -25,7 +25,7 @@ const gitHubInstall = async (req) => {
 			opts
 		);
 		//check to see if a user with the associated user information already exists
-		const userAlreadyExists = await Users.findOne({
+		const userAlreadyExists = await User.findOne({
 			where: {
 				slackID: parsedUserInfo.userId,
 			},
@@ -40,12 +40,12 @@ const gitHubInstall = async (req) => {
 			});
 		}
 		//if the user is new and not found we create one and assign it to it's associated workspace
-		const newUsersWorkspace = await Workspaces.findOne({
+		const newUserWorkspace = await Workspaces.findOne({
 			where: {
 				teamID: parsedUserInfo.teamId,
 			},
 		});
-		const newUser = await Users.create({
+		const newUser = await User.create({
 			slackID: parsedUserInfo.userId,
 			gitHubToken: res.data.access_token,
 		});

@@ -36,12 +36,12 @@ Achievement.belongsToMany(User, { through: "user_achievement" });
 
 // (async()=>{
 
-// const playerOne = await Users.findOne({
+// const playerOne = await User.findOne({
 //     where:{
 //         id: 1
 //     }
 // })
-// const playerTwo = await Users.findOne({
+// const playerTwo = await User.findOne({
 //     where:{
 //         id: 2
 //     }
@@ -105,19 +105,19 @@ Achievement.belongsToMany(User, { through: "user_achievement" });
 // ]);
 
 module.exports = {
-    Achievement,
-    db,
-    Goldlog,
-    Repos,
-    User,
-    Workspaces,
-    Quest,
-    Playerstat,
+	Achievement,
+	db,
+	Goldlog,
+	Repos,
+	User,
+	Workspaces,
+	Quest,
+	Playerstat,
 };
 
 // const testQuery = async () => {
 // 	try {
-// 		const adminUser = await Users.findOne({
+// 		const adminUser = await User.findOne({
 // 			where: {
 // 				id: 1, //this would be slackID in the real thing
 // 			},
@@ -141,7 +141,7 @@ module.exports = {
 // 						id: adminUser.dataValues.workspaceId,
 // 					},
 // 				},
-// 				{ model: Users },
+// 				{ model: User },
 // 			],
 // 		});
 // 		console.log(questsReturn);

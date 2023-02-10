@@ -1,21 +1,25 @@
 const { WebClient } = require("@slack/web-api");
-const { Users, Playerstat } = require("../../server/db");
+const { User, Playerstat } = require("../../server/db");
 const { findTokenByTeamId } = require("../../helperFuncs");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 const profileModal = async (reqBody) => {
 	const token = await findTokenByTeamId(reqBody.user.team_id);
-	const user = await Users.findOne({
+	const user = await User.findOne({
 		where: {
 			slackID: reqBody.user.id,
 		},
-        include:{
-            model:Playerstat
-        }
+		include: {
+			model: Playerstat,
+		},
 	});
-    const {dataValues:{playerstat:{dataValues:{
-    rewardGold, level, gold, exp, title
-    }}}} = user
+	const {
+		dataValues: {
+			playerstat: {
+				dataValues: { rewardGold, level, gold, exp, title },
+			},
+		},
+	} = user;
 	const renderQuery = {
 		component: "profile",
 		user: user.gitHubLogin,
