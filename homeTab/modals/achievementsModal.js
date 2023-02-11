@@ -35,7 +35,6 @@ const achievementsModal = async (reqBody) => {
 			},
 			blocks: achievements
 				? achievements.map((achievement) => {
-						console.log(achievement);
 						return {
 							type: "section",
 							text: {

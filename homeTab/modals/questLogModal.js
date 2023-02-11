@@ -9,11 +9,10 @@ const {
 
 const questLogModal = async (reqBody) => {
 	const quests = await findAllActiveQuestsPerUser(reqBody);
-
 	await web.views.open({
 		trigger_id: reqBody.trigger_id,
 		token: await findTokenByTeamId(reqBody.user.team_id),
-		view: {
+		view:quests.length ? {
 			type: "modal",
 			callback_id: "questLogSubmit",
 			title: {
@@ -31,6 +30,21 @@ const questLogModal = async (reqBody) => {
 				text: "Cancel",
 				emoji: true,
 			},
+			blocks: questDisplay(quests, "active"),
+		} : {
+			type: "modal",
+			callback_id: "questLogSubmit",
+			title: {
+				type: "plain_text",
+				text: "Your Active Quests",
+				emoji: true,
+			},
+			close: {
+				type: "plain_text",
+				text: "Cancel",
+				emoji: true,
+			},
+			
 			blocks: questDisplay(quests, "active"),
 		},
 	});

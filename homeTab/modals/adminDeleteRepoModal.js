@@ -32,7 +32,7 @@ const adminDeleteRepoModal = async (reqBody) => {
 					block_id: "adminDeleteRepoModal",
 					text: {
 						type: "mrkdwn",
-						text: "Pick items from the list",
+						text: "*Select Repos to Stop Tracking*",
 					},
 					accessory: {
 						action_id: "adminDeleteRepoModalAction",
