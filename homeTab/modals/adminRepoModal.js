@@ -32,7 +32,7 @@ const adminRepoModal = async (reqBody) => {
 					block_id: "adminRepoModal",
 					text: {
 						type: "mrkdwn",
-						text: "Pick items from the list",
+						text: "*Select Repo to Watch*",
 					},
 					accessory: {
 						action_id: "adminRepoModalAction",

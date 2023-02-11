@@ -21,7 +21,7 @@ const questDisplay = (quests, status) => {
 						status === "available"
 							? "Select Available Quests"
 							: status === "active"
-							? "Want to give up  on a Quest? Select below and submit"
+							? "*_Surrender a Quest?! Select below and submit..._*"
 							: "Select Quest to complete to a Player",
 				},
 				accessory: {
@@ -67,7 +67,7 @@ const questDisplay = (quests, status) => {
 						status === "available"
 							? "There are no available Quests"
 							: status === "active"
-							? "You do not have any active Quests"
+							? "_*You do not have any active Quests*_"
 							: "There are no active quests to assign",
 				},
 			},

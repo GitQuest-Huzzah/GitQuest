@@ -36,7 +36,7 @@ const adminOrgModal = async (reqBody) => {
 					},
 					label: {
 						type: "plain_text",
-						text: "Owner or Org",
+						text: ":robot_face: Owner or Organization on GitHub :robot_face:",
 						emoji: true,
 					},
 				},

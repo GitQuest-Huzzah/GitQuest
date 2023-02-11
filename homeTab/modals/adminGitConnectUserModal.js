@@ -32,14 +32,14 @@ const adminGitConnectUserModal = async (reqBody) => {
 					block_id: "adminGitConnectUserSlack",
 					text: {
 						type: "mrkdwn",
-						text: "Slack User",
+						text: "*Slack User*",
 					},
 					accessory: {
 						action_id: "slackUserSelect",
 						type: "users_select",
 						placeholder: {
 							type: "plain_text",
-							text: "Select a Slack User",
+							text: "Select Slack User",
 						},
 					},
 				},
@@ -48,14 +48,14 @@ const adminGitConnectUserModal = async (reqBody) => {
 					block_id: "adminGitConnectUserModal",
 					text: {
 						type: "mrkdwn",
-						text: "GitHub Account",
+						text: "*GitHub Username*",
 					},
 					accessory: {
 						action_id: "adminGitConnectUserAction",
 						type: "external_select",
 						placeholder: {
 							type: "plain_text",
-							text: "Select items",
+							text: "Select GitHub Username",
 						},
 						min_query_length: 0,
 					},
