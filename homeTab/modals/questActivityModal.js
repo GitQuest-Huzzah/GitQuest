@@ -7,7 +7,7 @@ const questActivityModal = async (reqBody) => {
 	const questStats = await findQuestActivity(reqBody);
 	const stringQuery = JSON.stringify({
 		component: "questActivity",
-		activityStats:{...questStats}
+		activityStats:[...questStats]
 	});
 	const baseQuery = Buffer.from(stringQuery).toString("base64");
 	await web.views.open({
