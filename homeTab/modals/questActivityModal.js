@@ -26,10 +26,18 @@ const questActivityModal = async (reqBody) => {
 				emoji: true,
 			},
 			blocks: [
+				questStats.length ? 
 				{
 					type: "image",
-					image_url: `http://${process.env.PRERENDER_URL}/render?width=410&height=490&renderType=jpeg&url=https://${process.env.FRONTEND_PRERENDER}?${baseQuery}`,
+					image_url: `http://${process.env.PRERENDER_URL}/render?width=1126&height=678&renderType=jpeg&url=https://${process.env.FRONTEND_PRERENDER}?${baseQuery}`,
 					alt_text: "quest stats",
+				} : {
+					type: "header",
+					text: {
+						type: "plain_text",
+						emoji: true,
+						text: ":astonished: No Quest Activity Found! :astonished:",
+					},
 				},
 			],
 		},
