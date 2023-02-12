@@ -29,7 +29,7 @@ const questActivityModal = async (reqBody) => {
 				questStats.length ? 
 				{
 					type: "image",
-					image_url: `http://${process.env.PRERENDER_URL}/render?width=1126&height=678&renderType=jpeg&url=https://${process.env.FRONTEND_PRERENDER}?${baseQuery}`,
+					image_url: `http://${process.env.PRERENDER_URL}/render?width=865&height=500&renderType=jpeg&url=https://${process.env.FRONTEND_PRERENDER}?${baseQuery}`,
 					alt_text: "quest stats",
 				} : {
 					type: "header",
