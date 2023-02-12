@@ -2,7 +2,6 @@ const { Workspace, User, Quest } = require("../../server/db");
 const { DateTime } = require("luxon");
 const { Sequelize } = require("sequelize");
 const findQuestActivity = async (reqBody) => {
-	console.log(reqBody, 'body')
 	try {
 		const adminUser = await User.findOne({
 			where: {
@@ -40,7 +39,6 @@ const findQuestActivity = async (reqBody) => {
 				.toObject();
 			return timeSinceQuestComplete.hours < 30;
 		});
-		console.log("i got called")
 		return questsWithinTimePeriod
 			.map((quest) => quest.dataValues.gitHubLogin)
 			.reduce((acc, name) => {
