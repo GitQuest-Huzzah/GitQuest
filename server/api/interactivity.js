@@ -23,6 +23,7 @@ const {
 	goldLogModal,
 	profileModal,
 	questActivityModal,
+	questActivityGraphModal,
 	questLogModal,
 	viewQuestsModal,
 } = require("../../homeTab");
@@ -62,9 +63,18 @@ router.post("/", (req, res, next) => {
 		if (parsedSubmission.actions[0].action_id === "assignQuestCompleteButton")
 			adminAssignQuestCompleteModal(parsedSubmission);
 		if (parsedSubmission.actions[0].action_id === "questActivityButton")
-		questActivityModal(parsedSubmission);
+			questActivityModal(parsedSubmission);
+		// if (parsedSubmission.actions[0].action_id === "questActivitySelect")
+			
 	}
+	if (
+		parsedSubmission.view.callback_id === "questActivityGraphSubmit" &&
+		parsedSubmission.type === "view_submission"
+	) {
+		res.send({ response_action: "clear" });
+		questActivityGraphModal(parsedSubmission);
 
+	}
 	if (
 		parsedSubmission.view.callback_id === "adminAddReposSubmit" &&
 		parsedSubmission.type === "view_submission"
