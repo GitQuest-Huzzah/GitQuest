@@ -37,7 +37,7 @@ const findQuestActivity = async (reqBody) => {
 			const timeSinceQuestComplete = now
 				.diff(questFinished, "hours")
 				.toObject();
-			return timeSinceQuestComplete.hours < 30;
+			return timeSinceQuestComplete.hours < 24;
 		});
 		const questStats = questsWithinTimePeriod
 			.map((quest) => quest.dataValues.gitHubLogin)
