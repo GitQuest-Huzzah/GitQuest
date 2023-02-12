@@ -3,6 +3,9 @@ const { findTokenByTeamId, findQuestActivity } = require("../../helperFuncs");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 const questActivityGraphModal = async (reqBody) => {
+	const timeFrame =
+		reqBody.view.state.values.questActivityOption.questActivitySelect
+			.selected_option.text.text;
 	const token = await findTokenByTeamId(reqBody.user.team_id);
 	const questStats = await findQuestActivity(reqBody);
 	const stringQuery = JSON.stringify({
@@ -17,7 +20,7 @@ const questActivityGraphModal = async (reqBody) => {
 			type: "modal",
 			title: {
 				type: "plain_text",
-				text: "Quest Activity",
+				text: `${timeFrame} of Quests`,
 				emoji: true,
 			},
 			close: {
@@ -26,19 +29,20 @@ const questActivityGraphModal = async (reqBody) => {
 				emoji: true,
 			},
 			blocks: [
-				questStats.length ? 
-				{
-					type: "image",
-					image_url: `http://${process.env.PRERENDER_URL}/render?width=400&height=250&renderType=jpeg&url=https://${process.env.FRONTEND_PRERENDER}?${baseQuery}`,
-					alt_text: "quest stats",
-				} : {
-					type: "header",
-					text: {
-						type: "plain_text",
-						emoji: true,
-						text: ":astonished: No Quest Activity Found! :astonished:",
-					},
-				},
+				questStats.length
+					? {
+							type: "image",
+							image_url: `http://${process.env.PRERENDER_URL}/render?width=400&height=250&renderType=jpeg&url=https://${process.env.FRONTEND_PRERENDER}?${baseQuery}`,
+							alt_text: "quest stats",
+					  }
+					: {
+							type: "header",
+							text: {
+								type: "plain_text",
+								emoji: true,
+								text: ":astonished: No Quest Activity Found! :astonished:",
+							},
+					  },
 			],
 		},
 	});
