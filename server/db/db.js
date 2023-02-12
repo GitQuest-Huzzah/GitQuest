@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-// const seed = require('../../seed')
+
 
 const db = (() => {
 	switch (process.env.ENVIRONMENT) {
@@ -26,5 +26,4 @@ const db = (() => {
 })();
 
 db.sync();
-
 module.exports = db;
