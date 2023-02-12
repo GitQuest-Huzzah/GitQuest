@@ -15,6 +15,9 @@ const findQuestActivity = async (reqBody) => {
 			},
 		});
 		const questsReturn = await Quest.findAll({
+			where:{
+				status: 'completed'
+			},
 			include: [
 				{
 					model: Workspace,
