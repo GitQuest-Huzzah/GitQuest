@@ -114,6 +114,15 @@ const adminHomeView = (user, gHLink) => {
 					},
 					action_id: "assignQuestCompleteButton",
 				},
+				{
+					type: "button",
+					text: {
+						type: "plain_text",
+						text: ":chart_with_upwards_trend: Quest Activity",
+						emoji: true,
+					},
+					action_id: "questActivityButton",
+				},
 			],
 		},
 		{

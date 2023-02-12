@@ -22,6 +22,7 @@ const {
 	giveGoldModal,
 	goldLogModal,
 	profileModal,
+	questActivityModal,
 	questLogModal,
 	viewQuestsModal,
 } = require("../../homeTab");
@@ -61,6 +62,8 @@ router.post("/", (req, res, next) => {
 			questLogModal(parsedSubmission);
 		if (parsedSubmission.actions[0].action_id === "assignQuestCompleteButton")
 			adminAssignQuestCompleteModal(parsedSubmission);
+		if (parsedSubmission.actions[0].action_id === "questActivityButton")
+		questActivityModal(parsedSubmission);
 	}
 
 	if (
