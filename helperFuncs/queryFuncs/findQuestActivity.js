@@ -39,12 +39,16 @@ const findQuestActivity = async (reqBody) => {
 				.toObject();
 			return timeSinceQuestComplete.hours < 30;
 		});
-		return questsWithinTimePeriod
+		const questStats = questsWithinTimePeriod
 			.map((quest) => quest.dataValues.gitHubLogin)
 			.reduce((acc, name) => {
 				acc[name] = (acc[name] || 0) + 1;
 				return acc;
 			}, {});
+		const finalStats = Object.entries(questStats).map((stat) => {
+			return { name: stat[0], questQuantity: stat[1] };
+		});
+		return finalStats;
 	} catch (error) {
 		console.error(error);
 	}
