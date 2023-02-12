@@ -16,6 +16,7 @@ const findGitHubAPIToken = require("./queryFuncs/findGitHubAPIToken");
 const findGitHubOrgAllUsers = require("./queryFuncs/findGitHubOrgAllUsers");
 const findOrgOnGH = require("./queryFuncs/findOrgOnGH");
 const findTokenByTeamId = require("./queryFuncs/findTokenByTeamId");
+const findQuestActivity = require('./queryFuncs/findQuestActivity')
 const gitHubDeleteRepo = require("./gitFuncs/gitHubDeleteRepo");
 const gitHubInstall = require("./gitFuncs/gitHubInstall");
 const gitHubSetRepoHook = require("./gitFuncs/gitHubSetRepoHook");
@@ -52,6 +53,7 @@ module.exports = {
 	findGitHubOrgAllUsers,
 	findOrgOnGH,
 	findTokenByTeamId,
+	findQuestActivity,
 	gitHubDeleteRepo,
 	gitHubInstall,
 	gitHubSetRepoHook,

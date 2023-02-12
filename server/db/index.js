@@ -5,6 +5,7 @@ const Goldlog = require("./models/Goldlog");
 const Playerstat = require("./models/Playerstat");
 const Quest = require("./models/Quest");
 const Repo = require("./models/Repo");
+const seed = require("./seed");
 const User = require("./models/User");
 const Workspace = require("./models/Workspace");
 
@@ -12,7 +13,6 @@ const Workspace = require("./models/Workspace");
 
 User.belongsTo(Workspace);
 Workspace.hasMany(User);
-
 
 Repo.belongsTo(Workspace);
 Workspace.hasMany(Repo);
@@ -35,123 +35,16 @@ Channel.belongsTo(Workspace);
 User.belongsToMany(Achievement, { through: "user_achievement" });
 Achievement.belongsToMany(User, { through: "user_achievement" });
 
-// (async()=>{
-
-// const playerOne = await User.findOne({
-//     where:{
-//         id: 1
-//     }
-// })
-// const playerTwo = await User.findOne({
-//     where:{
-//         id: 2
-//     }
-// })
-
-// const statOne = await Playerstat.create()
-// const statTwo = await Playerstat.create()
-
-// playerOne.setPlayerstat(statOne)
-// statOne.setUser(playerOne)
-// playerTwo.setPlayerstat(statTwo)
-// statTwo.setUser(playerTwo)
-
-// })()
-// Achievement.bulkCreate([
-//     {
-//         commitValue: 1,
-//         achievementType: "commit",
-//         description: "Your first commit!",
-//     },
-//     {
-//         commitValue: 3,
-//         achievementType: "commit",
-//         description: "Your third commit!",
-//     },
-//     {
-//         commitValue: 5,
-//         achievementType: "commit",
-//         description: "Your fifth commit!",
-//     },
-//     {
-//         pullRequestValue: 1,
-//         achievementType: "pullRequest",
-//         description: "Your first pull request!",
-//     },
-//     {
-//         pullRequestValue: 3,
-//         achievementType: "pullRequest",
-//         description: "Your third pull request!",
-//     },
-//     {
-//         pullRequestValue: 5,
-//         achievementType: "pullRequest",
-//         description: "Your fifth pull request!",
-//     },
-//     {
-//         questsCompleted: 1,
-//         achievementType: "quest",
-//         description: "Your first quest!",
-//     },
-//     {
-//         questsCompleted: 3,
-//         achievementType: "quest",
-//         description: "Your third quest!",
-//     },
-//     {
-//         questsCompleted: 5,
-//         achievementType: "quest",
-//         description: "Your fifth quest!",
-//     },
-// ]);
-
+seed()
 module.exports = {
-    Achievement,
-    db,
-    Goldlog,
-    Repo,
-    User,
-    Workspace,
-    Quest,
-    Playerstat,
-
+	Achievement,
+	db,
+	Goldlog,
+	Repo,
+	User,
+	Workspace,
+	Quest,
+	Playerstat,
 };
 
-// const testQuery = async () => {
-// 	try {
-// 		const adminUser = await User.findOne({
-// 			where: {
-// 				id: 1, //this would be slackID in the real thing
-// 			},
-// 			include: {
-// 				model: Workspaces,
-// 			},
-// 		});
-// 		// console.log(adminUser)
-// 		const time = Math.round(new Date().getTime() / 1000);
-// 		const yesterday = time - 24 * 3600;
-// 		const questsReturn = await Quest.findAll({
-// 			where: {
-// 				updatedAt: {
-// 					[Op.between]: [yesterday, new Date()],
-// 				},
-// 			},
-// 			include: [
-// 				{
-// 					model: Workspaces,
-// 					where: {
-// 						id: adminUser.dataValues.workspaceId,
-// 					},
-// 				},
-// 				{ model: User },
-// 			],
-// 		});
-// 		console.log(questsReturn);
-// 		return questsReturn;
-// 	} catch (error) {
-// 		console.error(error);
-// 	}
-// };
 
-// // console.log(tsYesterday);
-// console.log(testQuery(), "promise?");
