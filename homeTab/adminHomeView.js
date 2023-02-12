@@ -114,6 +114,11 @@ const adminHomeView = (user, gHLink) => {
 					},
 					action_id: "assignQuestCompleteButton",
 				},
+			],
+		},
+		{
+			type: "actions",
+			elements: [
 				{
 					type: "button",
 					text: {
