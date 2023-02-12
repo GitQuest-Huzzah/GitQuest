@@ -23,6 +23,7 @@ const {
 	goldLogModal,
 	profileModal,
 	questActivityModal,
+	questActivityGraphModal,
 	questLogModal,
 	viewQuestsModal,
 } = require("../../homeTab");
@@ -62,73 +63,42 @@ router.post("/", (req, res, next) => {
 		if (parsedSubmission.actions[0].action_id === "assignQuestCompleteButton")
 			adminAssignQuestCompleteModal(parsedSubmission);
 		if (parsedSubmission.actions[0].action_id === "questActivityButton")
-		questActivityModal(parsedSubmission);
+			questActivityModal(parsedSubmission);
 	}
 
-	if (
-		parsedSubmission.view.callback_id === "adminAddReposSubmit" &&
-		parsedSubmission.type === "view_submission"
-	) {
+	if (parsedSubmission.type === "view_submission") {
+		if (parsedSubmission.view.callback_id === "questActivityGraphSubmit") {
+			questActivityGraphModal(parsedSubmission);
+		}
+		if (parsedSubmission.view.callback_id === "adminAddReposSubmit") {
+			addAllOrgReposToDB(parsedSubmission);
+			gitHubSetRepoHook(parsedSubmission);
+		}
+		if (parsedSubmission.view.callback_id === "adminAddOrgSubmit") {
+			createOrUpdateOrg(parsedSubmission);
+		}
+		if (parsedSubmission.view.callback_id === "adminGitConnectUserSubmit") {
+			updateUserGitHub(parsedSubmission);
+		}
+		if (parsedSubmission.view.callback_id === "adminDeleteReposSubmit") {
+			gitHubDeleteRepo(parsedSubmission);
+		}
+		if (parsedSubmission.view.callback_id === "giveGoldSubmit") {
+			giveGold(parsedSubmission);
+		}
+		if (parsedSubmission.view.callback_id === "addQuestSubmit") {
+			addNewQuest(parsedSubmission);
+		}
+		if (parsedSubmission.view.callback_id === "viewQuestsSubmit") {
+			viewQuests(parsedSubmission);
+		}
+		if (parsedSubmission.view.callback_id === "questLogSubmit") {
+			questLog(parsedSubmission);
+		}
+		if (parsedSubmission.view.callback_id === "assignQuestCompleteSubmit") {
+			adminAssignQuestComplete(parsedSubmission);
+		}
 		res.send({ response_action: "clear" });
-		addAllOrgReposToDB(parsedSubmission);
-		gitHubSetRepoHook(parsedSubmission);
-	}
-
-	if (
-		parsedSubmission.view.callback_id === "adminAddOrgSubmit" &&
-		parsedSubmission.type === "view_submission"
-	) {
-		res.send({ response_action: "clear" });
-		createOrUpdateOrg(parsedSubmission);
-	}
-	if (
-		parsedSubmission.view.callback_id === "adminGitConnectUserSubmit" &&
-		parsedSubmission.type === "view_submission"
-	) {
-		res.send({ response_action: "clear" });
-		updateUserGitHub(parsedSubmission);
-	}
-	if (
-		parsedSubmission.view.callback_id === "adminDeleteReposSubmit" &&
-		parsedSubmission.type === "view_submission"
-	) {
-		res.send({ response_action: "clear" });
-		gitHubDeleteRepo(parsedSubmission);
-	}
-	if (
-		parsedSubmission.view.callback_id === "giveGoldSubmit" &&
-		parsedSubmission.type === "view_submission"
-	) {
-		res.send({ response_action: "clear" });
-		giveGold(parsedSubmission);
-	}
-	if (
-		parsedSubmission.view.callback_id === "addQuestSubmit" &&
-		parsedSubmission.type === "view_submission"
-	) {
-		res.send({ response_action: "clear" });
-		addNewQuest(parsedSubmission);
-	}
-	if (
-		parsedSubmission.view.callback_id === "viewQuestsSubmit" &&
-		parsedSubmission.type === "view_submission"
-	) {
-		res.send({ response_action: "clear" });
-		viewQuests(parsedSubmission);
-	}
-	if (
-		parsedSubmission.view.callback_id === "questLogSubmit" &&
-		parsedSubmission.type === "view_submission"
-	) {
-		res.send({ response_action: "clear" });
-		questLog(parsedSubmission);
-	}
-	if (
-		parsedSubmission.view.callback_id === "assignQuestCompleteSubmit" &&
-		parsedSubmission.type === "view_submission"
-	) {
-		res.send({ response_action: "clear" });
-		adminAssignQuestComplete(parsedSubmission);
 	}
 });
 

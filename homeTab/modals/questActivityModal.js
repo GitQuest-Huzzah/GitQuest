@@ -1,23 +1,23 @@
 const { WebClient } = require("@slack/web-api");
-const { findTokenByTeamId, findQuestActivity } = require("../../helperFuncs");
+const { findTokenByTeamId } = require("../../helperFuncs");
 //instantiating an instance of the slack Web Client API
 const web = new WebClient();
 const questActivityModal = async (reqBody) => {
 	const token = await findTokenByTeamId(reqBody.user.team_id);
-	const questStats = await findQuestActivity(reqBody);
-	const stringQuery = JSON.stringify({
-		component: "questActivity",
-		activityStats:[...questStats]
-	});
-	const baseQuery = Buffer.from(stringQuery).toString("base64");
 	await web.views.open({
 		trigger_id: reqBody.trigger_id,
 		token: token,
 		view: {
 			type: "modal",
+			callback_id: "questActivityGraphSubmit",
 			title: {
 				type: "plain_text",
 				text: "Quest Activity",
+				emoji: true,
+			},
+			submit: {
+				type: "plain_text",
+				text: "Submit",
 				emoji: true,
 			},
 			close: {
@@ -26,17 +26,87 @@ const questActivityModal = async (reqBody) => {
 				emoji: true,
 			},
 			blocks: [
-				questStats.length ? 
 				{
-					type: "image",
-					image_url: `http://${process.env.PRERENDER_URL}/render?width=400&height=250&renderType=jpeg&url=https://${process.env.FRONTEND_PRERENDER}?${baseQuery}`,
-					alt_text: "quest stats",
-				} : {
-					type: "header",
+					type: "section",
+					block_id:'questActivityOption',
 					text: {
-						type: "plain_text",
-						emoji: true,
-						text: ":astonished: No Quest Activity Found! :astonished:",
+						type: "mrkdwn",
+						text: "Activity Time Frame",
+					},
+					accessory: {
+						type: "static_select",
+						placeholder: {
+							type: "plain_text",
+							text: "Select Time",
+							emoji: true,
+						},
+						options: [
+							{
+								text: {
+									type: "plain_text",
+									text: "12hrs",
+									emoji: true,
+								},
+								value: "12",
+							},
+							{
+								text: {
+									type: "plain_text",
+									text: "1 Day",
+									emoji: true,
+								},
+								value: "24",
+							},
+							{
+								text: {
+									type: "plain_text",
+									text: "2 Days",
+									emoji: true,
+								},
+								value: "48",
+							},
+							{
+								text: {
+									type: "plain_text",
+									text: "3 Days",
+									emoji: true,
+								},
+								value: "72",
+							},
+							{
+								text: {
+									type: "plain_text",
+									text: "4 Days",
+									emoji: true,
+								},
+								value: "96",
+							},
+							{
+								text: {
+									type: "plain_text",
+									text: "5 Days",
+									emoji: true,
+								},
+								value: "120",
+							},
+							{
+								text: {
+									type: "plain_text",
+									text: "6 Days",
+									emoji: true,
+								},
+								value: "144",
+							},
+							{
+								text: {
+									type: "plain_text",
+									text: "7 Days",
+									emoji: true,
+								},
+								value: "168",
+							},
+						],
+						action_id: "questActivitySelect",
 					},
 				},
 			],

@@ -15,6 +15,7 @@ const goldLogModal = require("./modals/goldLogModal");
 const homeTab = require("./homeTab");
 const profileModal = require("./modals/profileModal");
 const questActivityModal = require("./modals/questActivityModal");
+const questActivityGraphModal = require('./modals/questActivityGraphModal')
 const questLogModal = require("./modals/questLogModal");
 const userHomeView = require("./userHomeView");
 const viewQuestsModal = require("./modals/viewQuestsModal");
@@ -37,6 +38,7 @@ module.exports = {
 	homeTab,
 	profileModal,
 	questActivityModal,
+	questActivityGraphModal,
 	questLogModal,
 	userHomeView,
 	viewQuestsModal,
