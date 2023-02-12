@@ -54,7 +54,6 @@ const findQuestActivity = async (reqBody) => {
 		const finalStats = Object.entries(questStats).map((stat) => {
 			return { name: stat[0], questQuantity: stat[1] };
 		});
-		console.log(finalStats);
 		return finalStats;
 	} catch (error) {
 		console.error(error);
