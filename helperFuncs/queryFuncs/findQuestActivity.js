@@ -2,7 +2,10 @@ const { Workspace, User, Quest } = require("../../server/db");
 const { DateTime } = require("luxon");
 const { Sequelize } = require("sequelize");
 const findQuestActivity = async (reqBody) => {
-	try {
+			try {
+		const timeFrame =
+			reqBody.view.state.values.questActivityOption.questActivitySelect
+				.selected_option.value;
 		const adminUser = await User.findOne({
 			where: {
 				slackID: reqBody.user.id, //this would be slackID in the real thing
@@ -15,8 +18,8 @@ const findQuestActivity = async (reqBody) => {
 			},
 		});
 		const questsReturn = await Quest.findAll({
-			where:{
-				status: 'completed'
+			where: {
+				status: "completed",
 			},
 			include: [
 				{
@@ -40,7 +43,7 @@ const findQuestActivity = async (reqBody) => {
 			const timeSinceQuestComplete = now
 				.diff(questFinished, "hours")
 				.toObject();
-			return timeSinceQuestComplete.hours < 48;
+			return timeSinceQuestComplete.hours < timeFrame;
 		});
 		const questStats = questsWithinTimePeriod
 			.map((quest) => quest.dataValues.gitHubLogin)
