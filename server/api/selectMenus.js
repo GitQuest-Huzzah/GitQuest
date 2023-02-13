@@ -1,50 +1,37 @@
 const {
-	externalRepoSelectMenu,
 	externalGitHubUserConnectSelectMenu,
-	externalRepoDeleteSelectMenu,
 	externalQuestLogSelect,
+	externalRepoDeleteSelectMenu,
+	externalRepoSelectMenu,
 } = require("../../homeTab");
 const {
-	findAllAvailableQuests,
-	findAllActiveQuestsPerUser,
 	findAllActiveQuests,
+	findAllActiveQuestsPerUser,
+	findAllAvailableQuests,
 } = require("../../helperFuncs");
-
 const router = require("express").Router();
-
 //path is api/selectMenus
 router.post("/", async (req, res, next) => {
 	const parsedSubmission = JSON.parse(req.body.payload);
-
-	if (parsedSubmission.view.callback_id === "adminAddReposSubmit") {
-		res.send(await externalRepoSelectMenu(parsedSubmission)).status(200);
-	}
-	if (parsedSubmission.view.callback_id === "adminGitConnectUserSubmit") {
+	const menuSubmission = {
+		adminAddReposSubmit: externalRepoSelectMenu,
+		adminDeleteReposSubmit: externalRepoDeleteSelectMenu,
+		adminGitConnectUserSubmit: externalGitHubUserConnectSelectMenu,
+	};
+	const questMenuSubmission = {
+		assignQuestCompleteSubmit: findAllActiveQuests,
+		questLogSubmit: findAllActiveQuestsPerUser,
+		viewQuestsSubmit: findAllAvailableQuests,
+	};
+	const inputSubmitted = parsedSubmission.view.callback_id;
+	if (Object.keys(menuSubmission).includes(inputSubmitted)) {
 		res
-			.send(await externalGitHubUserConnectSelectMenu(parsedSubmission))
+			.send(await menuSubmission[inputSubmitted](parsedSubmission))
 			.status(200);
 	}
-	if (parsedSubmission.view.callback_id === "adminDeleteReposSubmit") {
-		res.send(await externalRepoDeleteSelectMenu(parsedSubmission)).status(200);
-	}
-	if (parsedSubmission.view.callback_id === "viewQuestsSubmit") {
-		const quests = await findAllAvailableQuests(parsedSubmission);
-		res
-			.send(await externalQuestLogSelect(quests, parsedSubmission))
-			.status(200);
-	}
-	if (parsedSubmission.view.callback_id === "questLogSubmit") {
-		const quests = await findAllActiveQuestsPerUser(parsedSubmission);
-		res
-			.send(await externalQuestLogSelect(quests, parsedSubmission))
-			.status(200);
-	}
-	if (parsedSubmission.view.callback_id === "assignQuestCompleteSubmit") {
-		const quests = await findAllActiveQuests(parsedSubmission);
-		res
-			.send(await externalQuestLogSelect(quests, parsedSubmission))
-			.status(200);
+	if (Object.keys(questMenuSubmission).includes(inputSubmitted)) {
+		const quests = await questMenuSubmission[inputSubmitted](parsedSubmission);
+		res.send(await externalQuestLogSelect(quests, parsedSubmission));
 	}
 });
-
 module.exports = router;

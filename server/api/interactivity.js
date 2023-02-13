@@ -4,11 +4,11 @@ const {
 	adminAssignQuestComplete,
 	createOrUpdateOrg,
 	gitHubDeleteRepo,
+	gitHubSetRepoHook,
 	giveGold,
 	questLog,
 	updateUserGitHub,
 	viewQuests,
-	gitHubSetRepoHook,
 } = require("../../helperFuncs");
 
 const {
@@ -32,71 +32,47 @@ const router = require("express").Router();
 
 //path is api/interactivity
 //all captured data from interactive slack messages hit this endpoint
-router.post("/", (req, res, next) => {
+router.post("/", (req, res) => {
 	const parsedSubmission = JSON.parse(req.body.payload);
 	if (parsedSubmission.type === "block_actions") {
-		if (parsedSubmission.actions[0].action_id === "adminOrgModalButton")
-			adminOrgModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "adminRepoModalButton")
-			adminRepoModal(parsedSubmission);
-		if (
-			parsedSubmission.actions[0].action_id === "adminGitConnectUserModalButton"
-		)
-			adminGitConnectUserModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "adminRepoDeleteModalButton")
-			adminDeleteRepoModal(parsedSubmission);
+		const modal = {
+			achievementButton: achievementsModal,
+			addQuestButton: addQuestModal,
+			adminGitConnectUserModalButton: adminGitConnectUserModal,
+			adminOrgModalButton: adminOrgModal,
+			adminRepoDeleteModalButton: adminDeleteRepoModal,
+			adminRepoModalButton: adminRepoModal,
+			assignQuestCompleteButton: adminAssignQuestCompleteModal,
+			giveGoldButton: giveGoldModal,
+			goldLogButton: goldLogModal,
+			profileButton: profileModal,
+			questActivityButton: questActivityModal,
+			questLogButton: questLogModal,
+			viewQuestsButton: viewQuestsModal,
+		};
+		const buttonClicked = parsedSubmission.actions[0].action_id;
+		if (Object.keys(modal).includes(buttonClicked)) {
+			modal[buttonClicked](parsedSubmission);
+		}
 		res.sendStatus(200);
-		if (parsedSubmission.actions[0].action_id === "goldLogButton")
-			goldLogModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "achievementButton")
-			achievementsModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "giveGoldButton")
-			giveGoldModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "addQuestButton")
-			addQuestModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "viewQuestsButton")
-			viewQuestsModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "profileButton")
-			profileModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "questLogButton")
-			questLogModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "assignQuestCompleteButton")
-			adminAssignQuestCompleteModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "questActivityButton")
-			questActivityModal(parsedSubmission);
 	}
 
 	if (parsedSubmission.type === "view_submission") {
-		if (parsedSubmission.view.callback_id === "questActivityGraphSubmit") {
-			questActivityGraphModal(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "adminAddReposSubmit") {
-			addAllOrgReposToDB(parsedSubmission);
-			gitHubSetRepoHook(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "adminAddOrgSubmit") {
-			createOrUpdateOrg(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "adminGitConnectUserSubmit") {
-			updateUserGitHub(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "adminDeleteReposSubmit") {
-			gitHubDeleteRepo(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "giveGoldSubmit") {
-			giveGold(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "addQuestSubmit") {
-			addNewQuest(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "viewQuestsSubmit") {
-			viewQuests(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "questLogSubmit") {
-			questLog(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "assignQuestCompleteSubmit") {
-			adminAssignQuestComplete(parsedSubmission);
+		const submission = {
+			addQuestSubmit: [addNewQuest],
+			adminAddOrgSubmit: [createOrUpdateOrg],
+			adminAddReposSubmit: [addAllOrgReposToDB, gitHubSetRepoHook],
+			adminDeleteReposSubmit: [gitHubDeleteRepo],
+			adminGitConnectUserSubmit: [updateUserGitHub],
+			assignQuestCompleteSubmit: [adminAssignQuestComplete],
+			giveGoldSubmit: [giveGold],
+			questActivityGraphSubmit: [questActivityGraphModal],
+			questLogSubmit: [questLog],
+			viewQuestsSubmit: [viewQuests],
+		};
+		const inputSubmitted = parsedSubmission.view.callback_id;
+		if (Object.keys(submission).includes(inputSubmitted)) {
+			submission[inputSubmitted].forEach((submit) => submit(parsedSubmission));
 		}
 		res.send({ response_action: "clear" });
 	}

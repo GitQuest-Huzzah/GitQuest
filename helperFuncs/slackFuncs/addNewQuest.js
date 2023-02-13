@@ -3,14 +3,20 @@ const web = new WebClient();
 const { Workspace, Quest } = require("../../server/db");
 const findTokenByTeamId = require("../queryFuncs/findTokenByTeamId");
 const addNewQuest = async (reqBody) => {
-	const name = reqBody.view.state.values.name.nameAction.value;
-	const keyword = reqBody.view.state.values.keyword.keywordAction.value;
-	const description =
-		reqBody.view.state.values.description.descriptionAction.value;
-	const expValue = reqBody.view.state.values.expValue.expValueAction.value;
-	const goldValue = reqBody.view.state.values.goldValue.goldValueAction.value;
+	const {
+		view: {
+			state: {
+				values: { name, keyword, description, expValue, goldValue },
+			},
+		},
+	} = reqBody;
+	const qName = name.nameAction.value;
+	const qKeyword = keyword.keywordAction.value;
+	const qDescription = description.descriptionAction.value;
+	const qExpValue = expValue.expValueAction.value;
+	const qGoldValue = goldValue.goldValueAction.value;
 
-	if (keyword.split(" ").length > 1) {
+	if (qKeyword.split(" ").length > 1) {
 		await web.chat.postMessage({
 			blocks: [
 				{
@@ -33,11 +39,11 @@ const addNewQuest = async (reqBody) => {
 	});
 
 	const quest = await Quest.create({
-		name,
-		keyword,
-		description,
-		expValue,
-		goldValue,
+		name: qName,
+		keyword: qKeyword,
+		description: qDescription,
+		expValue: qExpValue,
+		goldValue: qGoldValue,
 	});
 	workspace.addQuest(quest);
 };
