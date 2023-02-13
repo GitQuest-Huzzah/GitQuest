@@ -85,7 +85,7 @@ const giveGold = async (reqBody) => {
 		},
 	});
 	const receivingUserLog = await Goldlog.create({
-		description: `${sendingUserk.dataValues.gitHubLogin} gave you gold!`,
+		description: `${sendingUser.dataValues.gitHubLogin} gave you gold!`,
 		valueChange: `+ ${goldExchanged}`,
 	});
 	receivingUser.addGoldlog(receivingUserLog);
