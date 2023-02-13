@@ -27,7 +27,7 @@ const gitHubSetRepoHook = async (reqBody) => {
 			active: true,
 			events: ["push", "pull_request"],
 			config: {
-				url: "https://2fe4-68-187-211-51.ngrok.io/api/webhook",
+				url: "https://gitgoingslackbot.uc.r.appspot.com/api/webhook",
 				content_type: "json",
 				insecure_ssl: "0",
 			},
