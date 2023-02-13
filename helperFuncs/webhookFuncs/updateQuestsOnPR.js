@@ -31,16 +31,6 @@ const updateQuestsOnPR = async (reqBody) => {
 				userId: user.dataValues.id
 			}
 		});
-		// Playerstat.update(
-		// 	{
-		// 		questsCompleted,
-		// 	},
-		// 	{
-		// 		where: {
-		// 			userId: user.dataValues.id,
-		// 		},
-		// 	}
-		// );
 		user.addAchievement(achievement);
 		quest.update({
 			status: "completed",
