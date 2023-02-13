@@ -63,7 +63,7 @@ const giveGold = async (reqBody) => {
 					type: "section",
 					text: {
 						type: "mrkdwn",
-						text: "User you are trying to give gold too doens't exist in the database",
+						text: "Adventurer you are trying to give gold to doesn't exist",
 					},
 				},
 			],
@@ -85,7 +85,7 @@ const giveGold = async (reqBody) => {
 		},
 	});
 	const receivingUserLog = await Goldlog.create({
-		description: "Someone gave you gold!",
+		description: `${sendingUser.dataValues.gitHubLogin} gave you gold!`,
 		valueChange: `+ ${goldExchanged}`,
 	});
 	receivingUser.addGoldlog(receivingUserLog);
