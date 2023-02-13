@@ -35,68 +35,44 @@ const router = require("express").Router();
 router.post("/", (req, res, next) => {
 	const parsedSubmission = JSON.parse(req.body.payload);
 	if (parsedSubmission.type === "block_actions") {
-		if (parsedSubmission.actions[0].action_id === "adminOrgModalButton")
-			adminOrgModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "adminRepoModalButton")
-			adminRepoModal(parsedSubmission);
-		if (
-			parsedSubmission.actions[0].action_id === "adminGitConnectUserModalButton"
-		)
-			adminGitConnectUserModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "adminRepoDeleteModalButton")
-			adminDeleteRepoModal(parsedSubmission);
+		const modal = {
+			adminOrgModalButton: adminOrgModal,
+			adminRepoModalButton: adminRepoModal,
+			adminGitConnectUserModalButton: adminGitConnectUserModal,
+			adminRepoDeleteModalButton: adminDeleteRepoModal,
+			goldLogButton: goldLogModal,
+			achievementButton: achievementsModal,
+			giveGoldButton: giveGoldModal,
+			addQuestButton: addQuestModal,
+			viewQuestsButton: viewQuestsModal,
+			profileButton: profileModal,
+			questLogButton: questLogModal,
+			assignQuestCompleteButton: adminAssignQuestCompleteModal,
+			questActivityButton: questActivityModal,
+		};
+		const buttonClicked = parsedSubmission.actions[0].action_id;
+		if (Object.keys(modal).includes(buttonClicked)) {
+			modal[buttonClicked](parsedSubmission);
+		}
 		res.sendStatus(200);
-		if (parsedSubmission.actions[0].action_id === "goldLogButton")
-			goldLogModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "achievementButton")
-			achievementsModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "giveGoldButton")
-			giveGoldModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "addQuestButton")
-			addQuestModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "viewQuestsButton")
-			viewQuestsModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "profileButton")
-			profileModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "questLogButton")
-			questLogModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "assignQuestCompleteButton")
-			adminAssignQuestCompleteModal(parsedSubmission);
-		if (parsedSubmission.actions[0].action_id === "questActivityButton")
-			questActivityModal(parsedSubmission);
 	}
 
 	if (parsedSubmission.type === "view_submission") {
-		if (parsedSubmission.view.callback_id === "questActivityGraphSubmit") {
-			questActivityGraphModal(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "adminAddReposSubmit") {
-			addAllOrgReposToDB(parsedSubmission);
-			gitHubSetRepoHook(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "adminAddOrgSubmit") {
-			createOrUpdateOrg(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "adminGitConnectUserSubmit") {
-			updateUserGitHub(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "adminDeleteReposSubmit") {
-			gitHubDeleteRepo(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "giveGoldSubmit") {
-			giveGold(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "addQuestSubmit") {
-			addNewQuest(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "viewQuestsSubmit") {
-			viewQuests(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "questLogSubmit") {
-			questLog(parsedSubmission);
-		}
-		if (parsedSubmission.view.callback_id === "assignQuestCompleteSubmit") {
-			adminAssignQuestComplete(parsedSubmission);
+		const submission = {
+			questActivityGraphSubmit: [questActivityGraphModal],
+			adminAddReposSubmit: [addAllOrgReposToDB, gitHubSetRepoHook],
+			adminAddOrgSubmit: [createOrUpdateOrg],
+			adminGitConnectUserSubmit: [updateUserGitHub],
+			adminDeleteReposSubmit: [gitHubDeleteRepo],
+			giveGoldSubmit: [giveGold],
+			addQuestSubmit: [addNewQuest],
+			viewQuestsSubmit: [viewQuests],
+			questLogSubmit: [questLog],
+			assignQuestCompleteSubmit: [adminAssignQuestComplete],
+		};
+		const inputSubmitted = parsedSubmission.view.callback_id;
+		if (Object.keys(submission).includes(inputSubmitted)) {
+			submission[inputSubmitted].forEach((submit) => submit(parsedSubmission));
 		}
 		res.send({ response_action: "clear" });
 	}
