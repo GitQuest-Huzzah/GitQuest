@@ -29,7 +29,7 @@ const questDisplay = (quests, status) => {
 					type: "multi_external_select",
 					placeholder: {
 						type: "plain_text",
-						text: "Select items",
+						text: "Select Quests",
 					},
 					min_query_length: 0,
 				},

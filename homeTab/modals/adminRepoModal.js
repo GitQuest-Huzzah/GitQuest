@@ -39,7 +39,7 @@ const adminRepoModal = async (reqBody) => {
 						type: "multi_external_select",
 						placeholder: {
 							type: "plain_text",
-							text: "Select items",
+							text: "Select Repos",
 						},
 						min_query_length: 0,
 					},
