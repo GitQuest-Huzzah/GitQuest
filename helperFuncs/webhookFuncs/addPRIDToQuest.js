@@ -20,7 +20,7 @@ const addPRIDToQuest = async (reqBody) => {
 	});
 	if (quests.length) {
 		const prQuest = quests.reduce((acc, quest) => {
-			if (reqBody.pull_request.title.split(" ")[0] === quest.keyword) {
+			if (reqBody.pull_request.title.toLowercase().split(" ")[0] === quest.keyword.toLowercase()) {
 				acc = quest;
 			}
 			return acc;
