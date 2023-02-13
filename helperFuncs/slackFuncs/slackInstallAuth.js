@@ -5,7 +5,7 @@ const { User, Workspace, Playerstat } = require("../../server/db");
 const web = new WebClient();
 //slackInstallAuth responds to the redirect from a user agreeing to install the app on a workspace, which hits the path /api/slack/install/redirect
 // the first block takes the code given by agreeing to install, and supplies the associated slack app information and then exchanges it for a official bot token
-const slackInstallAuth = async (req, res) => {
+const slackInstallAuth = async (req, _res) => {
 	try {
 		const installRequest = await web.oauth.v2.access({
 			code: req.query.code,

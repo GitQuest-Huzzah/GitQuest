@@ -1,11 +1,11 @@
 const questDisplay = (quests, status) => {
 	if (quests.length) {
-		let returnArr = quests.map((quest) => {
+		let returnArr = quests.map(({dataValues:{name, keyword, description,goldValue, expValue, status}}) => {
 			return {
 				type: "section",
 				text: {
 					type: "mrkdwn",
-					text: `*Name* ${quest.dataValues.name}\n*Keyword* ${quest.dataValues.keyword}\n*Description* ${quest.dataValues.description}\n*Gold Value* ${quest.dataValues.goldValue}\n*Exp Value* ${quest.dataValues.expValue}\n*Availability* ${quest.dataValues.status}`,
+					text: `*Name* ${name}\n*Keyword* ${keyword}\n*Description* ${description}\n*Gold Value* ${goldValue}\n*Exp Value* ${expValue}\n*Availability* ${status}`,
 				},
 			};
 		});

@@ -3,10 +3,16 @@ const userLevelFunc = require("../webhookFuncs/userLevelFunc");
 const updateAchievement = require("../webhookFuncs/updateAchievement");
 
 const adminAssignQuestComplete = async (reqBody) => {
-	const quests =
-		reqBody.view.state.values.questBlock.questAction.selected_options;
-	const userId =
-		reqBody.view.state.values.userSelectBlock.userSelectAction.selected_user;
+	const {
+		view: {
+			state: {
+				values: { questBlock, userSelectBlock },
+			},
+		},
+	} = reqBody;
+
+	const quests = questBlock.questAction.selected_options;
+	const userId = userSelectBlock.userSelectAction.selected_user;
 	const user = await User.findOne({
 		where: {
 			slackID: userId,

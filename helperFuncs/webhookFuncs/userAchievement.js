@@ -1,4 +1,4 @@
-const { Achievement, User } = require("../../server/db");
+const { Achievement } = require("../../server/db");
 const updateAchievement = require("./updateAchievement");
 
 const userAchievement = async (user, commits, pulls) => {
