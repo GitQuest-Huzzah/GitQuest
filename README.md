@@ -1,7 +1,7 @@
 ![GQBANNER](https://user-images.githubusercontent.com/114195647/218575946-a91b1e73-d29d-40b9-9ae9-f35b0f475411.png)
 # GitQuest!
 
-GitQuest is a Slack app integration that gamifies your GitHub acitivity from a selected repository.
+GitQuest is a Slack app integration that gamifies your GitHub activity from a selected repository.
 
 ## Installation
 To install you'll first need to add the app to your slack workspace by clicking the add to slack button on our website after providing your email. 
@@ -12,7 +12,7 @@ Follow the numbered buttons provided to the admin of your organization who insta
 
 2. Authorize our app thru GitHub.
 
-3. Link your workspaces users and to their GitHub usernames, don't worry this can be changed at any time in the future.
+3. Link your workspaces users and to their GitHub usernames (don't worry this can be changed at any time in the future).
 
 4. Link any repos you'd like us track activity on for you. Please choose as many as you'd like. Later if you decide to stop tracking certain repos feel free to use the ```Unfollow Repos``` button.
 
@@ -21,9 +21,9 @@ Follow the numbered buttons provided to the admin of your organization who insta
 ## Usage
 
 ### Quests
-•Once the workspace administrator has followed all the installation instructions your team will be ready to commit to the quest.
+•Once the workspace administrator has followed all the installation instructions your team will be ready to commit to the quest!
 
-•Your workspace administrator can create quests much like a typical ticket to allow a specific amount of gold and xp to bestow upon completion. Quests have a description to cover any and all issues the quest should address, a name to identify it, and MOST importantly a ```keyword``` which will need to be provided as the first word of your pull request subject, which is populated automatically from your commit message. This is how we make sure a pull request is referencing a specific quest so make sure you do it right. However if you forget your admin can still complete a quest for you however be aware you won't get credit for your pull request, or the commits, only the value for the quest itself. Below is an example if the quest keyword were ```bugchase```(note: keywords are NOT case sensitive)
+•Your workspace administrator can create quests, much like a typical ticket to allow a specific amount of gold and xp to bestow upon completion. Quests have a description to cover any and all issues the quest should address, a name to identify it, and MOST importantly a ```keyword``` which will need to be provided as the first word of your pull request subject. The pull request subject is populated automatically from your commit message. This is how we make sure a pull request is referencing a specific quest, so make sure you do it right! However, if you forget, your admin can still complete a quest for you. Just be aware you won't get credit for your pull request or the commits, only the value for the quest itself. Below is an example if the quest keyword were ```bugchase```(note: keywords are NOT case sensitive)
 ![image](https://user-images.githubusercontent.com/114195647/218576962-9071803e-a919-41fd-8eee-0dcde2be92fb.png)
 
 •You can simply claim a quest(or several!) by using the ```Available Quests``` button on the app home screen in Slack.
