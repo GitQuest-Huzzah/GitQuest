@@ -3,7 +3,6 @@ const addNewQuest = require("./slackFuncs/addNewQuest");
 const addPRIDToQuest = require("./webhookFuncs/addPRIDToQuest");
 const adminAssignQuestComplete = require("./slackFuncs/adminAssignQuestComplete");
 const commitAchievements = require("./webhookFuncs/commitAchievements");
-const commitReqAchieveFunc = require("./webhookFuncs/commitReqAchieveFunc");
 const createAdminGHLink = require("./slackFuncs/createAdminGHLink");
 const createOrUpdateOrg = require("./slackFuncs/createOrUpdateOrg");
 const findAllActiveQuestsPerUser = require("./queryFuncs/findAllActiveQuestPerUser");
@@ -21,7 +20,6 @@ const gitHubDeleteRepo = require("./gitFuncs/gitHubDeleteRepo");
 const gitHubInstall = require("./gitFuncs/gitHubInstall");
 const gitHubSetRepoHook = require("./gitFuncs/gitHubSetRepoHook");
 const giveGold = require("./slackFuncs/giveGold");
-const pullReqAchieveFunc = require("./webhookFuncs/pullReqAchieveFunc");
 const pullRequestAchievements = require("./webhookFuncs/pullRequestAchievements");
 const questDisplay = require("./slackFuncs/questDisplay");
 const questLog = require("./slackFuncs/questLog");
@@ -40,7 +38,6 @@ module.exports = {
 	addPRIDToQuest,
 	adminAssignQuestComplete,
 	commitAchievements,
-	commitReqAchieveFunc,
 	createAdminGHLink,
 	createOrUpdateOrg,
 	findAllActiveQuestsPerUser,
@@ -58,7 +55,6 @@ module.exports = {
 	gitHubInstall,
 	gitHubSetRepoHook,
 	giveGold,
-	pullReqAchieveFunc,
 	pullRequestAchievements,
 	questDisplay,
 	questLog,

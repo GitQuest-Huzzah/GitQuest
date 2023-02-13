@@ -4,10 +4,12 @@ const findTokenByTeamId = require("../queryFuncs/findTokenByTeamId");
 const web = new WebClient();
 
 const giveGold = async (reqBody) => {
+	const selectedUser =
+		reqBody.view.state.values.userSelected.selectedUser.selected_user;
+	const goldExchanged = reqBody.view.state.values.amountGiven.givenAmount.value;
 	const receivingUser = await User.findOne({
 		where: {
-			slackID:
-				reqBody.view.state.values.userSelected.selectedUser.selected_user,
+			slackID: selectedUser,
 		},
 	});
 
@@ -15,15 +17,12 @@ const giveGold = async (reqBody) => {
 		where: {
 			slackID: reqBody.user.id,
 		},
-		include:{
-			model: Playerstat
-		}
+		include: {
+			model: Playerstat,
+		},
 	});
 
-	if (
-		sendingUser.dataValues.playerstat.dataValues.rewardGold <
-		reqBody.view.state.values.amountGiven.givenAmount.value
-	) {
+	if (sendingUser.dataValues.playerstat.dataValues.rewardGold < goldExchanged) {
 		await web.chat.postMessage({
 			blocks: [
 				{
@@ -40,10 +39,7 @@ const giveGold = async (reqBody) => {
 		return console.log("exiting");
 	}
 
-	if (
-		reqBody.user.id ===
-		reqBody.view.state.values.userSelected.selectedUser.selected_user
-	) {
+	if (reqBody.user.id === selectedUser) {
 		await web.chat.postMessage({
 			blocks: [
 				{
@@ -77,18 +73,20 @@ const giveGold = async (reqBody) => {
 		return console.log("exiting");
 	}
 	Playerstat.decrement("rewardGold", {
-		by: reqBody.view.state.values.amountGiven.givenAmount.value, where:{
-			userId: sendingUser.dataValues.id
-		}
+		by: goldExchanged,
+		where: {
+			userId: sendingUser.dataValues.id,
+		},
 	});
 	Playerstat.increment("gold", {
-		by: reqBody.view.state.values.amountGiven.givenAmount.value, where:{
-			userId: receivingUser.dataValues.id
-		}
+		by: goldExchanged,
+		where: {
+			userId: receivingUser.dataValues.id,
+		},
 	});
 	const receivingUserLog = await Goldlog.create({
 		description: "Someone gave you gold!",
-		valueChange: `+ ${reqBody.view.state.values.amountGiven.givenAmount.value}`,
+		valueChange: `+ ${goldExchanged}`,
 	});
 	receivingUser.addGoldlog(receivingUserLog);
 };

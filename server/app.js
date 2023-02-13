@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api", require("./api"));
 
 //app error handling
-app.use((error, req, res, next) => {
+app.use((error, _req, res, _next) => {
 	console.error(error);
 	res.status(error.status).send(error.message);
 });
