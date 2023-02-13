@@ -40,11 +40,11 @@ module.exports = {
 	Achievement,
 	db,
 	Goldlog,
+	Playerstat,
+	Quest,
 	Repo,
 	User,
 	Workspace,
-	Quest,
-	Playerstat,
 };
 
 

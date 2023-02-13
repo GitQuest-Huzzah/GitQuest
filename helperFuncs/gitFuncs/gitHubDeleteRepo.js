@@ -11,7 +11,7 @@ const gitHubDeleteRepo = async (reqBody) => {
 	});
 	reposToDelete.forEach(async (repo) => {
 		const [repoId, orgName] = repo.value.split(",");
-		const destroyedRepo = await Repo.destroy({
+		await Repo.destroy({
 			where: {
 				repoId: repoId,
 			},

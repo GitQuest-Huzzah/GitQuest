@@ -1,13 +1,13 @@
 const {
-	externalRepoSelectMenu,
 	externalGitHubUserConnectSelectMenu,
-	externalRepoDeleteSelectMenu,
 	externalQuestLogSelect,
+	externalRepoDeleteSelectMenu,
+	externalRepoSelectMenu,
 } = require("../../homeTab");
 const {
-	findAllAvailableQuests,
-	findAllActiveQuestsPerUser,
 	findAllActiveQuests,
+	findAllActiveQuestsPerUser,
+	findAllAvailableQuests,
 } = require("../../helperFuncs");
 const router = require("express").Router();
 //path is api/selectMenus
@@ -15,13 +15,13 @@ router.post("/", async (req, res, next) => {
 	const parsedSubmission = JSON.parse(req.body.payload);
 	const menuSubmission = {
 		adminAddReposSubmit: externalRepoSelectMenu,
-		adminGitConnectUserSubmit: externalGitHubUserConnectSelectMenu,
 		adminDeleteReposSubmit: externalRepoDeleteSelectMenu,
+		adminGitConnectUserSubmit: externalGitHubUserConnectSelectMenu,
 	};
 	const questMenuSubmission = {
-		viewQuestsSubmit: findAllAvailableQuests,
-		questLogSubmit: findAllActiveQuestsPerUser,
 		assignQuestCompleteSubmit: findAllActiveQuests,
+		questLogSubmit: findAllActiveQuestsPerUser,
+		viewQuestsSubmit: findAllAvailableQuests,
 	};
 	const inputSubmitted = parsedSubmission.view.callback_id;
 	if (Object.keys(menuSubmission).includes(inputSubmitted)) {
