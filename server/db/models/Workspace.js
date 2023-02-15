@@ -18,8 +18,8 @@ const Workspace = db.define("workspace", {
 		type: Sequelize.STRING,
 	},
 	ghType: {
-		type: Sequelize.ENUM("individual", "organization"),
-		defaultValue:"individual"
+        type: Sequelize.STRING,
+		defaultValue:'individual'
 	}
 });
 
