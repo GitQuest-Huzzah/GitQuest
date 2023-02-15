@@ -10,7 +10,7 @@ const findAllOrgRepos = async (reqBody) => {
 	const {
 		dataValues: {
 			workspace: {
-				dataValues: { orgName },
+				dataValues: { orgName, ghType },
 			},
 		},
 	} = await User.findOne({
@@ -21,9 +21,9 @@ const findAllOrgRepos = async (reqBody) => {
 			model: Workspace,
 		},
 	});
-	return await octokit.request("GET /orgs/{owner}/repos", {
+	return ghType === "organization" ? await octokit.request("GET /orgs/{owner}/repos", {
 		owner: orgName, //these need to be set to receive from the found user
-	});
+	}) : await octokit.request("GET /user/repos")
 };
 
 module.exports = findAllOrgRepos;

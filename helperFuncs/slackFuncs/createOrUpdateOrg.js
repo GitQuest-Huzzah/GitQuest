@@ -9,10 +9,10 @@ const createOrUpdateOrg = async (reqBody) => {
 			teamID: reqBody.view.team_id,
 		},
 	});
-	const doesOrgExist = await findOrgOnGH(reqBody);
-	if (doesOrgExist) {
-		return await orgToUpdate.update({ orgName: orgName });
+		const doesOrgExist = await findOrgOnGH(reqBody);
+		if (doesOrgExist) {
+			return await orgToUpdate.update({ orgName: orgName, ghType: ownerOrgSelect });
+		}
 	}
-};
 
 module.exports = createOrUpdateOrg;
