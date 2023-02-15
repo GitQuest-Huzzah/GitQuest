@@ -17,6 +17,10 @@ const Workspace = db.define("workspace", {
 	orgName: {
 		type: Sequelize.STRING,
 	},
+	ghType: {
+		type: Sequelize.ENUM("individual", "organization"),
+		defaultValue:"individual"
+	}
 });
 
 module.exports = Workspace;

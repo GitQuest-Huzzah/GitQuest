@@ -68,7 +68,7 @@ const adminOrgModal = async (reqBody) => {
                                         text: "Organization",
                                         emoji: true,
                                     },
-                                    value: "org",
+                                    value: "organization",
                                 },
                             ],
                             action_id: "ownerOrgSelect",
