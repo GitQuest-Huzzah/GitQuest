@@ -3,6 +3,7 @@ const findOrgOnGH = require("../queryFuncs/findOrgOnGH");
 
 const createOrUpdateOrg = async (reqBody) => {
 	const orgName = reqBody.view.state.values.OwnerName.Owner_Input.value;
+    const ownerOrgSelect = reqBody.view.state.values.ownerOrOrg.ownerOrgSelect.selected_option.value
 	const orgToUpdate = await Workspace.findOne({
 		where: {
 			teamID: reqBody.view.team_id,
