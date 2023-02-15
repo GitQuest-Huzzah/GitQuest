@@ -2,6 +2,7 @@ const { findGitHubOrgAllUsers } = require("../../helperFuncs");
 
 const externalGitHubUserConnectSelectMenu = async (reqBody) => {
 	const allMembers = await findGitHubOrgAllUsers(reqBody);
+	
 	const memberGHAccounts = allMembers.data.map((member) => member);
 
 	const optionsArray = memberGHAccounts.reduce((acc, member) => {

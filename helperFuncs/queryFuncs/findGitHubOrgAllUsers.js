@@ -22,7 +22,7 @@ const findGitHubOrgAllUsers = async (reqBody) => {
 		owner: workspace.dataValues.orgName,
 	}) : await octokit.request("GET /repos/{owner}/{repo}/collborators", {
 		owner: workspace.dataValues.orgName,
-		repo: 
+		// repo:
 	})
 	return allOrgMembers;
 };
