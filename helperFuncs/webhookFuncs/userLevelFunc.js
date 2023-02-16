@@ -2,8 +2,8 @@ const { Goldlog, Playerstat } = require("../../server/db/index");
 
 const expEnum = {
     0: 1,
-    10: 2,
-    50: 3,
+    500: 2,
+    1000: 3,
     2500: 4,
     5000: 5,
     7500: 6,
@@ -24,8 +24,8 @@ const expEnum = {
 };
 const titlesEnum = {
     1: "Neophyte",
-    2: "Fledgling",
-    4: "Apprentice",
+    4: "Fledgling",
+    7: "Apprentice",
     10: "Trailblazer",
     13: "Specialist",
     16: "Warrior",
