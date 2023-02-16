@@ -4,7 +4,6 @@ const externalRepoDeleteSelectMenu = async (parsedSubmission) => {
 		dataValues: { workspace },
 	} = await findAllReposInDB(parsedSubmission);
 	const { repos } = workspace;
-    console.log(repos)
 	for (const [index, repo] of repos.entries()) {
 		if (
 			repo.dataValues.repoName.includes(parsedSubmission.value) &&

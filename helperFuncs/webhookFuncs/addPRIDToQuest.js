@@ -8,7 +8,7 @@ const addPRIDToQuest = async (reqBody) => {
 		include: {
 			model: Workspace,
 			where: {
-				orgName: reqBody.organization.login,
+				orgName: reqBody.organization ? reqBody.organization.login :  reqBody.repository.owner.login,
 			},
 		},
 	});
@@ -16,6 +16,7 @@ const addPRIDToQuest = async (reqBody) => {
 	const quests = await Quest.findAll({
 		where: {
 			userId: user.id,
+			status: "active"
 		},
 	});
 	if (quests.length) {
