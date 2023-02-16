@@ -20,7 +20,6 @@ const addPRIDToQuest = async (reqBody) => {
 			},
 		},
 	});
-
 	const quests = await Quest.findAll({
 		where: {
 			userId: user.id,
