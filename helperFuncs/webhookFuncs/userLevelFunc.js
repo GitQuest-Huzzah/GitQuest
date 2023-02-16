@@ -36,6 +36,7 @@ const titlesEnum = {
 };
 
 const userLevelFunc = async (user, gainedExp, gainedGold) => {
+    console.log("user level func args", user, gainedExp, gainedGold, "user level func args")
     const {
         dataValues: {
             playerstat: {
@@ -44,7 +45,7 @@ const userLevelFunc = async (user, gainedExp, gainedGold) => {
         },
     } = user;
     const totalExp = gainedExp + exp;
-
+    console.log("level from EXP", exp, "level from EXP")
     const levelFromExp = (exp) => {
         for (let x = exp; x > 0; x--) {
             if (expEnum[x]) return expEnum[x];
@@ -52,7 +53,7 @@ const userLevelFunc = async (user, gainedExp, gainedGold) => {
         throw new Error("you coded fucked up");
     };
     const currentLevel = levelFromExp(totalExp);
-
+    
     const titleFromLevel = (lvl) => {
         for (let x = lvl; x > 0; x--) {
             if (titlesEnum[x]) return titlesEnum[x];
