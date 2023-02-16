@@ -23,7 +23,6 @@ const updateQuestsOnPR = async (reqBody) => {
 			model: Playerstat,
 		},
 	});
-
 	if (quest) {
 		const achievements = await Achievement.findAll();
 		const questsCompleted =
