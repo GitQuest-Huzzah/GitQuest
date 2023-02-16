@@ -3,6 +3,7 @@ const userLevelFunc = require("./userLevelFunc");
 const userAchievement = require("./userAchievement");
 
 const updateUserOnPR = async (reqBody) => {
+    console.log("update user PR BODY",reqBody, "req from updateUSER PR")
 	const userWorkspace = await Workspace.findOne({
 		where: {
 			orgName: reqBody.organization
@@ -32,6 +33,7 @@ const updateUserOnPR = async (reqBody) => {
 			},
 		],
 	});
+    console.log(user, "update user on PR ")
 	const numOfCommits =
 		reqBody.pull_request.commits +
 		user.dataValues.playerstat.dataValues.commits;

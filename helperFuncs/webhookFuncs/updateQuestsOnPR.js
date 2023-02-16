@@ -2,6 +2,7 @@ const { Achievement, Quest, User, Playerstat, Workspace } = require("../../serve
 const userLevelFunc = require("../webhookFuncs/userLevelFunc");
 const updateAchievement = require("./updateAchievement");
 const updateQuestsOnPR = async (reqBody) => {
+	console.log("req from update quest pr", reqBody, "req from update quest PR")
 	const userWorkspace = await Workspace.findOne({
 		where: {
 			orgName: reqBody.organization
@@ -23,6 +24,7 @@ const updateQuestsOnPR = async (reqBody) => {
 			model: Playerstat,
 		},
 	});
+	console.log(user, "update quest on PR user")
 	if (quest) {
 		const achievements = await Achievement.findAll();
 		const questsCompleted =

@@ -48,6 +48,7 @@ const adminAssignQuestComplete = async (reqBody) => {
 					},
 				}
 			);
+			console.log(user, "adminAssignQuest user")
 			userLevelFunc(
 				user,
 				singleQuest.dataValues.expValue,
