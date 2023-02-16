@@ -9,7 +9,7 @@ const userHomeView = (user) => {
 			type: "header",
 			text: {
 				type: "plain_text",
-				text: `Welcome ${user.dataValues.gitHubLogin}!`,
+                text: `Welcome ${user.dataValues.gitHubLogin ? user.dataValues.gitHubLogin : "Hero" }!`,
 			},
 		},
 		{
