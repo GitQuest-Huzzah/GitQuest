@@ -7,11 +7,13 @@ const updateUserGitHub = async (reqBody) => {
     const userSlackID =
         reqBody.view.state.values.adminGitConnectUserSlack.slackUserSelect
             .selected_user;
-    console.log(reqBody, "THIS IS REQ BODY")
+    console.log(reqBody, "THIS IS REQ BODY");
     const workspace = await Workspace.findOne({
-        teamID: reqBody.user.team_id,
+        where: {
+            teamID: reqBody.user.team_id,
+        },
     });
-    console.log('THIS IS WORKSPACE', workspace, "THIS IS WORKSPACE")
+    console.log("THIS IS WORKSPACE", workspace, "THIS IS WORKSPACE");
     const [user, created] = await User.findOrCreate({
         where: {
             slackID: userSlackID,
