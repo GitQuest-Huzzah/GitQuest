@@ -1,4 +1,4 @@
-const { User } = require("../../server/db");
+const { User, Playerstat, Workspace } = require("../../server/db");
 
 const updateUserGitHub = async (reqBody) => {
 	const gitHubUser =
@@ -7,11 +7,23 @@ const updateUserGitHub = async (reqBody) => {
 	const userSlackID =
 		reqBody.view.state.values.adminGitConnectUserSlack.slackUserSelect
 			.selected_user;
-	const user = await User.findOne({
+	const [user, created] = await User.findOrCreate({
 		where: {
 			slackID: userSlackID,
 		},
 	});
+
+    if(created){
+        const workspace = await Workspace.findOne({
+            slackID: reqBody.team.id
+        }) 
+        const playerstat = await Playerstat.create()
+        console.log(user)
+        user.setWorkspace(workspace)
+        user.setPlayerstat(playerstat)
+    }
+
+
 	user.update({
 		gitHubID: gitHubUser.value,
 		gitHubLogin: gitHubUser.text.text,
