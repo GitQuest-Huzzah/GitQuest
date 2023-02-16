@@ -7,7 +7,6 @@ const updateQuestsOnPR = async (reqBody) => {
 			pullRequestID: reqBody.pull_request.id,
 		},
 	});
-
 	const user = await User.findOne({
 		where: {
 			gitHubID: reqBody.pull_request.user.id.toString(),

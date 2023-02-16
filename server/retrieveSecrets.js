@@ -5,7 +5,7 @@ function retrieveSecrets() {
 
 	return client
 		.accessSecretVersion({
-			name: "projects/1003391217227/secrets/ENV_VARIABLES/versions/17",
+			name: "projects/1003391217227/secrets/ENV_VARIABLES/versions/18",
 		})
 		.then(([version]) => {
 			//turning the buffer value of the payload into a readable string
@@ -25,6 +25,7 @@ function retrieveSecrets() {
 			process.env["SLACK_CLIENT_SECRET"] = parsedPayload.SLACK_CLIENT_SECRET;
 			process.env["PRERENDER_URL"] = parsedPayload.PRERENDER_URL;
 			process.env["FRONTEND_PRERENDER"] = parsedPayload.FRONTEND_PRERENDER;
+			process.env["WEBHOOK_URL"] = parsedPayload.WEBHOOK_URL;
 		})
 		.catch(console.error);
 }
