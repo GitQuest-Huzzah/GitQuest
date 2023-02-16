@@ -12,9 +12,9 @@ Follow the numbered buttons provided to the admin of your organization who insta
 
 2. Authorize our app thru GitHub.
 
-3. Link your workspaces users and to their GitHub usernames (don't worry this can be changed at any time in the future).
+3. Link any repos you'd like us track activity on for you. Please choose as many as you'd like. Later if you decide to stop tracking certain repos feel free to use the ```Unfollow Repos``` button.
 
-4. Link any repos you'd like us track activity on for you. Please choose as many as you'd like. Later if you decide to stop tracking certain repos feel free to use the ```Unfollow Repos``` button.
+4. Link your workspaces users and to their GitHub usernames (don't worry this can be changed at any time in the future).
 
 5. Experience the Adventure! 
 
