@@ -1,7 +1,14 @@
-const { Achievement, Quest, User, Playerstat } = require("../../server/db");
+const { Achievement, Quest, User, Playerstat, Workspace } = require("../../server/db");
 const userLevelFunc = require("../webhookFuncs/userLevelFunc");
 const updateAchievement = require("./updateAchievement");
 const updateQuestsOnPR = async (reqBody) => {
+	const userWorkspace = await Workspace.findOne({
+		where: {
+			orgName: reqBody.organization
+				? reqBody.organization.login
+				: reqBody.repository.owner.login,
+		}, 
+	})
 	const quest = await Quest.findOne({
 		where: {
 			pullRequestID: reqBody.pull_request.id,
@@ -10,6 +17,7 @@ const updateQuestsOnPR = async (reqBody) => {
 	const user = await User.findOne({
 		where: {
 			gitHubID: reqBody.pull_request.user.id.toString(),
+			workspaceId: userWorkspace.dataValues.id
 		},
 		include: {
 			model: Playerstat,
