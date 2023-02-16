@@ -24,7 +24,6 @@ router.post("/", async (req, res, next) => {
 		viewQuestsSubmit: findAllAvailableQuests,
 	};
 	const inputSubmitted = parsedSubmission.view.callback_id;
-    console.log(parsedSubmission.view)
 	if (Object.keys(menuSubmission).includes(inputSubmitted)) {
 		res
 			.send(await menuSubmission[inputSubmitted](parsedSubmission))
