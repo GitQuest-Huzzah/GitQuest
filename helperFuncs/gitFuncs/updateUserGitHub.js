@@ -8,7 +8,7 @@ const updateUserGitHub = async (reqBody) => {
         reqBody.view.state.values.adminGitConnectUserSlack.slackUserSelect
             .selected_user;
     const workspace = await Workspace.findOne({
-        slackID: reqBody.team.id,
+        teamID: reqBody.team.id,
     });
     const [user, created] = await User.findOrCreate({
         where: {
@@ -16,7 +16,6 @@ const updateUserGitHub = async (reqBody) => {
             workspaceId: workspace.dataValues.id,
         },
     });
-
     if (created) {
         const playerstat = await Playerstat.create();
         user.setWorkspace(workspace);
