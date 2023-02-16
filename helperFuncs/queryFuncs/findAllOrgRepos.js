@@ -23,7 +23,7 @@ const findAllOrgRepos = async (reqBody) => {
 	});
 	return ghType === "organization" ? await octokit.request("GET /orgs/{owner}/repos", {
 		owner: orgName, //these need to be set to receive from the found user
-	}) : await octokit.request("GET /user/repos")
+	}) : await octokit.request("GET /user/repos", {affiliation:"owner"})
 };
 
 module.exports = findAllOrgRepos;

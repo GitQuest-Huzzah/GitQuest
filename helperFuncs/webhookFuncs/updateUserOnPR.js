@@ -11,7 +11,7 @@ const updateUserOnPR = async (reqBody) => {
             {
                 model: Workspace,
                 where: {
-                    orgName: reqBody.organization.login,
+                    orgName: reqBody.organization ? reqBody.organization.login :  reqBody.repository.owner.login,
                 },
             },
             {
