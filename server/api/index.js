@@ -13,4 +13,6 @@ router.use("/webhook", require("./webhooksEndpoints"));
 
 router.use("/selectMenus", require("./selectMenus"));
 
+router.use("/auth", require("./auth"));
+
 module.exports = router;
