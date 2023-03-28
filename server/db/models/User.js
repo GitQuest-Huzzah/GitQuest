@@ -11,11 +11,6 @@ const User = db.define("user", {
             isEmail: true,
         },
     },
-    username: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false,
-    },
     password: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -48,11 +43,11 @@ User.prototype.correctPassword = function (candidatePwd) {
     return argon2.verify(this.password, candidatePwd);
 };
 
-User.authenticate = async function ({ username, password }) {
-    console.log(username, password);
-    const user = await this.findOne({ where: { username } });
+User.authenticate = async function ({ email, password }) {
+    console.log(email, password);
+    const user = await this.findOne({ where: { email } });
     if (!user || !(await user.correctPassword(password))) {
-        const error = Error("Incorrect Username / Password");
+        const error = Error("Incorrect Email / Password");
         error.status = 401;
         throw error;
     }
