@@ -12,8 +12,7 @@ const User = db.define("user", {
         },
     },
     password: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.STRING
     },
     slackID: {
         type: Sequelize.STRING,
@@ -76,6 +75,9 @@ User.findByToken = async function (token) {
 };
 
 const hashPassword = async (user) => {
+    if(!user.password){
+        return
+    }
     if (user.changed("password")) {
         user.password = await argon2.hash(user.password);
     }
