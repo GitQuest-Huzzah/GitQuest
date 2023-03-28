@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
+const cors = require('cors')
 
 //json parsing middleware
 app.use(express.json());
+app.use(cors({origin: 'https://gitquest.fun/api'}))
 
 //url param decoding middleware
 app.use(express.urlencoded({ extended: false }));
