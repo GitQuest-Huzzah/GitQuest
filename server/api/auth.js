@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { User } = require("../db");
 
+//  api/auth/login
 router.post("/login", async (req, res, next) => {
     try {
         res.send({ token: await User.authenticate(req.body) });
@@ -9,8 +10,10 @@ router.post("/login", async (req, res, next) => {
     }
 });
 
+//  api/auth/signup
 router.post("/signup", async (req, res, next) => {
     try {
+        console.log('req body', req.body)
         const [user, created] = await User.findOrCreate({
             where: {
                 email: req.body.email,
@@ -32,6 +35,7 @@ router.post("/signup", async (req, res, next) => {
     }
 });
 
+// api/auth/me
 router.get("/me", async (req, res, next) => {
     try {
         console.log(req)
