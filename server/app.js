@@ -4,7 +4,7 @@ const cors = require('cors')
 
 //json parsing middleware
 app.use(express.json());
-app.use(cors({origin: 'https://gitquest.fun/api'}))
+app.use(cors({origin: 'https://gitquest.fun'}))
 
 //url param decoding middleware
 app.use(express.urlencoded({ extended: false }));
