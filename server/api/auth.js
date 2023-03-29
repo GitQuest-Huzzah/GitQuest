@@ -16,7 +16,7 @@ router.post("/signup", async (req, res, next) => {
     console.log("req body", req.body);
     const user = await User.findOne({
       where: {
-        email: req.body.email,
+        email: req.body.email.toLowerCase(),
       },
     });
     if (user && !user.password) {
