@@ -49,7 +49,7 @@ router.get("/me", async (req, res, next) => {
     if (user) {
      const userList = await Workspace.findOne({
         where: {
-          id: user.id,
+          id: user.dataValues.id,
         },
         // include: [
         //   {
