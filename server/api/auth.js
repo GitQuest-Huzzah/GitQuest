@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../db");
+const { User, Repo, Quest, Playerstat } = require("../db");
 
 //  api/auth/login
 router.post("/login", async (req, res, next) => {
@@ -46,7 +46,31 @@ router.post("/signup", async (req, res, next) => {
 router.get("/me", async (req, res, next) => {
   try {
     console.log(req);
-    res.send(await User.findByToken(req.headers.authorization));
+    const user = await User.findByToken(req.headers.authorization);
+    if (user) {
+     const userList = await Workspace.findOne({
+        where: {
+          id: user.id,
+        },
+        include: [
+          {
+            model: User,
+            include: [
+              {
+                model: Quest,
+              },
+              { 
+                model: Playerstat 
+              }
+            ],
+          },
+          {
+            model: Repo,
+          },
+        ],
+      });
+    }
+    res.send({user, userList});
   } catch (ex) {
     next(ex);
   }
