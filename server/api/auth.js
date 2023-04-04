@@ -71,7 +71,7 @@ router.get("/me", async (req, res, next) => {
     // res.write(userList)
     // }
     res.write(user);
-    res.end()
+    res.send()
   } catch (ex) {
     next(ex);
   }
