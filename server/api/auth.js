@@ -70,7 +70,9 @@ router.get("/me", async (req, res, next) => {
         ],
       });
     }
-    res.send({user, userList});
+    res.write(user);
+    res.write(userList)
+    res.end()
   } catch (ex) {
     next(ex);
   }
