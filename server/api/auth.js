@@ -45,7 +45,6 @@ router.post("/signup", async (req, res, next) => {
 // api/auth/me
 router.get("/me", async (req, res, next) => {
   try {
-    console.log(req);
     const user = await User.findByToken(req.headers.authorization);
     if (user) {
      const userList = await Workspace.findOne({
@@ -69,10 +68,10 @@ router.get("/me", async (req, res, next) => {
           },
         ],
       });
-      res.write(user);
     res.write(userList)
-    res.end()
     }
+    res.write(user);
+    res.end()
   } catch (ex) {
     next(ex);
   }
