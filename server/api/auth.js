@@ -51,22 +51,22 @@ router.get("/me", async (req, res, next) => {
         where: {
           id: user.id,
         },
-        include: [
-          {
-            model: User,
-            include: [
-              {
-                model: Quest,
-              },
-              { 
-                model: Playerstat 
-              }
-            ],
-          },
-          {
-            model: Repo,
-          },
-        ],
+        // include: [
+        //   {
+        //     model: User,
+        //     include: [
+        //       {
+        //         model: Quest,
+        //       },
+        //       { 
+        //         model: Playerstat 
+        //       }
+        //     ],
+        //   },
+        //   {
+        //     model: Repo,
+        //   },
+        // ],
       });
     console.log('this is our user list:', userList)
     }
