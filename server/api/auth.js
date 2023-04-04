@@ -46,30 +46,6 @@ router.post("/signup", async (req, res, next) => {
 router.get("/me", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    if (user) {
-     const userList = await Workspace.findOne({
-        where: {
-          id: user.dataValues.id,
-        },
-        // include: [
-        //   {
-        //     model: User,
-        //     include: [
-        //       {
-        //         model: Quest,
-        //       },
-        //       { 
-        //         model: Playerstat 
-        //       }
-        //     ],
-        //   },
-        //   {
-        //     model: Repo,
-        //   },
-        // ],
-      });
-    console.log('this is our user list:', userList)
-    }
     res.send(user)
   } catch (ex) {
     next(ex);
