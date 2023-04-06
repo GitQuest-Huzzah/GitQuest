@@ -29,6 +29,7 @@ router.post("/signup", async (req, res, next) => {
       throw new Error("user not found");
     }
     if (user && user.password) {
+      console.log(user, "user at if exists", user.password,"password at user if exists")
       throw new Error("user exists");
     }
   } catch (err) {
