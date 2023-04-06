@@ -23,14 +23,10 @@ router.post("/signup", async (req, res, next) => {
       await user.update({
         password: req.body.password,
       });
-      res.send({ token: await user.generateToken() });
+     return res.send({ token: await user.generateToken() });
     }
     if (!user) {
       throw new Error("user not found");
-    }
-    if (user && user.password) {
-      console.log(user, "user at if exists", user.password,"password at user if exists")
-      throw new Error("user exists");
     }
   } catch (err) {
     if (err.message === "user exists") {
