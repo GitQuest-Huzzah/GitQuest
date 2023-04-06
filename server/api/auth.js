@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Repo, Quest, Playerstat } = require("../db");
+const { User, Workspace, Repo, Quest, Playerstat } = require("../db");
 
 //  api/auth/login
 router.post("/login", async (req, res, next) => {
