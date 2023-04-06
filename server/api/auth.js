@@ -28,6 +28,9 @@ router.post("/signup", async (req, res, next) => {
     if (!user) {
       throw new Error("user not found");
     }
+    if (user && user.password) {
+      throw new Error("user exists");
+    }
   } catch (err) {
     if (err.message === "user exists") {
       res.status(401).send("This user already has an account");
