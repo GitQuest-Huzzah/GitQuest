@@ -59,12 +59,7 @@ router.get("/me/list", async (req, res, next) => {
 		const userList = await Workspace.findOne({
 			where: {
 				id: user.dataValues.workspaceId,
-			},
-      include: [
-			  {
-			    model: User
-			  }
-			],
+			}
 		});
 		console.log("this is our user list:", userList);
 		res.send(userList);
