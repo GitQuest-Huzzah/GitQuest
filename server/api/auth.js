@@ -62,19 +62,8 @@ router.get("/me/list", async (req, res, next) => {
 			},
       include: [
 			  {
-			    model: User,
-			    include: [
-			      {
-			        model: Quest,
-			      },
-			      {
-			        model: Playerstat
-			      }
-			    ],
-			  },
-			  {
-			    model: Repo,
-			  },
+			    model: User
+			  }
 			],
 		});
 		console.log("this is our user list:", userList);
