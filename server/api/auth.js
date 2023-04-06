@@ -13,7 +13,6 @@ router.post("/login", async (req, res, next) => {
 //  api/auth/signup
 router.post("/signup", async (req, res, next) => {
   try {
-    console.log("req body", req.body);
     const user = await User.findOne({
       where: {
         email: req.body.email.toLowerCase(),
