@@ -58,24 +58,24 @@ router.get("/me/list", async (req, res, next) => {
     console.log(user, "this is user in list")
 		const userList = await Workspace.findOne({
 			where: {
-				id: user.id,
-			}
-			// include: [
-			//   {
-			//     model: User,
-			//     include: [
-			//       {
-			//         model: Quest,
-			//       },
-			//       {
-			//         model: Playerstat
-			//       }
-			//     ],
-			//   },
-			//   {
-			//     model: Repo,
-			//   },
-			// ],
+				id: user.dataValues.workspaceId,
+			},
+      include: [
+			  {
+			    model: User,
+			    include: [
+			      {
+			        model: Quest,
+			      },
+			      {
+			        model: Playerstat
+			      }
+			    ],
+			  },
+			  {
+			    model: Repo,
+			  },
+			],
 		});
 		console.log("this is our user list:", userList);
 		res.send(userList);
