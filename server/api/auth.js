@@ -32,6 +32,7 @@ router.post("/signup", async (req, res, next) => {
       throw new Error("user exists");
     }
   } catch (err) {
+    console.error(err)
     if (err.message === "user exists") {
       res.status(401).send("This user already has an account");
     } else if (err.message === "user not found") {
@@ -46,6 +47,14 @@ router.post("/signup", async (req, res, next) => {
 router.get("/me", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
+    if (user) {
+     const userList = await Workspace.findOne({
+        where: {
+          id: user.dataValues.id,
+        },
+      });
+    console.log('this is our user list:', userList)
+    }
     res.send(user)
   } catch (ex) {
     next(ex);
