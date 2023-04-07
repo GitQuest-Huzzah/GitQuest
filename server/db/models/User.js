@@ -63,7 +63,7 @@ User.findByToken = async function (token) {
         if (!user) {
             throw "noo";
         }
-        return {email,gitHubLogin, workspaceId};
+        return {email:email,gitHubLogin:gitHubLogin, workspaceId:workspaceId};
     } catch (err) {
         const error = Error("bad token");
         error.status = 401;
