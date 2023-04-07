@@ -76,6 +76,10 @@ router.get("/me/list", async (req, res, next) => {
 					model: Repo,
 				},
 			],
+			attributes: [
+				"orgName", "teamName",
+				[Sequelize.literal('"user". "gitHubLogin"'), "gitHubLogin"],
+			],
 		});
 		console.log("this is our user list:", userList);
 		res.send(userList);
