@@ -55,11 +55,29 @@ router.get("/me", async (req, res, next) => {
 router.get("/me/list", async (req, res, next) => {
 	const user = await User.findByToken(req.headers.authorization);
 	try {
-    console.log(user, "this is user in list")
+		console.log(user, "this is user in list");
 		const userList = await Workspace.findOne({
 			where: {
 				id: user.dataValues.workspaceId,
-			}
+			},
+			include: [
+				{
+					model: User,
+				},
+			],
+			//     include: [
+			//       {
+			//         model: Quest,
+			//       },
+			//       {
+			//         model: Playerstat
+			//       }
+			//     ],
+			//   },
+			//   {
+			//     model: Repo,
+			//   },
+			// ],
 		});
 		console.log("this is our user list:", userList);
 		res.send(userList);
