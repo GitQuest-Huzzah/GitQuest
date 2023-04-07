@@ -43,7 +43,8 @@ User.prototype.correctPassword = function (candidatePwd) {
 };
 
 User.authenticate = async function ({ email, password }) {
-    const user = await this.findOne({ where: { email } });
+    const emailLower = email.toLowerCase()
+    const user = await this.findOne({ where: { emailLower } });
     if (!user || !(await user.correctPassword(password))) {
         const error = Error("Incorrect Email / Password");
         error.status = 401;
