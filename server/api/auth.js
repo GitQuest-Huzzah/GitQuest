@@ -72,9 +72,9 @@ router.get("/me/list", async (req, res, next) => {
 						},
 					],
 				},
-				// {
-				// 	model: Repo,
-				// },
+				{
+					model: Repo,
+				},
 			],
 		});
 		console.log("this is our user list:", userList);
