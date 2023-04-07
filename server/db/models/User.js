@@ -59,14 +59,11 @@ User.prototype.generateToken = async function () {
 User.findByToken = async function (token) {
     try {
         const { id } = await PasetoV4.verify(token, publicKey);
-        const user = await User.findByPk(id,{attributes:{
-            gitHubLogin,
-            email
-        }});
+        const user = await User.findByPk(id);
         if (!user) {
             throw "noo";
         }
-        return user;
+        return {email:user.email,gitHubLogin:user.gitHubLogin};
     } catch (err) {
         const error = Error("bad token");
         error.status = 401;
