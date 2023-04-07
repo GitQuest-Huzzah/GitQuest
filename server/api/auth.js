@@ -60,9 +60,11 @@ router.get("/me/list", async (req, res, next) => {
 			where: {
 				id: user.workspaceId,
 			},
+			attributes:['teamName','orgName'],	
 			include: [
 				{
 					model: User,
+					attributes:['gitHubLogin', 'email'],
 					include: [
 						{
 							model: Quest,
@@ -74,6 +76,7 @@ router.get("/me/list", async (req, res, next) => {
 				},
 				{
 					model: Repo,
+					attributes:['repoName']
 				},
 			],
 		});
