@@ -55,7 +55,6 @@ router.get("/me", async (req, res, next) => {
 router.get("/me/list", async (req, res, next) => {
 	const user = await User.findByToken(req.headers.authorization);
 	try {
-		console.log(user, "this is user in list");
 		const userList = await Workspace.findOne({
 			where: {
 				id: user.workspaceId,
@@ -80,7 +79,6 @@ router.get("/me/list", async (req, res, next) => {
 				},
 			],
 		});
-		console.log("this is our user list:", userList);
 		res.send(userList);
 	} catch (error) {
 		next(error);
